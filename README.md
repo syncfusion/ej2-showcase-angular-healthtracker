@@ -21,6 +21,6 @@ ng serve
 
 ## Demo
 
-#### <a href="https://ej2.syncfusion.com/showcase/angular/healthtracker/src/#/dashboard" target="_blank">https://ej2.syncfusion.com/showcase/angular/healthtracker</a>
+#### <a href="https://ej2.syncfusion.com/showcase/angular/healthtracker/src/#/dashboard" target="_blank">Essential JS 2 for Angular - Health Tracker</a>
 
 Check all the showcase samples from <a href="https://ej2.syncfusion.com/home/angular.html" target="_blank">here</a>.
