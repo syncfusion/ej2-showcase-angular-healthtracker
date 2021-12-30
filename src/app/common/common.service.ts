@@ -1,4 +1,4 @@
-import { Injectable, ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { extend, Internationalization } from '@syncfusion/ej2-base';
 import { Predicate } from '@syncfusion/ej2-data';

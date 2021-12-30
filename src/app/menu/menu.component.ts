@@ -1,14 +1,9 @@
-import { Component, Directive, ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
-import { Browser, rippleEffect, isNullOrUndefined as isNOU, enableRipple } from '@syncfusion/ej2-base';
+import { rippleEffect, isNullOrUndefined as isNOU, enableRipple } from '@syncfusion/ej2-base';
 
 import { userInfo } from '../common/common.data';
 enableRipple(true);
-
-@Directive({
-  selector: '[routerLinkActive]',
-  exportAs: 'routerLinkActive'
-})
 
 @Component({
   selector: 'ng-app',

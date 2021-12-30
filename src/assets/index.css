@@ -1,0 +1,1121 @@
+.icon-achieved {
+  color: #868686;
+}
+#step-value {
+  line-height: 0px;
+}
+#Breakfast {
+  color: #FFFFFF;
+}
+#Lunch {
+  color: #868686;
+}
+#Dinner {
+  color: #868686;
+}
+#Snack {
+  color: #868686;
+}
+#icon-ml {
+  color: #868686;
+}
+#icon-ml1 {
+  color: #868686;
+}
+#icon-ml2 {
+  color: #868686;
+}
+#icon-ml3 {
+  color: #868686;
+}
+.waitingpopup {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  width: 50px;
+  height: 50px;
+}
+
+.image {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-image: url('../images/Medium-36px-spin.gif');
+  background-position: center;
+  width: 50px;
+  height: 50px;
+  padding: 6px;
+}
+#caloriesicon-column {
+  padding-left: 0px;
+}
+#foodimg .icon-Food {
+  float: right;
+  color: #FFFFFF
+  
+}
+#stepimg .icon-Steps {
+  float: right;
+  color: #999393;
+}
+#sleepimg .icon-Sleep {
+  float: right;
+  color: #999393;
+}
+#waterimg .icon-Water {
+  float: right;
+  color: #999393;
+}
+#steps-text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  color: #747474;
+  size: 32px;
+  letter-spacing: 0 38px;
+}
+#card-row {
+  margin-right: 3%;
+  margin-left: 1.6%;
+}
+.row {
+  margin-right: 0px !important;
+  margin-left: 0px !important;
+}
+#leftcontent {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 14px;
+  color: #485465;
+  letter-spacing: -0.08px;
+  text-align: center;
+}
+#rightcontent {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 14px;
+  color: #485465;
+  letter-spacing: -0.08px;
+  text-align: center;
+}
+#overall-title {
+  background: #FFFFFF;
+  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.16);
+  height: 60px;
+  margin-bottom: 20px
+}
+#container {
+  padding-bottom: 20px;
+  background: #FAFAFA !important;
+}
+#water-text {
+  padding-left: 5%;
+}
+#water-subtitle {
+  padding-left: 5%;
+}
+#calories-text {
+  padding-left: 5%;
+}
+#calories-subtitle {
+  padding-left: 5%;
+}
+#steps-text {
+  padding-left: 5%;
+}
+#steps-subtitle {
+  padding-left: 5%;
+}
+#sleep-text {
+  padding-left: 5%;
+}
+#sleep-subtitle {
+  padding-left: 5%;
+}
+.page-title {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 18px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  display:inline-block;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+#title {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 20px;
+  color: #535353;
+  letter-spacing: 0;
+  display:block;
+}
+#title span { 
+  display:block;
+  float:right;
+}
+#subtitle {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 20px;
+  color: #535353;
+  letter-spacing: 0;
+  display: block;
+}
+#subtitle span { 
+  display:block;
+  float:right;
+}
+#title-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-left: -1.2%;
+  margin-right: 9% !important;
+}
+#sleeptitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-left: -1.2%;
+  margin-right: 11% !important;
+}
+#caloriestitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-right: 11% !important;
+}
+#steptitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-left: -1.2%;
+  margin-right: 9% !important;
+}
+#watertitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-left: -1.2%;
+  margin-right: 13% !important;
+}
+#title-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+}
+#watertitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  padding-left: 1.5% !important;
+  margin-right: 11% !important;
+}
+#steptitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  padding-left: 1.5% !important;
+}
+#sleeptitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  padding-left: 1.5% !important;
+  margin-right: 13% !important;
+}
+#caloriestitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-right: 15% !important;
+}
+#subtitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 26px;
+  color: #780508;
+  letter-spacing: 0;
+  margin-top: -20px;
+}
+#subtitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 26px;
+  color: #DB4247;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 8% !important;
+}
+#watersubtitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 26px;
+  color: #780508;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 1.7%;
+}
+#watersubtitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 26px;
+  color: #DB4247;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 7%;
+}
+#caloriessubtitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 26px;
+  color: #780508;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 3%;
+}
+#caloriessubtitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 26px;
+  color: #DB4247;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 7%
+}
+#sleepsubtitle-annotation2 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 28px;
+  color: #780508;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 2%
+}
+#sleepsubtitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 700;
+  font-size: 28px;
+  color: #DB4247;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 7%;
+}
+#stepsubtitle-annotation1 {
+  font-family: 'Roboto';
+  font-weight: 700 !important;
+  font-size: 28px;
+  color: #DB4247;
+  letter-spacing: 0;
+  margin-top: -20px;
+  margin-right: 7%
+}
+#caloriescontent {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 12px;
+  color: #4A4A4A;
+  letter-spacing: -0.07px;
+}
+#time {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-weight: 500;
+  font-size: 49px;
+  color: #4A4A4A;
+  letter-spacing: -0.08px;
+  text-align: center;
+  height: 59px
+}
+#middlecontent {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 14px;
+  color: #4A4A4A;
+  letter-spacing: -0.08px;
+  text-align: center;
+}
+#sub-title {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 14px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+  margin-top: 20px;
+  padding-right: 0.7%
+}
+#chart-rightarea {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
+  border-radius: 4px;
+  margin-left: 4.5%;
+  margin-right: 2.9%;
+}
+#chart-leftarea {
+  margin-left: 3%;
+}
+#steps-text:hover {
+  font-family: ''Roboto'';
+  font-weight: 400;
+  color: #E41852;
+  font-size: 32px;
+  letter-spacing: 0 38px;
+}
+#calories-bg:hover {
+  background-image: 'linear-gradient(to right, #FCDE72 , #F26D6D)';
+}
+#water-bg:hover {
+  background-image: 'linear-gradient(to right, #FCDE72 , #F26D6D)';
+}
+#step-bg:hover {
+  background-image: 'linear-gradient(to right, #FCDE72 , #F26D6D)';
+}
+#sleep-bg:hover {
+  background-image: 'linear-gradient(to right, #FCDE72 , #F26D6D)';
+}
+.card {
+  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
+  border-radius: 4px;
+  background: #FFFFFF !important;
+}
+.card-block {
+  cursor:pointer;
+  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
+  border-radius: 4px;
+}
+#pie-chart {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
+  border-radius: 4px;
+  margin: 0px;
+  padding: 0px;
+}
+#inside-container {
+  cursor: default !important;
+}
+#water-polarSeriesCollection {
+  cursor:  pointer !important;
+}
+#calories-value:hover .card-block {
+  color: #E41852 !important;
+}
+.card-value{
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 32px;
+  color: #727272;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  letter-spacing: 0;
+}
+.card-text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0;
+  color: #303030;
+}
+#Break-icon {
+  background: #FFFFFF;
+  border: 1px solid rgba(241,89,51,0.20);
+  border-radius: 4px;
+}
+#Lunch-icon {
+  background: #FFFFFF;
+  border: 1px solid rgba(241,89,51,0.20);
+  border-radius: 4px;
+}
+#Dinner-icon {
+  background: #FFFFFF;
+  border: 1px solid rgba(241,89,51,0.20);
+  border-radius: 4px;
+}
+#Snack-icon {
+  background: #FFFFFF;
+  border: 1px solid rgba(241,89,51,0.20);
+  border-radius: 4px;
+}
+#Break-icon:hover {
+  background: #FFFFFF;
+  border: 1px solid #CB2F1B;
+  box-shadow: 0 2px 4px 0 rgba(240,121,44,0.10) !important;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#Lunch-icon:hover {
+  background: #FFFFFF;
+  border: 1px solid #CB2F1B;
+  box-shadow: 0 2px 4px 0 rgba(240,121,44,0.10) !important;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#Dinner-icon:hover {
+  background: #FFFFFF;
+  border: 1px solid #CB2F1B;
+  box-shadow: 0 2px 4px 0 rgba(240,121,44,0.10) !important;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#Snack-icon:hover {
+  background: #FFFFFF;
+  border: 1px solid #CB2F1B;
+  box-shadow: 0 2px 4px 0 rgba(240,121,44,0.10) !important;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#Break-text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px !important;
+  color: #7D7D7D;
+  letter-spacing: 0;
+}
+#Break-text:hover {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 16px !important;
+  color: #CB2F1B;
+  letter-spacing: 0;
+}
+#Lunch-text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #7D7D7D;
+  letter-spacing: 0;
+}
+#Lunch-text:hover {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #CB2F1B;
+  letter-spacing: 0;
+}
+#Dinner-text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #7D7D7D;
+  letter-spacing: 0;
+}
+#Dinner-text:hover {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #CB2F1B;
+  letter-spacing: 0;
+}
+#Snack-text {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #7D7D7D;
+  letter-spacing: 0;
+}
+#Snack-text:hover {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #CB2F1B;
+  letter-spacing: 0;
+}
+#Break-icon:hover .breakimg {
+      color: #CB2F1B !important
+}
+#Break-icon:hover .breaktext {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 15px;
+  color: #CB2F1B !important;
+  letter-spacing: 0;
+}
+#Lunch-icon:hover .lunchimg {
+  color: #CB2F1B !important
+}
+#Lunch-icon:hover .lunchtext {
+font-family: 'Roboto';
+font-weight: 400;
+font-size: 15px;
+color: #CB2F1B !important;
+letter-spacing: 0;
+}
+#Dinner-icon:hover .dinnerimg {
+  color: #CB2F1B !important
+}
+#Dinner-icon:hover .dinnertext {
+font-family: 'Roboto';
+font-weight: 400;
+font-size: 15px;
+color: #CB2F1B !important;
+letter-spacing: 0;
+}
+#Snack-icon:hover .snackimg {
+  color: #CB2F1B !important
+}
+#Snack-icon:hover .snacktext {
+font-family: 'Roboto';
+font-weight: 400;
+font-size: 15px;
+color: #CB2F1B !important;
+letter-spacing: 0;
+}
+.water-value:hover .icon-Water {
+  color: #1867DA !important;
+}
+.water-value:hover .card-value {
+  color: #1867DA !important;
+}
+.water-value:hover .card-text {
+  color: #1867DA !important;
+}
+.water-value:hover .card-block {
+  box-shadow: 0 1px 4px 1px rgba(24,103,218,0.30) !important;
+}
+.steps-value:hover .icon-Steps {
+  color: #078411 !important;
+}
+.steps-value:hover .card-value {
+  color: #078411 !important;
+}
+.steps-value:hover .card-text {
+  color: #078411 !important;
+}
+.steps-value:hover .card-block {
+  box-shadow: 0 1px 4px 1px rgba(76, 219, 83, 0.3) !important;
+}
+.calories-value:hover .icon-Food {
+  color: #F16A30 !important;
+}
+.calories-value:hover .card-block {
+  box-shadow: 0 1px 4px 1px rgba(241,106,48,0.20) !important;
+}
+.calories-value:hover .card-value {
+  color: #F16A30 !important;
+}
+.calories-value:hover .card-text {
+  color: #F16A30 !important;
+}
+.sleep-value:hover .icon-Sleep {
+  color: #6638B9 !important;
+}
+.sleep-value:hover .card-value {
+  color: #6638B9 !important;
+}
+.sleep-value:hover .card-text {
+  color: #6638B9 !important;
+}
+.sleep-value:hover .card-block {
+  box-shadow: 0 1px 4px 1px rgba(102,56,185,0.30) !important;
+}
+#chart {
+  margin-left: 3% !important;
+  margin-right: 0.5%;
+  padding-right: 0.75%;
+}
+.line-chart-area {
+  padding-right: 4.9%
+}
+#water50ml-column {
+  width: 22%;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  cursor: pointer;
+}
+#water100ml-column {
+  width: 22%;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  cursor: pointer;
+}
+#water200ml-column {
+  width: 22%;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  cursor: pointer;
+}
+#water300ml-column {
+  width: 22%;
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  cursor: pointer;
+}
+.water50ml-column:hover {
+  background: #FFFFFF;
+  border: 1px solid #4771E8 !important;
+  border-radius: 4px;
+}
+.water100ml-column:hover {
+  background: #FFFFFF;
+  border: 1px solid #4771E8 !important;
+  border-radius: 4px;
+}
+.water200ml-column:hover {
+  background: #FFFFFF;
+  border: 1px solid #4771E8 !important;
+  border-radius: 4px;
+}
+.water300ml-column:hover {
+  background: #FFFFFF;
+  border: 1px solid #4771E8 !important;
+  border-radius: 4px;
+}
+.water50ml-column:hover .icon-ml {
+  color: #4771E8 !important
+}
+.water100ml-column:hover .icon-ml1 {
+  color: #4771E8 !important
+}
+.water200ml-column:hover .icon-ml2 {
+  color: #4771E8 !important
+}
+.water300ml-column:hover .icon-ml3 {
+  color: #4771E8 !important
+}
+.water50ml-column:hover .imgtext1 {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  color: #2250D4 !important;
+  letter-spacing: 0;
+}
+.water100ml-column:hover .imgtext2 {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  color: #2250D4 !important;
+  letter-spacing: 0;
+}
+.water200ml-column:hover .imgtext3 {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  color: #2250D4 !important;
+  letter-spacing: 0;
+}
+.water300ml-column:hover .imgtext4 {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 16px;
+  color: #2250D4 !important;
+  letter-spacing: 0;
+}
+#value {
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 40px;
+  color: #F24C37;
+  letter-spacing: 0.86px;
+  text-align: center;
+  line-height: 25.92px;
+}
+#sub-value {
+  font-family: 'Roboto';
+  font-weight: 400;
+font-size: 14px;
+color: #F24C37;
+letter-spacing: 0;
+text-align: center;
+margin-bottom: 0px;
+}
+#end-value {
+  font-family: 'Roboto';
+  font-weight: 400;
+font-size: 14px;
+color: #4A4A4A;
+letter-spacing: 0;
+text-align: center;
+}
+#pie-title {
+  padding-top: 10px;
+}
+
+@media (min-width: 768px)
+{
+  .page-title{
+      display:inline-block;
+  }
+  .pie-chart,
+  .column-chart,
+  .line-chart{
+      margin-bottom: 16px;
+  }
+  .line-column-chart{
+      margin-bottom: 1.8rem;
+  }
+  .card{
+      margin-bottom: 20px;
+  }
+}
+@media only screen and (min-width: 213px) and (max-width: 500px) {
+  /* For portrait layouts only */
+  .card-value{
+      font-family: 'Roboto';
+      font-weight: 400;
+      font-size: 20px !important;
+      color: #727272;
+      margin-bottom: 0vw;
+      margin-top: 10px;
+      letter-spacing: 0;
+  }
+  .card-text {
+      font-family: 'Roboto';
+      font-weight: 400;
+      font-size: 15px !important;
+      letter-spacing: 0;
+      line-height: 0px !important;
+  }
+  #Break-text {
+      font-family: 'Roboto';
+      font-weight: 400;
+      font-size: 16px !important;
+      color: #7D7D7D;
+      line-height: 16px !important;
+      letter-spacing: 0;
+  }
+  #Break-text:hover {
+      font-family: 'Roboto';
+      font-weight: 400;
+      font-size: 16px !important;
+      line-height: 16px !important;
+      color: #CB2F1B;
+      letter-spacing: 0;
+  }
+  #title-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+  }
+  #title {
+      font-family: 'Roboto';
+      font-weight: 500;
+      font-size: 17px;
+      color: #535353;
+      letter-spacing: 0;
+      display: block;
+  }
+  #subtitle {
+      font-family: 'Roboto';
+      font-weight: 500;
+      font-size: 20px;
+      color: #535353;
+      letter-spacing: 0;
+      display: block;
+  }
+  #subtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 20px !important;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 13% !important;
+  }
+  #subtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 20px !important;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+  }
+  #steptitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      margin-right: 1% !important
+  }
+  #stepsubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700 !important;
+      font-size: 20px !important;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+  }
+  #watertitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      margin-right: 0% !important;
+  }
+  #watertitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+  }
+  #watersubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 17px;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 1.7% !important;
+  }
+  #watersubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 17px;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-right: 0% !important;
+      margin-top: -20px;
+  }
+  #caloriestitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      margin-right: 0% !important;
+  }
+  #caloriestitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      margin-right: 13%
+  }
+  #caloriessubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 15px !important;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 3%;
+  }
+  #caloriessubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 15px !important;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 4%;
+  }
+  #sleeptitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+  }
+  #sleeptitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+  }
+  #sleepsubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 17px !important;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 2%
+  }
+  #sleepsubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 17px !important;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 12%
+  }
+  #stepsubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700 !important;
+      font-size: 23px;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+  }
+  #stepsubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700 !important;
+      font-size: 20px;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+  }
+  #subtitle span {
+      display: block;
+      float: right;
+      margin-top: -20px;
+  }
+  #title span {
+      display: block;
+      float: right;
+  }
+  .stepsimg {
+      width: 15vw;
+  }
+  .foodimg {
+      width: 15vw;
+  }
+  .waterimg {
+      width: 15vw;
+  }
+  .sleepimg {
+      width: 15vw;
+  }
+}
+
+@media (min-width: 992px) {
+  .col-md-2 {
+      margin-left: 8%;
+  }
+}
+
+@media (max-width: 768px)
+{
+  
+.pie-chart,
+.column-chart,
+.line-chart{
+  margin-bottom: 16px;
+}
+
+
+.line-column-chart{
+ margin-bottom: 1.8rem;
+}
+
+}
+@media (max-width: 768px) {
+  .column-chart-area .chart-container {
+      padding-left: 0;
+  }
+  .card {
+      margin-bottom: 20px;
+      width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 3400px) {
+  #water50ml-column {
+      margin-left: 20px !important;
+  }
+  #watersubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 26px;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 9%;
+  }
+  #watersubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 26px;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 4%;
+  }
+  #caloriessubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 26px;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 9%;
+  }
+  #caloriessubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 26px;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 6%;
+  }
+  #sleepsubtitle-annotation1 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 28px;
+      color: #DB4247;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 8.5%;
+  }
+  #sleepsubtitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 700;
+      font-size: 28px;
+      color: #780508;
+      letter-spacing: 0;
+      margin-top: -20px;
+      margin-right: 4%;
+  }
+  #caloriestitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      margin-right: 16% !important;
+  }
+  #watertitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      padding-left: 1.5% !important;
+      margin-right: 11.5%;
+  }
+  #sleeptitle-annotation2 {
+      font-family: 'Roboto';
+      font-weight: 300;
+      font-size: 12px;
+      color: #1A1A1A;
+      letter-spacing: 0;
+      padding-left: 1.5% !important;
+      margin-right: 13% !important;
+  }
+}

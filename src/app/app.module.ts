@@ -7,9 +7,9 @@ import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { CheckBoxAllModule, RadioButtonAllModule } from '@syncfusion/ej2-angular-buttons';
 import { ChartAllModule, AccumulationChartAllModule } from '@syncfusion/ej2-angular-charts';
 import { MultiSelectAllModule, DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
-import { DialogAllModule, TooltipAllModule } from '@syncfusion/ej2-angular-popups';
+import { DialogAllModule } from '@syncfusion/ej2-angular-popups';
 import { DateRangePickerModule, DateRangePickerAllModule, DatePickerAllModule, TimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
-import { routing } from './app.router';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DashBoardComponent } from './dashboard/dashboard.component';
@@ -18,7 +18,7 @@ import { DashBoardService } from './dashboard/dashboard.service';
 
 @NgModule({
     imports: [
-        routing,
+        AppRoutingModule,
         GridModule,
         PagerModule,
         BrowserModule,
