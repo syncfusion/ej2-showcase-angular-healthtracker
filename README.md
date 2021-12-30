@@ -10,11 +10,6 @@ This health tracker demo application showcases using several Essential Angular c
 ```
 npm install
 ```
-* If Angular CLI is not installed into your machine, please use the below command to install Angular CLI.
-
-```
-npm install -g @angular/cli@7.2.4
-```
 
 ### Run
 

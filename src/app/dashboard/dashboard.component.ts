@@ -1,16 +1,14 @@
 import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
 
-import { Query, DataManager, Predicate } from '@syncfusion/ej2-data';
-import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent, Chart, Double } from '@syncfusion/ej2-angular-charts';
+import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { monday, tuesday, wednesday, thursday, friday, saturday, sunday } from './datasource';
 import { EmitType } from '@syncfusion/ej2-base';
 import {
-    AccumulationChartComponent, IAccResizeEventArgs, AccumulationChart, IAccLoadedEventArgs, AccumulationTheme
+    AccumulationChartComponent, IAccResizeEventArgs, AccumulationChart, IAccLoadedEventArgs
 } from '@syncfusion/ej2-angular-charts';
 
 import { AppComponent } from '../app.component';
 import { MenuComponent } from '../menu/menu.component';
-// import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 import { DashBoardService } from './dashboard.service';
 import { CommonService } from '../common/common.service';
@@ -23,7 +21,6 @@ import { CommonService } from '../common/common.service';
 export class DashBoardComponent implements OnInit {
     // tslint:disable:max-line-length
     // tslint:disable:no-string-literal
-    // @ViewChild('pieChart') pieChart: PieChartComponent;
     @ViewChild('lineChart') lineChart: ChartComponent;
     @ViewChild('splineChart') splineChart: ChartComponent;
     @ViewChild('bubbleChart') bubbleChart: ChartComponent;
@@ -876,6 +873,7 @@ export class DashBoardComponent implements OnInit {
                     explode: false, explodeOffset: '10%',
                 }
             ],
+            enableBorderOnMouseMove: false,
             enableSmartLabels: true,
             legendSettings: {
                 visible: false, position: 'Top'
@@ -901,6 +899,7 @@ export class DashBoardComponent implements OnInit {
                     explode: false,
                 }
             ],
+            enableBorderOnMouseMove: false,
             enableSmartLabels: true,
             resized: (args: IAccResizeEventArgs) => {
                 if (this.annotation) {

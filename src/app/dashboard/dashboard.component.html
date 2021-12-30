@@ -227,7 +227,7 @@
                             <div id="pie-title" style=" padding-top: 20px; cursor: default; margin-bottom: 6px;  margin-left: 20px; font-family: Roboto; font-weight:500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
                                 Activity</div>
                             <div class="column-chart" id="steps-donut" style="height:330px">
-                                <ejs-accumulationchart #multiplepie style='height: 330px; margin-bottom: 0px' [legendSettings]="legendSettings" [enableAnimation]= 'enableAnimation' (loaded)= 'steploaded($event)'>
+                                <ejs-accumulationchart #multiplepie style='height: 330px; margin-bottom: 0px' [enableBorderOnMouseMove]=false [legendSettings]="legendSettings" [enableAnimation]= 'enableAnimation' (loaded)= 'steploaded($event)'>
                                     <e-accumulation-annotations>
                                         <e-accumulation-annotation content='<div id="steps-innercontent"><p id="main-value" style="font-family: Roboto; font-weight:500; font-size: 28px;color: #313331;letter-spacing: 0;text-align: center; margin:0px">1800</p><p id="step-value" style="font-family: Roboto; font-weight:500; font-size: 14px; color: #535353; letter-spacing: 0; line-height: 0px;text-align: center;">Calories burnt</p></div>'
                                          region='Chart' x='50%' y='50%'>
