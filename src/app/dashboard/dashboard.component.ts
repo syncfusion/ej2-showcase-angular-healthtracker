@@ -809,7 +809,7 @@ export class DashBoardComponent implements OnInit {
         };
         document.getElementById('water').onclick = () => {
             document.getElementById('title').innerHTML = 'Water Consumption';
-            document.getElementById('pie-title').innerHTML = 'sunday Report';
+            document.getElementById('pie-title').innerHTML = 'Sunday Report';
             document.getElementById('calories-subtitle').style.color = '#828282';
             document.getElementById('calories-text').style.color = '#828282';
             document.getElementById('water-text').style.color = '#FFFFFF';
@@ -822,7 +822,7 @@ export class DashBoardComponent implements OnInit {
         };
         document.getElementById('step').onclick = () => {
             document.getElementById('title').innerHTML = 'Steps Count';
-            document.getElementById('pie-title').innerHTML = 'sunday Activity';
+            document.getElementById('pie-title').innerHTML = 'Sunday Activity';
             document.getElementById('calories-subtitle').style.color = '#828282';
             document.getElementById('calories-text').style.color = '#828282';
             document.getElementById('water-text').style.color = '#828282';
@@ -983,10 +983,9 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('sleep-img').style.color = '#999393';
         document.getElementById('water-img').style.color = '#FFFFFF';
         document.getElementById('food-img').style.color = '#999393';
-        document.getElementById('title').innerHTML = 'Water Consumption <span id="watertitle-annotation1">Daily Average</span><span id="watertitle-annotation2">Target</span>';
-        document.getElementById('subtitle').innerHTML = '<span id="watersubtitle-annotation1">4.32 litres</span><span id="watersubtitle-annotation2">7 litres</span>';
-        document.getElementById('watersubtitle-annotation1').style.color = '#3B61E9';
-        document.getElementById('watersubtitle-annotation2').style.color = '#3B61E9';
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Water Consumption </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Target </span><span id="value-annotation" style="color: #3B61E9;"> 7 litres </span>'
+        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color: #3B61E9;"> 4.32 litres </span>'
         document.getElementById('pie-title').innerHTML = 'sunday Report';
         document.getElementById('calories-subtitle').style.color = '#828282';
         document.getElementById('calories-text').style.color = '#828282';
@@ -1037,8 +1036,9 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('sleep-img').style.color = '#999393';
         document.getElementById('water-img').style.color = '#999393';
         document.getElementById('food-img').style.color = '#999393';
-        document.getElementById('title').innerHTML = 'Steps Taken <span id="steptitle-annotation1">Distance Travelled</span>';
-        document.getElementById('subtitle').innerHTML = '<span id="stepsubtitle-annotation1" style="color: #05AD13;">3.2 miles</span>';
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Steps Taken </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Distance Travelled </span><span id="value-annotation" style="color:#05AD13"> 3.2 miles </span>'
+        document.getElementById("average-value").innerHTML = ''
         document.getElementById('pie-title').innerHTML = 'sunday Activity';
         document.getElementById('calories-subtitle').style.color = '#828282';
         document.getElementById('calories-text').style.color = '#828282';
@@ -1088,10 +1088,9 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('sleep-img').style.color = '#FFFFFF';
         document.getElementById('water-img').style.color = '#999393';
         document.getElementById('food-img').style.color = '#999393';
-        document.getElementById('title').innerHTML = 'Sleep Tracker <span id="sleeptitle-annotation1">Daily Average</span><span id="sleeptitle-annotation2">Goal</span>';
-        document.getElementById('subtitle').innerHTML = '<span id="sleepsubtitle-annotation1">6.32 hrs</span><span id="sleepsubtitle-annotation2">7.5 hrs</span>';
-        document.getElementById('sleepsubtitle-annotation1').style.color = '#4526A6';
-        document.getElementById('sleepsubtitle-annotation2').style.color = '#4526A6';
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Sleep Tracker </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Goal </span><span id="value-annotation" style="color:#4526A6"> 7.2 hrs </span>'
+        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color:#4526A6"> 6.32 hrs </span>'
         document.getElementById('pie-title').innerHTML = 'Sleep Quality';
         document.getElementById('calories-subtitle').style.color = '#828282';
         document.getElementById('calories-text').style.color = '#828282';
@@ -1140,10 +1139,9 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('sleep-img').style.color = '#999393';
         document.getElementById('water-img').style.color = '#999393';
         document.getElementById('food-img').style.color = '#FFFFFF';
-        document.getElementById('title').innerHTML = 'Calories Consumed <span id="caloriestitle-annotation1">Daily Average</span><span id="caloriestitle-annotation2">Today</span>';
-        document.getElementById('subtitle').innerHTML = '<span id="caloriessubtitle-annotation1" >902 kcal</span><span id="caloriessubtitle-annotation2">1437 kcal</span>';
-        document.getElementById('caloriessubtitle-annotation1').style.color = '#DB4247';
-        document.getElementById('caloriessubtitle-annotation2').style.color = '#780508';
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Calories Consumed </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Total </span><span id="value-annotation" style="color:#780508">1437 Kcal</span>'
+        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color:#DB4247"> 902 Kcal </span>'
         document.getElementById('pie-title').innerHTML = 'Macro Nutrients';
         document.getElementById('calories-subtitle').style.color = '#FFFFFF';
         document.getElementById('calories-text').style.color = '#FFFFFF';

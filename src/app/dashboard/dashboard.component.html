@@ -1,72 +1,67 @@
 <div id="container" style=" background: #FAFAFA;">
-    <div class="row" id="overall-title" style="cursor: default">
-        <p class="page-title">Health <b>Stat</b></p>
-        <img src="./assets/images/icons/Healthstat.png" style="padding-left: 1.5%; margin-top: 10px; float:left;">
-        <img src="./assets/images/icons/Profile_.png" style="padding-right: 1.5%; margin-top: 10px; float:right">
-        <p id="sub-title" style=" float: right">Hi, John Smith</p>
-    </div>
+    <ejs-appbar cssClass="custom-appbar">
+        <div>
+            <span class="e-avatar custom-avatar e-avatar-circle"><img src="./assets/images/icons/Healthstat.png"></span>
+            <p class="appbar-title"> Health <b>Stat</b> </p>
+            <div class="e-appbar-spacer"></div>
+            <p class="appbar-subtitle"> Hi, John Smith </p>
+            <span class="e-avatar custom-avatar e-avatar-circle"><img src="./assets/images/icons/Profile_.png"></span>
+        </div>
+        </ejs-appbar>
     <div id="card-row">
         <div class="row">
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive" id="calories-column"
                 style="padding-right: 0px; padding-left: 20px">
-                <div class="card" id="calories" (click)="onCalClick($event)" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)">
-                    <div class="card-body expense-card" id="calories-bg" style=" background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
+                <div class="e-card" id="calories" (click)="onCalClick($event)" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)">
+                    <div class="expense-card" id="calories-bg" style=" background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
                         <div class="card-block" id="caloriescard" style="box-shadow: 0 3px 6px 2px rgba(178,30,195,0.30);">
-                            <div class="media">
-                                <div class="media-body text-xs-left float-right" id="calories-value" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
+                                <div class="media-body" id="calories-value" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
                                     <h3 class="card-value" id="calories-text" style="color: #FFFFFF">13,100</h3>
                                     <div id="foodimg"><span class="card-text" id="calories-subtitle" style="color: #FFFFFF">Calories
                                             Eaten</span><span id="food-img" class="icon-Food" style="font-size: 65px; margin-right: 3%; margin-bottom: 2% "></span>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value" id="step-column" style="padding-right: 0px; padding-left: 20px;">
-                <div class="card" id="step" (click)="onStepClick($event)" style="max-width: 445px; ">
-                    <div class="card-body income-card" id="step-bg">
+                <div class="e-card" id="step" (click)="onStepClick($event)" style="max-width: 445px; ">
+                    <div class="income-card" id="step-bg">
                         <div class="card-block" id="stepcard">
-                            <div class="media">
-                                <div class="media-body text-xs-left float-right" id="steps-value" style="max-width: 445px; background-image: null; border-radius: 4px">
+                                <div class="media-body" id="steps-value" style="max-width: 445px; background-image: null; border-radius: 4px">
                                     <h3 class="card-value" id="steps-text">52,100</h3>
                                     <div id="stepimg"><span class="card-text" id="steps-subtitle">Steps
                                             Taken</span>
                                         <span id="steps-img" class="icon-Steps" style="font-size: 65px; margin-right: 3%; margin-bottom: 2%"></span></div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value" id="water-column" style="padding-right: 0px; padding-left: 20px">
-                <div class="card" id="water" (click)="onWaterClick($event)" style="max-width: 445px;">
-                    <div class="card-body balance" id="water-bg">
+                <div class="e-card" id="water" (click)="onWaterClick($event)" style="max-width: 445px;">
+                    <div class="balance" id="water-bg">
                         <div class="card-block" id="watercard" style="max-width: 445px;">
-                            <div class="media">
-                                <div class="media-body text-xs-left float-right" id="water-value" style="max-width: 445px; background-image: null; border-radius: 4px">
+                                <div class="media-body" id="water-value" style="max-width: 445px; background-image: null; border-radius: 4px">
                                     <h3 class="card-value" id="water-text">38.7 ltr</h3>
                                     <div id="waterimg"><span class="card-text" id="water-subtitle">Water Consumed</span>
                                         <span id="water-img" class="icon-Water" style="font-size: 65px; margin-right: 3%; margin-bottom: 2%"></span></div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value" id="sleep-column" style="padding-right: 0px; padding-left: 20px">
-                <div class="card" id="sleep" (click)="onSleepClick($event)" style="max-width: 445px;">
-                    <div class="card-body transaction" id="sleep-bg">
+                <div class="e-card" id="sleep" (click)="onSleepClick($event)" style="max-width: 445px;">
+                    <div class="transaction" id="sleep-bg">
                         <div class="card-block" id="sleepcard" style="max-width: 445px;" >
-                            <div class="media">
-                                <div class="media-body text-xs-left float-right" id="sleep-value" style="max-width: 445px; background-image: null; border-radius: 4px">
+                                <div class="media-body" id="sleep-value" style="max-width: 445px; background-image: null; border-radius: 4px">
                                     <h3 class="card-value" id="sleep-text" style="font-family: 'Roboto'; font-weight:400; color: #727272;">50
                                         hr</h3>
                                     <div id="sleepimg"><span class="card-text" id="sleep-subtitle">Sleep Duration</span>
                                         <span id="sleep-img" class="icon-Sleep" style="font-size: 65px; margin-right: 4%; margin-bottom: 2%"></span></div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,17 +71,22 @@
     <div class="row" id="chart" style="background:transparent; padding-right: 0px">
         <div class="line-chart-area">
             <div class="col-sm-12 col-md-8" style="height: 530px; background:transparent">
-                    <div style="padding-top: 20px; margin-bottom: 10px;">
-                            <p id="title" style="color: #535353; cursor: default; ">Calories Consumed <span id="caloriestitle-annotation1">Daily
-                                    Average</span><span id="caloriestitle-annotation2">Today</span>
+                <div class="chart-header">
+                    <div id="chart-header-title"><p id="chart-title">Calories Consumed</p></div>
+                    <div class="chart-header-values">
+                        <div id="total-value" style="margin: 0px 10px;">
+                            <span id="title-annotation"> Total </span>
+                            <span id="value-annotation" style="color: #780508;"> 1437 Kcal </span>
                         </div>
-                        <div>
-                            <p id="subtitle" style="cursor: default;"><span id="caloriessubtitle-annotation1">902 kcal</span><span
-                                    id="caloriessubtitle-annotation2">1437 kcal</span></p>
+                        <div id="average-value" style="margin: 0px 10px;">
+                            <span id="title-annotation"> Daily Average </span>
+                            <span id="value-annotation" style="color: #DB4247;"> 902 Kcal </span>
                         </div>
+                    </div>
+                </div>
                 <div class="chart-padding" id="line">       
                     <div id="line" style='display:block'>
-                        <ejs-chart #lineChart id='balance' class='line-chart' style="width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [chartArea]='chartArea' [tooltip]='tooltip' 
+                        <ejs-chart #lineChart id='balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [chartArea]='chartArea' [tooltip]='tooltip' 
                             (chartMouseClick)='mouseclick($event)' (pointMove)='pointMove($event)' (loaded)='loaded($event)' [background]='background'>
                             <e-series-collection>
                                 <e-series type='Line' fill='#F38D36' xName='x' yName='y' width=2 [dataSource]='caloriesdata' [marker]='marker' [border]='cborder'> </e-series>
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div id="spline" style='display:none'>
-                            <ejs-chart #splineChart id='spline-balance' class='line-chart' style=" width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='splinePrimaryXAxis' [primaryYAxis]='splinePrimaryYAxis' [chartArea]='chartArea' [tooltip]='splineTooltip' 
+                            <ejs-chart #splineChart id='spline-balance' class='line-chart' style=" width: 100%; height:400px; background: transparent;" [primaryXAxis]='splinePrimaryXAxis' [primaryYAxis]='splinePrimaryYAxis' [chartArea]='chartArea' [tooltip]='splineTooltip' 
                                 (pointClick)='splinemouseclick($event)' (pointMove)='splinepointMove($event)' (loaded)='loaded($event)' [background]='background'>
                                 <e-annotations>
                                     <e-annotation content='<div id="waterachieved"><span id="achieved-img" class="icon-achieved" style="font-size: 30px; color: #3B61E9"></span></div>'
@@ -108,7 +108,7 @@
                             </ejs-chart>
                         </div>
                         <div id="column" style='display:none'>
-                            <ejs-chart #columnChart id='column-balance' class='line-chart' style="width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='columnPrimaryXAxis' [primaryYAxis]='columnPrimaryYAxis' [chartArea]='chartArea' [tooltip]='columnTooltip' 
+                            <ejs-chart #columnChart id='column-balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='columnPrimaryXAxis' [primaryYAxis]='columnPrimaryYAxis' [chartArea]='chartArea' [tooltip]='columnTooltip' 
                                 (loaded)='loaded($event)' (chartMouseClick)='columnmouseclick($event)' [background]='background'>
                                 <e-annotations>
                                     <e-annotation content='<div id="thumbs_up"><img src="./assets/images/icons/Shape.png"  style="width: 30px; height: 30px"></div>'
@@ -121,7 +121,7 @@
                             </ejs-chart>
                         </div>
                         <div id="bubble" style='display:none'>
-                            <ejs-chart #bubbleChart id='bubble-balance' class='line-chart' style="width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='bubblePrimaryXAxis' [primaryYAxis]='bubblePrimaryYAxis' [chartArea]='chartArea' [tooltip]='bubbleTooltip' 
+                            <ejs-chart #bubbleChart id='bubble-balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='bubblePrimaryXAxis' [primaryYAxis]='bubblePrimaryYAxis' [chartArea]='chartArea' [tooltip]='bubbleTooltip' 
                                 (chartMouseClick)='bubblemouseclick($event)' (pointMove)='bubblepointMove($event)' (loaded)='loaded($event)' [background]='background'>
                                 <e-series-collection>
                                     <e-series type='Bubble' fill='#4526A6' xName='x' yName='y' width=2 [dataSource]='bubbledata' [marker]='bubblemarker' [border]='bborder' size='size' > </e-series>
