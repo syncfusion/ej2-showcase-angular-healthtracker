@@ -212,13 +212,19 @@
 #chart-leftarea {
   margin-left: 3%;
 }
-.e-card {
+#calories,#step,#water,#sleep {
+  display: none;
   border-radius: 4px;
   cursor: pointer;
   overflow: visible !important;
   margin-bottom: 20px;
   line-height: 1.42857143;
 }
+#calories.hidden-element-size, #step.hidden-element-size,#water.hidden-element-size,#sleep.hidden-element-size {
+  display: block;
+  visibility: hidden;
+  position: absolute;
+} 
 #steps-text:hover {
   font-family: ''Roboto'';
   font-weight: 400;

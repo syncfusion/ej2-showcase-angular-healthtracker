@@ -31,6 +31,7 @@
         "@syncfusion/ej2-angular-inputs": "*",
         "@syncfusion/ej2-angular-layouts": "*",
         "@syncfusion/ej2-angular-navigations": "*",
+        "@syncfusion/ej2-angular-notifications": "^20.4.42",
         "@syncfusion/ej2-angular-popups": "*",
         "rxjs": "~7.8.0",
         "tslib": "^2.4.1",

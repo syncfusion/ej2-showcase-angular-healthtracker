@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
 
 import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { monday, tuesday, wednesday, thursday, friday, saturday, sunday } from './datasource';
-import { EmitType } from '@syncfusion/ej2-base';
+import { EmitType, addClass, removeClass } from '@syncfusion/ej2-base';
 import {
     AccumulationChartComponent, IAccResizeEventArgs, AccumulationChart, IAccLoadedEventArgs
 } from '@syncfusion/ej2-angular-charts';
@@ -53,14 +53,7 @@ export class DashBoardComponent implements OnInit {
     public chartArea: Object;
     public caloriesdata: Object[];
     public splinedata: Object[];
-    public polardata: any= [{ text: '00:00 - 3:00', x: '00:00', y: 0 },
-    { text: '03:00 - 6:00', x: '3:00', y: 0 },
-    { text: '06:00 - 9:00', x: '6:00', y: 0 },
-    { text: '09:00 - 12:00', x: '9:00', y: 1 },
-    { text: '12:00 - 15:00', x: '12:00', y: 1.5 },
-    { text: '15:00 - 18:00', x: '15:00', y: 2},
-    { text: '18:00 - 21:00', x: '18:00', y: 1.5 },
-    { text: '21:00 - 24:00', x: '21:00', y: 0.75 }];
+    public polardata: any= [];
     public polarchartdata: Object[];
     public calpiedata: Object[];
     public sleepdata: Object[];
@@ -93,8 +86,8 @@ export class DashBoardComponent implements OnInit {
     public cornerRadius: Object;
     public annotationpie1: AccumulationChart;
     public annotationpie2: AccumulationChart;
-    public annotationpie1data : Object[] = (<{ Exercise: Object[] }>sunday[0]).Exercise;
-    public annotationpie2data : Object[] = (<{ Hours: Object[] }>sunday[0]).Hours;
+    public annotationpie1data : Object[];
+    public annotationpie2data : Object[];
     public annotation: boolean = true;
     public steppiedata: Object[];
     public yValue: number = 0;
@@ -167,7 +160,7 @@ export class DashBoardComponent implements OnInit {
             lineStyle: { width: 0 },
             majorTickLines: { width: 0 },
             minorTickLines: { width: 0 },
-            stripLines: [{ start: 7, sizeType: 'Pixel', size: 1, color: '#3B61E9', dashArray: '5,5', text: 'Target', textStyle: { color: '#3B61E9' }, horizontalAlignment: 'End', verticalAlignment: 'End' }]
+            stripLines: [{ sizeType: 'Pixel', size: 1, color: '#3B61E9', dashArray: '5,5', textStyle: { color: '#3B61E9' }, horizontalAlignment: 'End', verticalAlignment: 'End' }]
         };
         this.columnPrimaryXAxis = {
             valueType: 'Category', interval: 1, majorGridLines: { width: 0 }, majorTickLines: { width: 0 },
@@ -179,11 +172,11 @@ export class DashBoardComponent implements OnInit {
             maximum: 3500,
             interval: 500,
             stripLines: [{
-                start: 2800, sizeType: 'Pixel', dashArray: '3,3', size: 1, color: '#D93237', text: 'Daily Average 2800 cal',
+                sizeType: 'Pixel', dashArray: '3,3', size: 1, color: '#D93237',
                 textStyle: { color: '#D93237', size: '12px', fontFamily: 'Roboto', fontWeight: '500' }, horizontalAlignment: 'End', verticalAlignment: 'End'
             },
             {
-                start: 2000, sizeType: 'Pixel', dashArray: '3,3', size: 1, color: '#760104', text: 'Today 2000 cal',
+                sizeType: 'Pixel', dashArray: '3,3', size: 1, color: '#760104',
                 textStyle: { color: '#760104', size: '12px', fontFamily: 'Roboto', fontWeight: '500' }, horizontalAlignment: 'End', verticalAlignment: 'End'
             }],
             lineStyle: { width: 0 },
@@ -192,7 +185,7 @@ export class DashBoardComponent implements OnInit {
         };
         this.columnPrimaryYAxis = {
             majorTickLines: { width: 0 }, lineStyle: { width: 0 },
-            stripLines: [{ start: 9000, sizeType: 'Pixel', size: 1, dashArray: '5,5', color: '#BB830D', text: 'Goal 9000 Steps', textStyle: { color: '#BB830D', size: '12px', fontFamily: 'Roboto', fontWeight: '500' }, horizontalAlignment: 'End', verticalAlignment: 'End' }]
+            stripLines: [{ sizeType: 'Pixel', size: 1, dashArray: '5,5', color: '#BB830D', textStyle: { color: '#BB830D', size: '12px', fontFamily: 'Roboto', fontWeight: '500' }, horizontalAlignment: 'End', verticalAlignment: 'End' }]
         };
         this.polarPrimaryYAxis = {
             labelFormat: '{value}L',
@@ -238,30 +231,9 @@ export class DashBoardComponent implements OnInit {
         this.polarmarker = {
             dataLabel: { name: 'text' }
         };
-        this.caloriesdata = [
-            { x: 'sunday', y: 1200 }, { x: 'Monday', y: 1800 }, { x: 'Tuesday', y: 2850 }, { x: 'Wednesday', y: 1900 }, { x: 'Thursday', y: 2500 }, { x: 'Friday', y: 1650 }, { x: 'Saturday', y: 1300 }
-        ];
-        this.splinedata = [
-            { x: 'Sunday', y: 5 }, { x: 'Monday', y: 6 }, { x: 'Tuesday', y: 4.5 }, { x: 'Wednesday', y: 5.5 }, { x: 'Thursday', y: 7.2 }, { x: 'Friday', y: 4.5 }, { x: 'Saturday', y: 6 }
-        ];
-        this.bubbledata = [
-            { x: 'Sunday', y: 9, size: 4.837 }, { x: 'Monday', y: 6, size: 2.347 }, { x: 'Tuesday', y: 6, size: 2.347 }, { x: 'Wednesday', y: 7, size: 3.527 },
-            { x: 'Thursday', y: 8, size: 4.047 }, { x: 'Friday', y: 5, size: 1.582 }, { x: 'Saturday', y: 9, size: 4.837 }
-        ];
-        this.columndata = [{ x: 'Sunday', y: 8900 }, { x: 'Monday', y: 7200 }, { x: 'Tuesday', y: 9100 }, { x: 'Wednesday', y: 6200 }, { x: 'Thursday', y: 7000 },
-                           { x: 'Friday', y: 8000 }, { x: 'Saturday', y: 5500 }
-        ];
         this.cornerRadius = {
             topLeft: 10, topRight: 10
         };
-        this.polarchartdata = [{ text: '00:00 - 3:00', x: '00:00', y: 0 },
-        { text: '03:00 - 6:00', x: '3:00', y: 0 },
-        { text: '06:00 - 9:00', x: '6:00', y: 0 },
-        { text: '09:00 - 12:00', x: '9:00', y: 1 },
-        { text: '12:00 - 15:00', x: '12:00', y: 1.5 },
-        { text: '15:00 - 18:00', x: '15:00', y: 2},
-        { text: '18:00 - 21:00', x: '18:00', y: 1.5 },
-        { text: '21:00 - 24:00', x: '21:00', y: 0.75 }];
         this.startAngle = 220;
         this.stepstartAngle = 180;
         this.stependAngle = 180;
@@ -276,20 +248,268 @@ export class DashBoardComponent implements OnInit {
         };
         this.enableAnimation = true;
         this.polarEnableAnimation = false;
-        this.sleepdata = [
-            { x: 'Light sleep', y: 10, time: '10:30 pm - 11:24 pm' }, { x: 'Deep sleep', y: 20, time: '11:24 am - 1:12 am' },
-            { x: 'Awake', y: 2.5, time: '1:12 am - 1:25 am' }, { x: 'REM', y: 5, time: '1:25 am - 1:52 am' },
-            { x: 'Deep sleep', y: 22, time: '1:52 am - 3:45 am' }, { x: 'Awake', y: 2.5, time: '3:45 am - 3.58 am' },
-            { x: 'Light sleep', y: 15, time: '3:58 am - 5.20 am' }, { x: 'REM', y: 5, time: '5:20 am - 5:47 am' },
-            { x: 'Deep sleep', y: 18, time: '5:47 am - 7:30 am' }
-        ];
-        this.steppiedata = [
-            { x: 'Steps', y: 18, text: '18%' }, { x: 'Legal', y: 8, text: '8%' }
-        ];
-        this.calpiedata = [{ 'x': 'Protein', 'y': 30, 'r': '100', text: '25%' }, { 'x': 'Fat', 'y': 12.5, 'r': '110', text: '12.5%' }, { 'x': 'Fiber', 'y': 12.5, 'r': '115', text: '12.5%' },
-        { 'x': 'Calcium', 'y': 10, 'r': '125', text: '50%' }, { 'x': 'Carbs', 'y': 20, 'r': '125', text: '50%' }, { 'x': 'Vitamins', 'y': 30, 'r': '125', text: '50%' }];
+        this.initializeSkeleton();
+        this.LoadCardData();
+        this.LoadChartData('calorie');
     }
-
+    public initializeSkeleton(): void {
+        let cardSkeletons: HTMLCollectionOf<Element> = document.getElementById('card-row').getElementsByTagName('ejs-skeleton');
+        const cards: NodeList = document.querySelectorAll('#card-row .row .e-card');
+        addClass([cards[0] as HTMLElement, cards[1] as HTMLElement, cards[2] as HTMLElement, cards[3] as HTMLElement], "hidden-element-size");
+        (cardSkeletons[0] as HTMLElement).style.height = (cards[0] as HTMLElement).offsetHeight + 'px';
+        (cardSkeletons[1] as HTMLElement).style.height = (cards[1] as HTMLElement).offsetHeight + 'px';
+        (cardSkeletons[2] as HTMLElement).style.height = (cards[2] as HTMLElement).offsetHeight + 'px';
+        (cardSkeletons[3] as HTMLElement).style.height = (cards[3] as HTMLElement).offsetHeight + 'px';
+        removeClass([cards[0] as HTMLElement, cards[1] as HTMLElement, cards[2] as HTMLElement, cards[3] as HTMLElement], "hidden-element-size");
+    }
+    public GetCardData(): any {
+        return new Promise(resolve => setTimeout(() => {
+            let data: { [key: string]: Object } = {};
+            data['calories-eaten'] = '13,100';
+            data['steps-taken'] = '52,100';
+            data['water-consumed'] = '38.7 ltr';
+            data['sleep-duration'] = '50 hr';
+            resolve(data);
+        }, 2000));
+    }
+    public LoadCardData(): void {
+        this.GetCardData().then((data: any) => {
+            document.getElementById('calories-text').textContent = data['calories-eaten'];
+            document.getElementById('steps-text').textContent = data['steps-taken'];
+            document.getElementById('water-text').textContent = data['water-consumed'];
+            document.getElementById('sleep-text').textContent = data['sleep-duration'];
+            let cardSkeletons: HTMLCollectionOf<Element> = document.getElementById('card-row').getElementsByTagName('ejs-skeleton');
+            const cards: NodeList = document.querySelectorAll('#card-row .row .e-card');
+            (cardSkeletons[0] as HTMLElement).style.display = 'none';
+            (cardSkeletons[1] as HTMLElement).style.display = 'none';
+            (cardSkeletons[2] as HTMLElement).style.display = 'none';
+            (cardSkeletons[3] as HTMLElement).style.display = 'none';
+            (cards[0] as HTMLElement).style.display = 'flex';
+            (cards[1] as HTMLElement).style.display = 'flex';
+            (cards[2] as HTMLElement).style.display = 'flex';
+            (cards[3] as HTMLElement).style.display = 'flex';
+            this.ToggleVisibility('none', 'block');
+        });
+    }
+    public GetCalorieData(): any {
+        return new Promise(resolve => setTimeout(() => {
+            let data: { [key: string]: Object } = {};
+            data['dailyaveragecal'] = 2800;
+            data['todaycal'] = 2000;
+            data['caloriesdata'] = [
+                { x: 'Sunday', y: 1200 }, { x: 'Monday', y: 1800 }, { x: 'Tuesday', y: 2850 }, { x: 'Wednesday', y: 1900 }, { x: 'Thursday', y: 2500 }, { x: 'Friday', y: 1650 }, { x: 'Saturday', y: 1300 }
+            ];
+            data['calpiedata'] = [{ 'x': 'Protein', 'y': 30, 'r': '100', text: '25%' }, { 'x': 'Fat', 'y': 12.5, 'r': '110', text: '12.5%' }, { 'x': 'Fiber', 'y': 12.5, 'r': '115', text: '12.5%' },
+            { 'x': 'Calcium', 'y': 10, 'r': '125', text: '50%' }, { 'x': 'Carbs', 'y': 20, 'r': '125', text: '50%' }, { 'x': 'Vitamins', 'y': 30, 'r': '125', text: '50%' }];
+            resolve(data);
+        }, 2000));
+    }
+    public GetStepsData(): any {
+        return new Promise(resolve => setTimeout(() => {
+            let data: { [key: string]: Object } = {};
+            data['stepsgoal'] = 9000;
+            data['columndata'] = [{ x: 'Sunday', y: 8900 }, { x: 'Monday', y: 7200 }, { x: 'Tuesday', y: 9100 }, { x: 'Wednesday', y: 6200 }, { x: 'Thursday', y: 7000 }, { x: 'Friday', y: 8000 }, { x: 'Saturday', y: 5500 }];
+            data['steppiedata'] = [{ x: 'Steps', y: 18, text: '18%' }, { x: 'Legal', y: 8, text: '8%' }];
+            data['annotationpie1data'] = (<{ Exercise: Object[] }>sunday[0]).Exercise;
+            data['annotationpie2data'] = (<{ Hours: Object[] }>sunday[0]).Hours;
+            resolve(data);
+        }, 2000));
+    }
+    public GetWaterData(): any {
+        return new Promise(resolve => setTimeout(() => {
+            let data: { [key: string]: Object } = {};
+            data['watergoal'] = 7;
+            data['splinedata'] = [
+                { x: 'Sunday', y: 5 }, { x: 'Monday', y: 6 }, { x: 'Tuesday', y: 4.5 }, { x: 'Wednesday', y: 5.5 }, { x: 'Thursday', y: 7.2 }, { x: 'Friday', y: 4.5 }, { x: 'Saturday', y: 6 }
+            ];
+            data['polarchartdata'] = [
+                { text: '00:00 - 3:00', x: '00:00', y: 0 },
+                { text: '03:00 - 6:00', x: '3:00', y: 0 },
+                { text: '06:00 - 9:00', x: '6:00', y: 0 },
+                { text: '09:00 - 12:00', x: '9:00', y: 1 },
+                { text: '12:00 - 15:00', x: '12:00', y: 1.5 },
+                { text: '15:00 - 18:00', x: '15:00', y: 2},
+                { text: '18:00 - 21:00', x: '18:00', y: 1.5 },
+                { text: '21:00 - 24:00', x: '21:00', y: 0.75 }
+            ];
+            data['polardata'] = [
+                { text: '00:00 - 3:00', x: '00:00', y: 0 },
+                { text: '03:00 - 6:00', x: '3:00', y: 0 },
+                { text: '06:00 - 9:00', x: '6:00', y: 0 },
+                { text: '09:00 - 12:00', x: '9:00', y: 1 },
+                { text: '12:00 - 15:00', x: '12:00', y: 1.5 },
+                { text: '15:00 - 18:00', x: '15:00', y: 2},
+                { text: '18:00 - 21:00', x: '18:00', y: 1.5 },
+                { text: '21:00 - 24:00', x: '21:00', y: 0.75 }
+            ];
+            resolve(data);
+        }, 2000));
+    }
+    public GetSleepData(): any {
+        return new Promise(resolve => setTimeout(() => {
+            let data: { [key: string]: Object } = {};
+            data['sleepdata'] = [
+                { x: 'Light sleep', y: 10, time: '10:30 pm - 11:24 pm' }, { x: 'Deep sleep', y: 20, time: '11:24 am - 1:12 am' },
+                { x: 'Awake', y: 2.5, time: '1:12 am - 1:25 am' }, { x: 'REM', y: 5, time: '1:25 am - 1:52 am' },
+                { x: 'Deep sleep', y: 22, time: '1:52 am - 3:45 am' }, { x: 'Awake', y: 2.5, time: '3:45 am - 3.58 am' },
+                { x: 'Light sleep', y: 15, time: '3:58 am - 5.20 am' }, { x: 'REM', y: 5, time: '5:20 am - 5:47 am' },
+                { x: 'Deep sleep', y: 18, time: '5:47 am - 7:30 am' }
+            ];
+            data['bubbledata'] = [
+                { x: 'Sunday', y: 9, size: 4.837 }, { x: 'Monday', y: 6, size: 2.347 }, { x: 'Tuesday', y: 6, size: 2.347 }, { x: 'Wednesday', y: 7, size: 3.527 },
+                { x: 'Thursday', y: 8, size: 4.047 }, { x: 'Friday', y: 5, size: 1.582 }, { x: 'Saturday', y: 9, size: 4.837 }
+            ];
+            resolve(data);
+        }, 2000));
+    }
+    public LoadChartData(activity: string): void {
+        switch(activity.toLowerCase()) {
+            case "calorie": {
+                this.GetCalorieData().then((data: any) => {
+                    this.ToggleVisibility('none', 'block');
+                    this.caloriesdata = data['caloriesdata'];
+                    this.calpiedata = data['calpiedata'];
+                    this.lineChart.primaryYAxis.stripLines[0].start = data['dailyaveragecal'];
+                    this.lineChart.primaryYAxis.stripLines[0].text = 'Daily Average ' + data['dailyaveragecal'] + ' cal';
+                    this.lineChart.primaryYAxis.stripLines[1].start = data['todaycal'];
+                    this.lineChart.primaryYAxis.stripLines[1].text = 'Today ' + data['todaycal'] + ' cal';
+                    this.lineChart.refresh();
+                    this.pie.refresh();
+                });
+                break;
+            }
+            case "steps": {
+                this.GetStepsData().then((data: any) => {
+                    this.ToggleVisibility('none', 'block');
+                    this.columndata = data['columndata'];
+                    this.steppiedata = data['steppiedata'];
+                    this.columnChart.primaryYAxis.stripLines[0].start = data['stepsgoal'];
+                    this.columnChart.primaryYAxis.stripLines[0].text = 'Goal ' + data['stepsgoal'] + ' steps';
+                    this.annotationpie1data = data['annotationpie1data'];
+                    this.annotationpie2data = data['annotationpie2data'];
+                    this.columnChart.refresh();
+                    this.multiplepie.refresh();
+                })
+                break;
+            }
+            case "water": {
+                this.GetWaterData().then((data:any) => {
+                    this.ToggleVisibility('none', 'block');
+                    this.splinedata = data['splinedata'];
+                    this.splineChart.primaryYAxis.stripLines[0].start = data['watergoal'];
+                    this.splineChart.primaryYAxis.stripLines[0].text = 'Target';
+                    this.polarchartdata = data['polarchartdata'];
+                    this.polardata = data['polardata'];
+                    this.splineChart.refresh();
+                    this.polarChart.refresh();
+                })
+                break;
+            }
+            case "sleep": {
+                this.GetSleepData().then((data: any) => {
+                    this.ToggleVisibility('none', 'block');
+                    this.bubbledata = data['bubbledata'];
+                    this.sleepdata = data['sleepdata'];
+                    this.sleepChart.refresh();
+                    this.bubbleChart.refresh();
+                })
+                break;
+            }
+        }
+    }
+    public ToggleVisibility(displaySkeleton:string, displayChart:string): void {
+        let lineChartSkeleton: HTMLCollectionOf<Element> = document.querySelector('.line-chart-area').getElementsByTagName('ejs-skeleton');
+        (lineChartSkeleton[0] as HTMLElement).style.display = displaySkeleton;
+        let pieChartSkeleton: HTMLCollectionOf<Element> = document.querySelector('.column-chart-area').getElementsByTagName('ejs-skeleton');
+        (pieChartSkeleton[0] as HTMLElement).style.display = displaySkeleton;
+        (document.getElementById('line-wrapper') as HTMLElement).style.display = displayChart;
+        (document.getElementById('pie-wrapper') as HTMLElement).style.display = displayChart;
+    }
+    public GetBubbleClickData(index_point: number): any {
+        let data: { [key: string]: Object } = {};
+        return new Promise(resolve => setTimeout(() => {
+        switch(index_point) {
+            case 0: {
+                data['sleepinfo'] = (<{ sleep: Object[] }>sunday[0]).sleep;
+                data['totalsleephours'] = "9";
+                data['sleepstarttime'] = "10.30 pm";
+                data['sleependtime'] = "7:30 am pm"; 
+                data['deepsleep'] = "5h 24 mins"; 
+                data['lightsleep'] = "1h 15 mins"; 
+                data['awaketime'] = "27 mins"; 
+                data['remaintime'] = "54 mins";
+                break;
+            }
+            case 1: {
+                data['sleepinfo'] = (<{ sleep: Object[] }>monday[0]).sleep;
+                data['totalsleephours'] = "6";
+                data['sleepstarttime'] = "11:40 pm";
+                data['sleependtime'] = "5:40 am"; 
+                data['deepsleep'] = "2h 54 mins"; 
+                data['lightsleep'] = "2h 22 mins"; 
+                data['awaketime'] = "18 mins"; 
+                data['remaintime'] = "36 mins";
+                break;
+            }
+            case 2: {
+                data['sleepinfo'] = (<{ sleep: Object[] }>tuesday[0]).sleep;
+                data['sleepstarttime'] = '9:30 pm';
+                data['sleependtime']  = '4:30 am';
+                data['totalsleephours'] = '6';
+                data['deepsleep'] = '3h 54 mins';
+                data['lightsleep'] = '1h 30 mins';
+                data['awaketime'] = '18 mins';
+                data['remaintime'] = '18 mins';
+                break;
+            }
+            case 3: {
+                data['sleepinfo'] = (<{ sleep: Object[] }>wednesday[0]).sleep;
+                data['sleepstarttime'] = '10:30 pm';
+                data['sleependtime'] = '6:30 am';
+                data['totalsleephours']  = '7';
+                data['deepsleep'] = '5h 51 mins';
+                data['lightsleep']  = '2h 06 mins';
+                data['awaketime']  = '21 mins';
+                data['remaintime'] = '42 mins';
+                break;
+            }
+            case 4: {
+                data['sleepinfo'] = (<{ sleep: Object[] }>thursday[0]).sleep;
+                data['sleepstarttime'] = '11:00 pm';
+                data['sleependtime'] = '7:00 am';
+                data['totalsleephours'] = '8';
+                data['deepsleep']  = '4h 48 mins ';
+                data['lightsleep']  = '3h 24 mins ';
+                data['awaketime']  = '24 mins';
+                data['remaintime']  = '24 mins ';
+                break;
+            }
+            case 5: {
+                data['sleepinfo']  = (<{ sleep: Object[] }>friday[0]).sleep;
+                data['sleepstarttime'] = '11:40 pm';
+                data['sleependtime'] ='4:40 am';
+                data['totalsleephours'] = '5';
+                data['deepsleep']  = '3h 45 mins ';
+                data['lightsleep']  = '45 mins ';
+                data['awaketime']= '15 mins';
+                data['remaintime'] = '15 mins ';
+                break;
+            }
+            case 6: {
+                data['sleepinfo'] = (<{ sleep: Object[] }>saturday[0]).sleep;
+                data['sleepstarttime'] = '9:40 pm';
+                data['sleependtime']  = '6:40 am';
+                data['totalsleephours']  = '9';
+                data['deepsleep']= '6h 18 mins';
+                data['lightsleep'] = '1h 48 mins ';
+                data['awaketime']= '27 mins';
+                data['remaintime']= '27 mins ';
+                break;
+            }
+        }
+        resolve(data);
+    }, 1000));
+    }
     public polarpointMove: EmitType<IPointEventArgs> = (args: IPointEventArgs) => {
         let point: any = getElement('water-polar_Series_' + args.seriesIndex + '_Point_' + args.pointIndex );
         if (point) {
@@ -329,92 +549,16 @@ export class DashBoardComponent implements OnInit {
     public bubblemouseclick: EmitType<IMouseEventArgs> = (args: IMouseEventArgs) => {
         let index: Index = indexFinder(args.target);
         if (getElement('bubble-balance_Series_' + index.series + '_Point_' + index.point)) {
-            switch (index.point) {
-                case 0:
-                        this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>sunday[0]).sleep;
-                        this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '10:30 pm';
-                        document.getElementById('rightcontent').innerHTML = '7:30 am';
-                        document.getElementById('time').innerHTML = '9';
-                        document.getElementById('deephour').innerHTML = '5h 24 mins';
-                        document.getElementById('lighthour').innerHTML = '2h 15 mins ';
-                        document.getElementById('awakehour').innerHTML = '27 mins';
-                        document.getElementById('remhour').innerHTML = '54 mins ';
-                    };
-                    break;
-                case 1:
-                        this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>monday[0]).sleep;
-                        this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '11:40 pm';
-                        document.getElementById('rightcontent').innerHTML = '5:40 am';
-                        document.getElementById('time').innerHTML = '6';
-                        document.getElementById('deephour').innerHTML = '3h 54 mins ';
-                        document.getElementById('lighthour').innerHTML = '1h 22 mins ';
-                        document.getElementById('awakehour').innerHTML = '18 mins';
-                        document.getElementById('remhour').innerHTML = '36 mins ';
-                    };
-                    break;
-                case 2:
-                        this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>tuesday[0]).sleep;
-                        this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '9:30 pm';
-                        document.getElementById('rightcontent').innerHTML = '4:30 am';
-                        document.getElementById('time').innerHTML = '6';
-                        document.getElementById('deephour').innerHTML = '3h 54 mins';
-                        document.getElementById('lighthour').innerHTML = '1h 30 mins';
-                        document.getElementById('awakehour').innerHTML = '18 mins';
-                        document.getElementById('remhour').innerHTML = '18 mins';
-                    };
-                    break;
-                case 3:
-                        this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>wednesday[0]).sleep;
-                        this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '10:30 pm';
-                        document.getElementById('rightcontent').innerHTML = '6:30 am';
-                        document.getElementById('time').innerHTML = '7';
-                        document.getElementById('deephour').innerHTML = '3h 51 mins';
-                        document.getElementById('lighthour').innerHTML = '2h 06 mins';
-                        document.getElementById('awakehour').innerHTML = '21 mins';
-                        document.getElementById('remhour').innerHTML = '42 mins';
-                    };
-                    break;
-                case 4:
-                        this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>thursday[0]).sleep;
-                        this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '11:00 pm';
-                        document.getElementById('rightcontent').innerHTML = '7:00 am';
-                        document.getElementById('time').innerHTML = '8';
-                        document.getElementById('deephour').innerHTML = '4h 48 mins ';
-                        document.getElementById('lighthour').innerHTML = '2h 24 mins ';
-                        document.getElementById('awakehour').innerHTML = '24 mins';
-                        document.getElementById('remhour').innerHTML = '24 mins ';
-                    };
-                    break;
-                case 5:
-                    this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>friday[0]).sleep;
-                    this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '11:40 pm';
-                        document.getElementById('rightcontent').innerHTML = '4:40 am';
-                        document.getElementById('time').innerHTML = '5';
-                        document.getElementById('deephour').innerHTML = '3h 45 mins ';
-                        document.getElementById('lighthour').innerHTML = '45 mins ';
-                        document.getElementById('awakehour').innerHTML = '15 mins';
-                        document.getElementById('remhour').innerHTML = '15 mins ';
-                    };
-                    break;
-                case 6:
-                    this.sleepChart.series[0].dataSource = (<{ sleep: Object[] }>saturday[0]).sleep;
-                    this.sleepChart.loaded = (args: IAccLoadedEventArgs) => {
-                        document.getElementById('leftcontent').innerHTML = '9:40 pm';
-                        document.getElementById('rightcontent').innerHTML = '6:40 am';
-                        document.getElementById('time').innerHTML = '9';
-                        document.getElementById('deephour').innerHTML = '6h 18 mins';
-                        document.getElementById('lighthour').innerHTML = '1h 48 mins ';
-                        document.getElementById('awakehour').innerHTML = '27 mins';
-                        document.getElementById('remhour').innerHTML = '27 mins ';
-                    };
-                    break;
-            }
+            this.GetBubbleClickData(index.point).then((data: any) => {
+                this.sleepChart.series[0].dataSource = data['sleepinfo'];
+                this.sleepChart.annotations[0].content = `<div id="leftcontent" style="width:100%; height:100%;"> ${data['sleepstarttime']} </div>`
+                this.sleepChart.annotations[1].content = `<div id="rightcontent" style="width:100%; height:100%;"> ${data['sleependtime']} </div>`
+                this.sleepChart.annotations[2].content = `<div id="middlecontent" style="font-family: Roboto; font-weight:500; font-size: 14px; color: #4A4A4A; letter-spacing: -0.08px; text-align: center;">Total hours of sleep <br><p id="time"> ${data['totalsleephours']} </p><br></div>`
+                document.getElementById('deephour').innerHTML = data['deepsleep'];
+                document.getElementById('lighthour').innerHTML = data['lightsleep'];
+                document.getElementById('awakehour').innerHTML = data['awaketime'];
+                document.getElementById('remhour').innerHTML = data['remaintime'];
+            })
             this.sleepChart.refresh();
         }
     }
@@ -618,6 +762,7 @@ export class DashBoardComponent implements OnInit {
             this.polarChart.series[0].animation.enable = false;
             this.polarChart.animateSeries = false;
             this.polarChart.enableAnimation = false;
+            this.polarChart.refresh();
         };
         document.getElementById('water100ml-column').onclick = () => {
             document.getElementById('water100ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
@@ -641,6 +786,7 @@ export class DashBoardComponent implements OnInit {
             this.polarChart.series[0].animation.enable = false;
             this.polarChart.animateSeries = false;
             this.polarChart.enableAnimation = false;
+            this.polarChart.refresh();
         };
         document.getElementById('water200ml-column').onclick = () => {
             document.getElementById('water200ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
@@ -664,6 +810,7 @@ export class DashBoardComponent implements OnInit {
             this.polarChart.series[0].animation.enable = false;
             this.polarChart.animateSeries = false;
             this.polarChart.enableAnimation = false;
+            this.polarChart.refresh();
         };
         document.getElementById('water300ml-column').onclick = () => {
             document.getElementById('water300ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
@@ -687,6 +834,7 @@ export class DashBoardComponent implements OnInit {
             this.polarChart.series[0].animation.enable = false;
             this.polarChart.animateSeries = false;
             this.polarChart.enableAnimation = false;
+            this.polarChart.refresh();
         };
     }
 
@@ -808,7 +956,7 @@ export class DashBoardComponent implements OnInit {
             this.pie.series[0].dataSource = (<{ Snack: Object[] }>sunday[0]).Snack;
         };
         document.getElementById('water').onclick = () => {
-            document.getElementById('title').innerHTML = 'Water Consumption';
+            document.getElementById('chart-title').innerHTML = 'Water Consumption';
             document.getElementById('pie-title').innerHTML = 'Sunday Report';
             document.getElementById('calories-subtitle').style.color = '#828282';
             document.getElementById('calories-text').style.color = '#828282';
@@ -821,7 +969,7 @@ export class DashBoardComponent implements OnInit {
             this.waterclick();
         };
         document.getElementById('step').onclick = () => {
-            document.getElementById('title').innerHTML = 'Steps Count';
+            document.getElementById('chart-title').innerHTML = 'Steps Count';
             document.getElementById('pie-title').innerHTML = 'Sunday Activity';
             document.getElementById('calories-subtitle').style.color = '#828282';
             document.getElementById('calories-text').style.color = '#828282';
@@ -835,6 +983,7 @@ export class DashBoardComponent implements OnInit {
             this.stepclick();
         };
         document.getElementById('sleep').onclick = () => {
+            document.getElementById('chart-title').innerHTML = 'Sleep Tracker';
             document.getElementById('pie-title').innerHTML = 'Sleep Quality';
             document.getElementById('calories-subtitle').style.color = '#828282';
             document.getElementById('calories-text').style.color = '#828282';
@@ -847,7 +996,7 @@ export class DashBoardComponent implements OnInit {
             this.sleepclick();
         };
         document.getElementById('calories').onclick = () => {
-            document.getElementById('title').innerHTML = 'Calories Consumed';
+            document.getElementById('chart-title').innerHTML = 'Calories Consumed';
             document.getElementById('pie-title').innerHTML = 'Macro Nutrients';
             document.getElementById('calories-subtitle').style.color = '#FFFFFF';
             document.getElementById('calories-text').style.color = '#FFFFFF';
@@ -934,6 +1083,7 @@ export class DashBoardComponent implements OnInit {
     }
     public waterclick(): void {
         this.annotation = false;
+        this.ToggleVisibility('block', 'none');
         document.getElementById('water-bg').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 3px 6px 3px rgba(49,131,185,0.25)';
         document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
@@ -983,10 +1133,9 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('sleep-img').style.color = '#999393';
         document.getElementById('water-img').style.color = '#FFFFFF';
         document.getElementById('food-img').style.color = '#999393';
-        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Water Consumption </span>'
-        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Target </span><span id="value-annotation" style="color: #3B61E9;"> 7 litres </span>'
-        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color: #3B61E9;"> 4.32 litres </span>'
-        document.getElementById('pie-title').innerHTML = 'sunday Report';
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Water Consumption </span>';
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Target </span><span id="value-annotation" style="color: #3B61E9;"> 7 litres </span>';
+        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color: #3B61E9;"> 4.32 litres </span>';
         document.getElementById('calories-subtitle').style.color = '#828282';
         document.getElementById('calories-text').style.color = '#828282';
         document.getElementById('water-text').style.color = '#FFFFFF';
@@ -995,13 +1144,13 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('steps-subtitle').style.color = '#828282';
         document.getElementById('sleep-text').style.color = '#828282';
         document.getElementById('sleep-subtitle').style.color = '#828282';
-        this.polarChart.series[0].dataSource = < Object[]>this.polarchartdata;
+        this.LoadChartData("water");
+        // this.polarChart.series[0].dataSource = < Object[]>this.polarchartdata;
         this.polarChart.series[0].animation.enable = true;
-        this.polarChart.refresh();
-        this.splineChart.refresh();
     }
     public stepclick(): void {
         this.annotation = true;
+        this.ToggleVisibility('block', 'none');
         document.getElementById('step-bg').style.borderRadius = '4px';
         document.getElementById('steps-value').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
@@ -1049,12 +1198,12 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('steps-text').style.color = '#FFFFFF';
         document.getElementById('steps-subtitle').style.color = '#FFFFFF';
         document.getElementById('steps-img').style.color = '#FFFFFF';
-        this.columnChart.refresh();
-        this.multiplepie.refresh();
+        this.LoadChartData("steps");
     }
 
     public sleepclick(): void {
         this.annotation = false;
+        this.ToggleVisibility('block', 'none');
         document.getElementById('sleep-bg').style.borderRadius = '4px';
         document.getElementById('sleep-value').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
@@ -1100,12 +1249,12 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('steps-subtitle').style.color = '#828282';
         document.getElementById('sleep-text').style.color = '#FFFFFF';
         document.getElementById('sleep-subtitle').style.color = '#FFFFFF';
-        this.sleepChart.refresh();
-        this.bubbleChart.refresh();
+        this.LoadChartData("sleep");
     }
 
     public caloriesclick(): void {
         this.annotation = false;
+        this.ToggleVisibility('block', 'none');
         document.getElementById('calories-bg').style.borderRadius = '4px';
         document.getElementById('calories-value').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
@@ -1151,7 +1300,6 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('steps-subtitle').style.color = '#828282';
         document.getElementById('sleep-text').style.color = '#828282';
         document.getElementById('sleep-subtitle').style.color = '#828282';
-        this.lineChart.refresh();
-        this.pie.refresh();
+        this.LoadChartData("calorie");
     }
 }

@@ -12,11 +12,12 @@
         <div class="row">
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive" id="calories-column"
                 style="padding-right: 0px; padding-left: 20px">
+				<ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="calories" (click)="onCalClick($event)" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)">
                     <div class="expense-card" id="calories-bg" style=" background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
                         <div class="card-block" id="caloriescard" style="box-shadow: 0 3px 6px 2px rgba(178,30,195,0.30);">
                                 <div class="media-body" id="calories-value" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
-                                    <h3 class="card-value" id="calories-text" style="color: #FFFFFF">13,100</h3>
+                                    <h3 class="card-value" id="calories-text" style="color: #FFFFFF">0</h3>
                                     <div id="foodimg"><span class="card-text" id="calories-subtitle" style="color: #FFFFFF">Calories
                                             Eaten</span><span id="food-img" class="icon-Food" style="font-size: 65px; margin-right: 3%; margin-bottom: 2% "></span>
                                     </div>
@@ -26,11 +27,12 @@
                 </div>
             </div>
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value" id="step-column" style="padding-right: 0px; padding-left: 20px;">
+                <ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="step" (click)="onStepClick($event)" style="max-width: 445px; ">
                     <div class="income-card" id="step-bg">
                         <div class="card-block" id="stepcard">
                                 <div class="media-body" id="steps-value" style="max-width: 445px; background-image: null; border-radius: 4px">
-                                    <h3 class="card-value" id="steps-text">52,100</h3>
+                                    <h3 class="card-value" id="steps-text">0</h3>
                                     <div id="stepimg"><span class="card-text" id="steps-subtitle">Steps
                                             Taken</span>
                                         <span id="steps-img" class="icon-Steps" style="font-size: 65px; margin-right: 3%; margin-bottom: 2%"></span></div>
@@ -40,11 +42,12 @@
                 </div>
             </div>
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value" id="water-column" style="padding-right: 0px; padding-left: 20px">
+                <ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="water" (click)="onWaterClick($event)" style="max-width: 445px;">
                     <div class="balance" id="water-bg">
                         <div class="card-block" id="watercard" style="max-width: 445px;">
                                 <div class="media-body" id="water-value" style="max-width: 445px; background-image: null; border-radius: 4px">
-                                    <h3 class="card-value" id="water-text">38.7 ltr</h3>
+                                    <h3 class="card-value" id="water-text">0</h3>
                                     <div id="waterimg"><span class="card-text" id="water-subtitle">Water Consumed</span>
                                         <span id="water-img" class="icon-Water" style="font-size: 65px; margin-right: 3%; margin-bottom: 2%"></span></div>
                                 </div>
@@ -53,12 +56,13 @@
                 </div>
             </div>
             <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value" id="sleep-column" style="padding-right: 0px; padding-left: 20px">
+                <ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="sleep" (click)="onSleepClick($event)" style="max-width: 445px;">
                     <div class="transaction" id="sleep-bg">
                         <div class="card-block" id="sleepcard" style="max-width: 445px;" >
                                 <div class="media-body" id="sleep-value" style="max-width: 445px; background-image: null; border-radius: 4px">
-                                    <h3 class="card-value" id="sleep-text" style="font-family: 'Roboto'; font-weight:400; color: #727272;">50
-                                        hr</h3>
+                                    <h3 class="card-value" id="sleep-text" style="font-family: 'Roboto'; font-weight:400; color: #727272;">0
+                                        </h3>
                                     <div id="sleepimg"><span class="card-text" id="sleep-subtitle">Sleep Duration</span>
                                         <span id="sleep-img" class="icon-Sleep" style="font-size: 65px; margin-right: 4%; margin-bottom: 2%"></span></div>
                                 </div>
@@ -71,20 +75,21 @@
     <div class="row" id="chart" style="background:transparent; padding-right: 0px">
         <div class="line-chart-area">
             <div class="col-sm-12 col-md-8" style="height: 530px; background:transparent">
-                <div class="chart-header">
-                    <div id="chart-header-title"><p id="chart-title">Calories Consumed</p></div>
-                    <div class="chart-header-values">
-                        <div id="total-value" style="margin: 0px 10px;">
-                            <span id="title-annotation"> Total </span>
-                            <span id="value-annotation" style="color: #780508;"> 1437 Kcal </span>
+                <ejs-skeleton cssClass="line-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
+                <div class="chart-padding" id="line-wrapper" style="display: none;">
+                    <div class="chart-header">
+                        <div id="chart-header-title"><p id="chart-title">Calories Consumed</p></div>
+                        <div class="chart-header-values">
+                            <div id="total-value" style="margin: 0px 10px;">
+                                <span id="title-annotation"> Total </span>
+                                <span id="value-annotation" style="color: #780508;"> 1437 Kcal </span>
+                            </div>
+                            <div id="average-value" style="margin: 0px 10px;">
+                                <span id="title-annotation"> Daily Average </span>
+                                <span id="value-annotation" style="color: #DB4247;"> 902 Kcal </span>
+                            </div>
                         </div>
-                        <div id="average-value" style="margin: 0px 10px;">
-                            <span id="title-annotation"> Daily Average </span>
-                            <span id="value-annotation" style="color: #DB4247;"> 902 Kcal </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-padding" id="line">       
+                    </div>       
                     <div id="line" style='display:block'>
                         <ejs-chart #lineChart id='balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [chartArea]='chartArea' [tooltip]='tooltip' 
                             (chartMouseClick)='mouseclick($event)' (pointMove)='pointMove($event)' (loaded)='loaded($event)' [background]='background'>
@@ -93,7 +98,7 @@
                             </e-series-collection>
                         </ejs-chart>
                     </div>
-                </div>
+                
                 <div id="spline" style='display:none'>
                             <ejs-chart #splineChart id='spline-balance' class='line-chart' style=" width: 100%; height:400px; background: transparent;" [primaryXAxis]='splinePrimaryXAxis' [primaryYAxis]='splinePrimaryYAxis' [chartArea]='chartArea' [tooltip]='splineTooltip' 
                                 (pointClick)='splinemouseclick($event)' (pointMove)='splinepointMove($event)' (loaded)='loaded($event)' [background]='background'>
@@ -128,12 +133,14 @@
                                 </e-series-collection>
                             </ejs-chart>
                         </div>
+                </div>    
             </div>
         </div>
         <div class="row">
             <div class="column-chart-area">
                 <div class="col-sm-12 col-md-4" id="pie-chart" style=" padding: 0px; height: 525px; ">
-                    <div class="chart-padding" id="pie">
+                    <ejs-skeleton cssClass="pie-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
+                    <div class="chart-padding" id="pie-wrapper" style="display: none;">
                         <div id="donut" style="display: block; height: 530px;">
                             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" id="pie" style=" padding: 0px;">
                                 <div id="pie-title" style=" padding-top: 20px; margin-bottom: 6px; cursor: default; margin-left: 20px; font-family: Roboto;  font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
@@ -221,7 +228,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
                     <div id="multiple-donut" style="display: none; height:330px">
                         <div class="col-sm-12" id="pie" style=" padding:0px ">
                             <div id="pie-title" style=" padding-top: 20px; cursor: default; margin-bottom: 6px;  margin-left: 20px; font-family: Roboto; font-weight:500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
@@ -357,6 +364,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
