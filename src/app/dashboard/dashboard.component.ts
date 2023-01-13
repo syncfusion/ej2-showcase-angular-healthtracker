@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 
 import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent } from '@syncfusion/ej2-angular-charts';
 import { monday, tuesday, wednesday, thursday, friday, saturday, sunday } from './datasource';
@@ -6,6 +6,7 @@ import { EmitType, addClass, removeClass } from '@syncfusion/ej2-base';
 import {
     AccumulationChartComponent, IAccResizeEventArgs, AccumulationChart, IAccLoadedEventArgs
 } from '@syncfusion/ej2-angular-charts';
+import { SkeletonComponent } from '@syncfusion/ej2-angular-notifications';
 
 import { AppComponent } from '../app.component';
 import { MenuComponent } from '../menu/menu.component';
@@ -29,7 +30,7 @@ export class DashBoardComponent implements OnInit {
     @ViewChild('multiplepie') multiplepie: AccumulationChartComponent | AccumulationChart;
     @ViewChild('polarChart') polarChart: ChartComponent;
     @ViewChild('sleepChart') sleepChart: AccumulationChartComponent | AccumulationChart;
-
+    
     public selectedpoint: Boolean = false;
     public tooltipMappingName: string = 'time';
     public animation: Object;
@@ -99,6 +100,8 @@ export class DashBoardComponent implements OnInit {
     public yValue6 : number = 0;
     public yValue7 : number = 0;
     public yValue8 : number = 0;
+    public showCardSkeleton:boolean = true;
+    public showChartSkeleton:boolean = true;
 
     constructor(
         public app: AppComponent,
@@ -111,8 +114,7 @@ export class DashBoardComponent implements OnInit {
     }
 
     public ngOnInit(): void {
-
-        /** Configurations for the components in the DashBoard page */
+        /** Configurations for the components in the DashBoard page */        
         this.primaryXAxis = {
             valueType: 'Category',
             labelFormat: 'y',
@@ -278,17 +280,12 @@ export class DashBoardComponent implements OnInit {
             document.getElementById('steps-text').textContent = data['steps-taken'];
             document.getElementById('water-text').textContent = data['water-consumed'];
             document.getElementById('sleep-text').textContent = data['sleep-duration'];
-            let cardSkeletons: HTMLCollectionOf<Element> = document.getElementById('card-row').getElementsByTagName('ejs-skeleton');
             const cards: NodeList = document.querySelectorAll('#card-row .row .e-card');
-            (cardSkeletons[0] as HTMLElement).style.display = 'none';
-            (cardSkeletons[1] as HTMLElement).style.display = 'none';
-            (cardSkeletons[2] as HTMLElement).style.display = 'none';
-            (cardSkeletons[3] as HTMLElement).style.display = 'none';
+            this.showCardSkeleton = false;
             (cards[0] as HTMLElement).style.display = 'flex';
             (cards[1] as HTMLElement).style.display = 'flex';
             (cards[2] as HTMLElement).style.display = 'flex';
             (cards[3] as HTMLElement).style.display = 'flex';
-            this.ToggleVisibility('none', 'block');
         });
     }
     public GetCalorieData(): any {
@@ -366,7 +363,7 @@ export class DashBoardComponent implements OnInit {
         switch(activity.toLowerCase()) {
             case "calorie": {
                 this.GetCalorieData().then((data: any) => {
-                    this.ToggleVisibility('none', 'block');
+                    this.ToggleVisibility(false, 'block');
                     this.caloriesdata = data['caloriesdata'];
                     this.calpiedata = data['calpiedata'];
                     this.lineChart.primaryYAxis.stripLines[0].start = data['dailyaveragecal'];
@@ -380,7 +377,7 @@ export class DashBoardComponent implements OnInit {
             }
             case "steps": {
                 this.GetStepsData().then((data: any) => {
-                    this.ToggleVisibility('none', 'block');
+                    this.ToggleVisibility(false, 'block');
                     this.columndata = data['columndata'];
                     this.steppiedata = data['steppiedata'];
                     this.columnChart.primaryYAxis.stripLines[0].start = data['stepsgoal'];
@@ -394,7 +391,7 @@ export class DashBoardComponent implements OnInit {
             }
             case "water": {
                 this.GetWaterData().then((data:any) => {
-                    this.ToggleVisibility('none', 'block');
+                    this.ToggleVisibility(false, 'block');
                     this.splinedata = data['splinedata'];
                     this.splineChart.primaryYAxis.stripLines[0].start = data['watergoal'];
                     this.splineChart.primaryYAxis.stripLines[0].text = 'Target';
@@ -407,7 +404,7 @@ export class DashBoardComponent implements OnInit {
             }
             case "sleep": {
                 this.GetSleepData().then((data: any) => {
-                    this.ToggleVisibility('none', 'block');
+                    this.ToggleVisibility(false, 'block');
                     this.bubbledata = data['bubbledata'];
                     this.sleepdata = data['sleepdata'];
                     this.sleepChart.refresh();
@@ -417,11 +414,8 @@ export class DashBoardComponent implements OnInit {
             }
         }
     }
-    public ToggleVisibility(displaySkeleton:string, displayChart:string): void {
-        let lineChartSkeleton: HTMLCollectionOf<Element> = document.querySelector('.line-chart-area').getElementsByTagName('ejs-skeleton');
-        (lineChartSkeleton[0] as HTMLElement).style.display = displaySkeleton;
-        let pieChartSkeleton: HTMLCollectionOf<Element> = document.querySelector('.column-chart-area').getElementsByTagName('ejs-skeleton');
-        (pieChartSkeleton[0] as HTMLElement).style.display = displaySkeleton;
+    public ToggleVisibility(displaySkeleton:boolean, displayChart:string): void {
+        this.showChartSkeleton = displaySkeleton;
         (document.getElementById('line-wrapper') as HTMLElement).style.display = displayChart;
         (document.getElementById('pie-wrapper') as HTMLElement).style.display = displayChart;
     }
@@ -574,7 +568,7 @@ export class DashBoardComponent implements OnInit {
             switch (index.point) {
                 case 0:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>sunday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Sunday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Sunday Activity';
                     document.getElementById('stepstext').innerHTML = '8200';
                     document.getElementById('exercise').innerHTML = '15';
                     document.getElementById('active').innerHTML = '7';
@@ -584,7 +578,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 1:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>monday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Monday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Monday Activity';
                     document.getElementById('stepstext').innerHTML = '7300';
                     document.getElementById('exercise').innerHTML = '16';
                     document.getElementById('active').innerHTML = '6';
@@ -594,7 +588,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 2:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>tuesday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Tuesday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Tuesday Activity';
                     document.getElementById('stepstext').innerHTML = '7800';
                     document.getElementById('exercise').innerHTML = '20';
                     document.getElementById('active').innerHTML = '5';
@@ -604,7 +598,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 3:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>wednesday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Wednesday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Wednesday Activity';
                     document.getElementById('stepstext').innerHTML = '6800';
                     document.getElementById('exercise').innerHTML = '16';
                     document.getElementById('active').innerHTML = '3';
@@ -614,7 +608,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 4:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>thursday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Thursday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Thursday Activity';
                     document.getElementById('stepstext').innerHTML = '7000';
                     document.getElementById('exercise').innerHTML = '10';
                     document.getElementById('active').innerHTML = '7';
@@ -624,7 +618,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 5:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>friday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Friday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Friday Activity';
                     document.getElementById('stepstext').innerHTML = '6900';
                     document.getElementById('exercise').innerHTML = '22';
                     document.getElementById('active').innerHTML = '4';
@@ -634,7 +628,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 6:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>saturday[0]).Steps;
-                    document.getElementById('pie-title').innerHTML = 'Saturday Activity';
+                    document.querySelector('#multiple-donut #pie-title').innerHTML = 'Saturday Activity';
                     document.getElementById('stepstext').innerHTML = '7200';
                     document.getElementById('exercise').innerHTML = '17';
                     document.getElementById('active').innerHTML = '4';
@@ -659,37 +653,37 @@ export class DashBoardComponent implements OnInit {
                 case 0:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>sunday[0]).water;
                     this.polardata = (<{ water: Object[] }>sunday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Sunday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Sunday Activity';
                     break;
                 case 1:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>monday[0]).water;
                     this.polardata = (<{ water: Object[] }>monday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Monday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Monday Activity';
                     break;
                 case 2:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>tuesday[0]).water;
                     this.polardata = (<{ water: Object[] }>tuesday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Tuesday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Tuesday Activity';
                     break;
                 case 3:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>wednesday[0]).water;
                     this.polardata = (<{ water: Object[] }>wednesday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Wednesday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Wednesday Activity';
                     break;
                 case 4:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>thursday[0]).water;
                     this.polardata = (<{ water: Object[] }>thursday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Thursday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Thursday Activity';
                     break;
                 case 5:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>friday[0]).water;
                     this.polardata = (<{ water: Object[] }>friday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Friday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Friday Activity';
                     break;
                 case 6:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>saturday[0]).water;
                     this.polardata = (<{ water: Object[] }>saturday[0]).water;
-                    document.getElementById('pie-title').innerHTML = 'Saturday Activity';
+                    document.querySelector('#polar #pie-title').innerHTML = 'Saturday Activity';
                     break;
             }
             this.polarChart.series[0].animation.enable = true;
@@ -1083,7 +1077,7 @@ export class DashBoardComponent implements OnInit {
     }
     public waterclick(): void {
         this.annotation = false;
-        this.ToggleVisibility('block', 'none');
+        this.ToggleVisibility(true, 'none');
         document.getElementById('water-bg').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 3px 6px 3px rgba(49,131,185,0.25)';
         document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
@@ -1105,10 +1099,7 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('iconml1-img').style.color = '#5B5B5B';
         document.getElementById('iconml2-img').style.color = '#5B5B5B';
         document.getElementById('iconml3-img').style.color = '#5B5B5B';
-        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value';
-        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value';
-        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-value';
-        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-valueactive';
+        document.getElementById('water-column').classList.replace('water-value', 'water-valueactive');
         document.getElementById('pie-title').innerHTML = 'Sunday Report';
         document.getElementById('multiple-donut').style.display = 'none';
         document.getElementById('donut').style.display = 'none';
@@ -1145,22 +1136,18 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('sleep-text').style.color = '#828282';
         document.getElementById('sleep-subtitle').style.color = '#828282';
         this.LoadChartData("water");
-        // this.polarChart.series[0].dataSource = < Object[]>this.polarchartdata;
         this.polarChart.series[0].animation.enable = true;
     }
     public stepclick(): void {
         this.annotation = true;
-        this.ToggleVisibility('block', 'none');
+        this.ToggleVisibility(true, 'none');
         document.getElementById('step-bg').style.borderRadius = '4px';
         document.getElementById('steps-value').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('stepcard').style.boxShadow = '0 3px 6px 3px rgba(66,254,19,0.20)';
         document.getElementById('sleepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('caloriescard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value';
-        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-valueactive';
-        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-value';
-        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value';
+        document.getElementById('step-column').classList.replace('steps-value', 'steps-valueactive');
         document.getElementById('multiple-donut').style.display = 'block';
         document.getElementById('donut').style.display = 'none';
         document.getElementById('semi-pie').style.display = 'none';
@@ -1203,17 +1190,14 @@ export class DashBoardComponent implements OnInit {
 
     public sleepclick(): void {
         this.annotation = false;
-        this.ToggleVisibility('block', 'none');
+        this.ToggleVisibility(true, 'none');
         document.getElementById('sleep-bg').style.borderRadius = '4px';
         document.getElementById('sleep-value').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('sleepcard').style.boxShadow = '0 3px 6px 3px rgba(71,63,204,0.20)';
         document.getElementById('caloriescard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-valueactive';
-        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value';
-        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-value';
-        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value';
+        document.getElementById('sleep-column').classList.replace('sleep-value', 'sleep-valueactive');
         document.getElementById('multiple-donut').style.display = 'none';
         document.getElementById('donut').style.display = 'none';
         document.getElementById('semi-pie').style.display = 'block';
@@ -1254,17 +1238,14 @@ export class DashBoardComponent implements OnInit {
 
     public caloriesclick(): void {
         this.annotation = false;
-        this.ToggleVisibility('block', 'none');
+        this.ToggleVisibility(true, 'none');
         document.getElementById('calories-bg').style.borderRadius = '4px';
         document.getElementById('calories-value').style.borderRadius = '4px';
         document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('sleepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
         document.getElementById('caloriescard').style.boxShadow = '0 3px 6px 2px rgba(178,30,195,0.30)';
-        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value';
-        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value';
-        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive';
-        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value';
+        document.getElementById('calories-column').classList.replace('calories-value', 'calories-valueactive');
         document.getElementById('multiple-donut').style.display = 'none';
         document.getElementById('donut').style.display = 'block';
         document.getElementById('semi-pie').style.display = 'none';

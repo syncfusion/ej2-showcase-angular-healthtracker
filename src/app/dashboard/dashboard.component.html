@@ -10,9 +10,8 @@
         </ejs-appbar>
     <div id="card-row">
         <div class="row">
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive" id="calories-column"
-                style="padding-right: 0px; padding-left: 20px">
-				<ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive card-container" id="calories-column">
+				<ejs-skeleton [visible]="showCardSkeleton" cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="calories" (click)="onCalClick($event)" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)">
                     <div class="expense-card" id="calories-bg" style=" background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
                         <div class="card-block" id="caloriescard" style="box-shadow: 0 3px 6px 2px rgba(178,30,195,0.30);">
@@ -26,8 +25,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value" id="step-column" style="padding-right: 0px; padding-left: 20px;">
-                <ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value card-container" id="step-column">
+                <ejs-skeleton [visible]="showCardSkeleton" cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="step" (click)="onStepClick($event)" style="max-width: 445px; ">
                     <div class="income-card" id="step-bg">
                         <div class="card-block" id="stepcard">
@@ -41,8 +40,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value" id="water-column" style="padding-right: 0px; padding-left: 20px">
-                <ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value card-container" id="water-column">
+                <ejs-skeleton [visible]="showCardSkeleton" cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="water" (click)="onWaterClick($event)" style="max-width: 445px;">
                     <div class="balance" id="water-bg">
                         <div class="card-block" id="watercard" style="max-width: 445px;">
@@ -55,8 +54,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value" id="sleep-column" style="padding-right: 0px; padding-left: 20px">
-                <ejs-skeleton cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value card-container" id="sleep-column">
+                <ejs-skeleton [visible]="showCardSkeleton" cssClass="card-skeleton" width="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="e-card" id="sleep" (click)="onSleepClick($event)" style="max-width: 445px;">
                     <div class="transaction" id="sleep-bg">
                         <div class="card-block" id="sleepcard" style="max-width: 445px;" >
@@ -74,8 +73,8 @@
     </div>
     <div class="row" id="chart" style="background:transparent; padding-right: 0px">
         <div class="line-chart-area">
-            <div class="col-sm-12 col-md-8" style="height: 530px; background:transparent">
-                <ejs-skeleton cssClass="line-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
+            <div class="col-sm-12 col-md-8 chart-container">
+                <ejs-skeleton [visible]="showChartSkeleton" cssClass="line-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
                 <div class="chart-padding" id="line-wrapper" style="display: none;">
                     <div class="chart-header">
                         <div id="chart-header-title"><p id="chart-title">Calories Consumed</p></div>
@@ -139,12 +138,12 @@
         <div class="row">
             <div class="column-chart-area">
                 <div class="col-sm-12 col-md-4" id="pie-chart" style=" padding: 0px; height: 525px; ">
-                    <ejs-skeleton cssClass="pie-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
+                    <ejs-skeleton [visible]="showChartSkeleton" cssClass="pie-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
                     <div class="chart-padding" id="pie-wrapper" style="display: none;">
                         <div id="donut" style="display: block; height: 530px;">
                             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" id="pie" style=" padding: 0px;">
-                                <div id="pie-title" style=" padding-top: 20px; margin-bottom: 6px; cursor: default; margin-left: 20px; font-family: Roboto;  font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
-                                    Activity</div>
+                                <div id="pie-title" style=" padding-top: 20px; margin-bottom: 6px; cursor: default; margin-left: 20px; font-family: Roboto;  font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Macro
+                                    Nutrients</div>
                                 <div class="column-chart" >
                                     <ejs-accumulationchart id="account-balance" #pie style='height: 268px; margin-bottom: 0px' [legendSettings]="legendSettings" [enableAnimation]= 'enableAnimation' [background]='background'>
                                         <e-accumulation-annotations>

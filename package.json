@@ -23,19 +23,18 @@
         "@angular/platform-browser-dynamic": "~15.0.4",
         "@angular/router": "~15.0.4",
         "@syncfusion/ej2-angular-base": "*",
+        "@syncfusion/ej2-angular-grids": "*",
+        "@syncfusion/ej2-angular-popups": "*",
+        "@syncfusion/ej2-angular-charts": "*",
+        "@syncfusion/ej2-angular-inputs": "*",
         "@syncfusion/ej2-angular-buttons": "*",
         "@syncfusion/ej2-angular-calendars": "*",
-        "@syncfusion/ej2-angular-charts": "*",
         "@syncfusion/ej2-angular-dropdowns": "*",
-        "@syncfusion/ej2-angular-grids": "*",
-        "@syncfusion/ej2-angular-inputs": "*",
-        "@syncfusion/ej2-angular-layouts": "*",
         "@syncfusion/ej2-angular-navigations": "*",
-        "@syncfusion/ej2-angular-notifications": "^20.4.42",
-        "@syncfusion/ej2-angular-popups": "*",
+        "@syncfusion/ej2-angular-layouts": "*",
+        "@syncfusion/ej2-angular-notifications": "*",
         "rxjs": "~7.8.0",
         "tslib": "^2.4.1",
-        "typescript": "^4.8.2",
         "zone.js": "~0.12.0"
     },
     "devDependencies": {
@@ -54,7 +53,8 @@
         "karma-jasmine-html-reporter": "^2.0.0",
         "protractor": "~7.0.0",
         "ts-node": "~10.9.1",
-        "tslint": "~6.1.0"
+        "tslint": "~6.1.0",
+        "typescript": "^4.8.2"
     },
     "keywords": [
         "ej2",
