@@ -54,7 +54,7 @@
 }
 #foodimg .icon-Food {
   float: right;
-  color: #FFFFFF
+  color: #999393
   
 }
 #stepimg .icon-Steps {
@@ -132,8 +132,44 @@
   font-size: 15px;
   color: #535353;
 }
+.card-block {
+  cursor:pointer;
+  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
+  border-radius: 4px;
+}
 #calories-column.card-container, #step-column.card-container, #water-column.card-container, #sleep-column.card-container {
   padding: 0px 0px 20px 20px;
+}
+.e-card.selected .card-text, .e-card.selected .card-value, .e-card.selected #food-img, .e-card.selected #steps-img, .e-card.selected #water-img, .e-card.selected #sleep-img{
+  color: #FFFFFF !important;
+}
+.e-card.selected#calories, .e-card.selected #calories-bg, .e-card.selected #calories-value{
+  background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%);
+  border-radius: 4px;
+}
+.e-card.selected#step, .e-card.selected #step-bg, .e-card.selected #steps-value{
+  background-image: linear-gradient(45deg, #04AB11 0%, #7DD61D 100%);
+  border-radius: 4px;
+}
+.e-card.selected#water, .e-card.selected #water-bg, .e-card.selected #water-value{
+  background-image: linear-gradient(44deg, #2140DC 0%, #00BFD5 100%);
+  border-radius: 4px;
+}
+.e-card.selected#sleep, .e-card.selected #sleep-bg, .e-card.selected #sleep-value{
+  background-image: linear-gradient(-135deg, #2925A6 0%, #B250D1 100%) ;
+  border-radius: 4px;
+}
+.e-card.selected #caloriescard {
+  box-shadow: 0 3px 6px 2px rgba(178,30,195,0.30);
+}
+.e-card.selected #stepcard {
+  box-shadow: 0 3px 6px 3px rgba(66,254,19,0.20);
+}
+.e-card.selected #watercard {
+  box-shadow: 0 3px 6px 3px rgba(49,131,185,0.25);
+}
+.e-card.selected #sleepcard {
+  box-shadow: 0 3px 6px 3px rgba(71,63,204,0.20);
 }
 .chart-container {
   height: 530px;
@@ -221,7 +257,6 @@
   margin-left: 3%;
 }
 #calories,#step,#water,#sleep {
-  display: none;
   border-radius: 4px;
   cursor: pointer;
   overflow: visible !important;
@@ -250,11 +285,6 @@
 }
 #sleep-bg:hover {
   background-image: 'linear-gradient(to right, #FCDE72 , #F26D6D)';
-}
-.card-block {
-  cursor:pointer;
-  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
-  border-radius: 4px;
 }
 #pie-chart {
   background: #FFFFFF;

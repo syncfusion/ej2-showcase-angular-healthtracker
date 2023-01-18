@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 
-import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent } from '@syncfusion/ej2-angular-charts';
+import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent, AxisModel, Axis } from '@syncfusion/ej2-angular-charts';
 import { monday, tuesday, wednesday, thursday, friday, saturday, sunday } from './datasource';
 import { EmitType, addClass, removeClass } from '@syncfusion/ej2-base';
 import {
@@ -65,10 +65,10 @@ export class DashBoardComponent implements OnInit {
     public columnPrimaryXAxis: Object;
     public splinePrimaryXAxis: Object;
     public bubblePrimaryXAxis: Object;
-    public primaryYAxis: Object;
-    public columnPrimaryYAxis: Object;
+    public primaryYAxis: AxisModel;
+    public columnPrimaryYAxis: AxisModel;
     public polarPrimaryYAxis: Object;
-    public splinePrimaryYAxis: Object;
+    public splinePrimaryYAxis: AxisModel;
     public bubblePrimaryYAxis: Object;
     public legendSettings: Object;
     public enableAnimation: Boolean;
@@ -100,8 +100,18 @@ export class DashBoardComponent implements OnInit {
     public yValue6 : number = 0;
     public yValue7 : number = 0;
     public yValue8 : number = 0;
-    public showCardSkeleton:boolean = true;
-    public showChartSkeleton:boolean = true;
+    public calorieEaten : string;
+    public stepsTaken : string;
+    public waterConsumed : string;
+    public sleepDuration : string;
+    public showCalorieSkeleton:boolean = true;
+    public showStepSkeleton:boolean = true;
+    public showWaterSkeleton:boolean = true;
+    public showSleepSkeleton:boolean = true;
+    public showLineChartSkeleton:boolean = true;
+    public showPieChartSkeleton:boolean = true;
+    public pieType: string = "donut";
+    public lineType: string = "line";
 
     constructor(
         public app: AppComponent,
@@ -195,6 +205,9 @@ export class DashBoardComponent implements OnInit {
         this.tooltip = {
             enable: true, header: '${point.x}', format: '${point.y}<br>Click to View More Details'
         };
+        this.splineTooltip = {
+            enable: true, format: '${point.y}', enableMarker: false
+        }
         this.splinemarker = {
              visible: true, shape: 'Circle', width: 8, height: 8, border: {width: 2, color: '#484848' }
         };
@@ -202,9 +215,9 @@ export class DashBoardComponent implements OnInit {
             visible: false, border: { color: '#F38181' }, width: 10, height: 10
         };
         this.columnmarker = { visible: false };
-        this.sleepTooltip = {
-            enable: true, header: '${point.x}', format: '${point.tooltip}',
-        };
+        this.columnTooltip = {
+            enable: true, format: '${point.y}', enableMarker: false
+        }
         this.bubbleTooltip = {
             enable: true, format: '${point.y}', enableMarker: false
         };
@@ -250,19 +263,8 @@ export class DashBoardComponent implements OnInit {
         };
         this.enableAnimation = true;
         this.polarEnableAnimation = false;
-        this.initializeSkeleton();
         this.LoadCardData();
         this.LoadChartData('calorie');
-    }
-    public initializeSkeleton(): void {
-        let cardSkeletons: HTMLCollectionOf<Element> = document.getElementById('card-row').getElementsByTagName('ejs-skeleton');
-        const cards: NodeList = document.querySelectorAll('#card-row .row .e-card');
-        addClass([cards[0] as HTMLElement, cards[1] as HTMLElement, cards[2] as HTMLElement, cards[3] as HTMLElement], "hidden-element-size");
-        (cardSkeletons[0] as HTMLElement).style.height = (cards[0] as HTMLElement).offsetHeight + 'px';
-        (cardSkeletons[1] as HTMLElement).style.height = (cards[1] as HTMLElement).offsetHeight + 'px';
-        (cardSkeletons[2] as HTMLElement).style.height = (cards[2] as HTMLElement).offsetHeight + 'px';
-        (cardSkeletons[3] as HTMLElement).style.height = (cards[3] as HTMLElement).offsetHeight + 'px';
-        removeClass([cards[0] as HTMLElement, cards[1] as HTMLElement, cards[2] as HTMLElement, cards[3] as HTMLElement], "hidden-element-size");
     }
     public GetCardData(): any {
         return new Promise(resolve => setTimeout(() => {
@@ -276,16 +278,14 @@ export class DashBoardComponent implements OnInit {
     }
     public LoadCardData(): void {
         this.GetCardData().then((data: any) => {
-            document.getElementById('calories-text').textContent = data['calories-eaten'];
-            document.getElementById('steps-text').textContent = data['steps-taken'];
-            document.getElementById('water-text').textContent = data['water-consumed'];
-            document.getElementById('sleep-text').textContent = data['sleep-duration'];
-            const cards: NodeList = document.querySelectorAll('#card-row .row .e-card');
-            this.showCardSkeleton = false;
-            (cards[0] as HTMLElement).style.display = 'flex';
-            (cards[1] as HTMLElement).style.display = 'flex';
-            (cards[2] as HTMLElement).style.display = 'flex';
-            (cards[3] as HTMLElement).style.display = 'flex';
+            this.calorieEaten = data['calories-eaten'];
+            this.stepsTaken = data['steps-taken'];
+            this.waterConsumed = data['water-consumed'];
+            this.sleepDuration = data['sleep-duration'];
+            this.showCalorieSkeleton = false;
+            this.showStepSkeleton = false;
+            this.showWaterSkeleton = false;
+            this.showSleepSkeleton = false;
         });
     }
     public GetCalorieData(): any {
@@ -363,61 +363,52 @@ export class DashBoardComponent implements OnInit {
         switch(activity.toLowerCase()) {
             case "calorie": {
                 this.GetCalorieData().then((data: any) => {
-                    this.ToggleVisibility(false, 'block');
                     this.caloriesdata = data['caloriesdata'];
                     this.calpiedata = data['calpiedata'];
-                    this.lineChart.primaryYAxis.stripLines[0].start = data['dailyaveragecal'];
-                    this.lineChart.primaryYAxis.stripLines[0].text = 'Daily Average ' + data['dailyaveragecal'] + ' cal';
-                    this.lineChart.primaryYAxis.stripLines[1].start = data['todaycal'];
-                    this.lineChart.primaryYAxis.stripLines[1].text = 'Today ' + data['todaycal'] + ' cal';
-                    this.lineChart.refresh();
-                    this.pie.refresh();
+                    this.primaryYAxis.stripLines[0].start = data['dailyaveragecal'];
+                    this.primaryYAxis.stripLines[0].text = 'Daily Average ' + data['dailyaveragecal'] + ' cal';
+                    this.primaryYAxis.stripLines[1].start = data['todaycal'];
+                    this.primaryYAxis.stripLines[1].text = 'Today ' + data['todaycal'] + ' cal';
+                    this.ToggleChartSkeleton(false);
                 });
                 break;
             }
             case "steps": {
                 this.GetStepsData().then((data: any) => {
-                    this.ToggleVisibility(false, 'block');
                     this.columndata = data['columndata'];
                     this.steppiedata = data['steppiedata'];
-                    this.columnChart.primaryYAxis.stripLines[0].start = data['stepsgoal'];
-                    this.columnChart.primaryYAxis.stripLines[0].text = 'Goal ' + data['stepsgoal'] + ' steps';
+                    this.columnPrimaryYAxis.stripLines[0].start = data['stepsgoal'];
+                    this.columnPrimaryYAxis.stripLines[0].text = 'Goal ' + data['stepsgoal'] + ' steps';
                     this.annotationpie1data = data['annotationpie1data'];
                     this.annotationpie2data = data['annotationpie2data'];
-                    this.columnChart.refresh();
-                    this.multiplepie.refresh();
+                    this.ToggleChartSkeleton(false);
                 })
                 break;
             }
             case "water": {
                 this.GetWaterData().then((data:any) => {
-                    this.ToggleVisibility(false, 'block');
                     this.splinedata = data['splinedata'];
-                    this.splineChart.primaryYAxis.stripLines[0].start = data['watergoal'];
-                    this.splineChart.primaryYAxis.stripLines[0].text = 'Target';
                     this.polarchartdata = data['polarchartdata'];
                     this.polardata = data['polardata'];
-                    this.splineChart.refresh();
-                    this.polarChart.refresh();
+                    this.splinePrimaryYAxis.stripLines[0].start = data['watergoal'];
+                    this.splinePrimaryYAxis.stripLines[0].text = 'Target';
+                    this.ToggleChartSkeleton(false);
                 })
                 break;
             }
             case "sleep": {
                 this.GetSleepData().then((data: any) => {
-                    this.ToggleVisibility(false, 'block');
                     this.bubbledata = data['bubbledata'];
                     this.sleepdata = data['sleepdata'];
-                    this.sleepChart.refresh();
-                    this.bubbleChart.refresh();
+                    this.ToggleChartSkeleton(false);
                 })
                 break;
             }
         }
     }
-    public ToggleVisibility(displaySkeleton:boolean, displayChart:string): void {
-        this.showChartSkeleton = displaySkeleton;
-        (document.getElementById('line-wrapper') as HTMLElement).style.display = displayChart;
-        (document.getElementById('pie-wrapper') as HTMLElement).style.display = displayChart;
+    public ToggleChartSkeleton(displaySkeleton:boolean): void {
+        this.showLineChartSkeleton = displaySkeleton;
+        this.showPieChartSkeleton = displaySkeleton;
     }
     public GetBubbleClickData(index_point: number): any {
         let data: { [key: string]: Object } = {};
@@ -427,7 +418,7 @@ export class DashBoardComponent implements OnInit {
                 data['sleepinfo'] = (<{ sleep: Object[] }>sunday[0]).sleep;
                 data['totalsleephours'] = "9";
                 data['sleepstarttime'] = "10.30 pm";
-                data['sleependtime'] = "7:30 am pm"; 
+                data['sleependtime'] = "7:30 am"; 
                 data['deepsleep'] = "5h 24 mins"; 
                 data['lightsleep'] = "1h 15 mins"; 
                 data['awaketime'] = "27 mins"; 
@@ -648,7 +639,7 @@ export class DashBoardComponent implements OnInit {
     }
     public splinemouseclick: EmitType<IPointEventArgs> = (args: IPointEventArgs) => {
         this.selectedpoint = false;
-        if (getElement('balance_Series_' + args.seriesIndex + '_Point_' + args.pointIndex + '_Symbol')) {
+        if (getElement('spline-balance_Series_' + args.seriesIndex + '_Point_' + args.pointIndex + '_Symbol')) {
             switch (args.pointIndex) {
                 case 0:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>sunday[0]).water;
@@ -730,279 +721,9 @@ export class DashBoardComponent implements OnInit {
                     this.pie.annotations[0].content = '<div id="calories-innercontent"><p id="value">1300</p><p id="sub-value" style="line-height: 10px">Cal consumed<hr style="margin-top: 20px; margin-bottom: 0px"><p> <p id="end-value"> 1500 cal left</p>';
                     break;
             }
+            this.pie.refresh();
         }
     }
-
-    public polarloaded(args: ILoadedEventArgs): void {
-        document.getElementById('water50ml-column').onclick = () => {
-            document.getElementById('water50ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
-            document.getElementById('water100ml-column').style.backgroundImage = null;
-            document.getElementById('water200ml-column').style.backgroundImage = null;
-            document.getElementById('water300ml-column').style.backgroundImage = null;
-            document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-columnactive';
-            document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column';
-            document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column';
-            document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column';
-            document.getElementById('iconml-img').style.color = '#FFFFFF';
-            document.getElementById('iconml1-img').style.color = '#5B5B5B';
-            document.getElementById('iconml2-img').style.color = '#5B5B5B';
-            document.getElementById('iconml3-img').style.color = '#5B5B5B';
-            document.getElementById('imgtext1').style.color = '#FFFFFF';
-            document.getElementById('imgtext2').style.color = '#5B5B5B';
-            document.getElementById('imgtext3').style.color = '#5B5B5B';
-            document.getElementById('imgtext4').style.color = '#5B5B5B';
-            (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.05;
-            this.polarChart.series[0].dataSource = <Object[]>this.polardata;
-            this.polarChart.series[0].animation.enable = false;
-            this.polarChart.animateSeries = false;
-            this.polarChart.enableAnimation = false;
-            this.polarChart.refresh();
-        };
-        document.getElementById('water100ml-column').onclick = () => {
-            document.getElementById('water100ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
-            document.getElementById('water50ml-column').style.backgroundImage = null;
-            document.getElementById('water200ml-column').style.backgroundImage = null;
-            document.getElementById('water300ml-column').style.backgroundImage = null;
-            document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column';
-            document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-columnactive';
-            document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column';
-            document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column';
-            document.getElementById('iconml-img').style.color = '#5B5B5B';
-            document.getElementById('iconml1-img').style.color = '#FFFFFF';
-            document.getElementById('iconml2-img').style.color = '#5B5B5B';
-            document.getElementById('iconml3-img').style.color = '#5B5B5B';
-            document.getElementById('imgtext2').style.color = '#FFFFFF';
-            document.getElementById('imgtext1').style.color = '#5B5B5B';
-            document.getElementById('imgtext3').style.color = '#5B5B5B';
-            document.getElementById('imgtext4').style.color = '#5B5B5B';
-            (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.1;
-            this.polarChart.series[0].dataSource = <Object[]>this.polardata;
-            this.polarChart.series[0].animation.enable = false;
-            this.polarChart.animateSeries = false;
-            this.polarChart.enableAnimation = false;
-            this.polarChart.refresh();
-        };
-        document.getElementById('water200ml-column').onclick = () => {
-            document.getElementById('water200ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
-            document.getElementById('water100ml-column').style.backgroundImage = null;
-            document.getElementById('water50ml-column').style.backgroundImage = null;
-            document.getElementById('water300ml-column').style.backgroundImage = null;
-            document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column';
-            document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column';
-            document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-columnactive';
-            document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column';
-            document.getElementById('iconml-img').style.color = '#5B5B5B';
-            document.getElementById('iconml1-img').style.color = '#5B5B5B';
-            document.getElementById('iconml2-img').style.color = '#FFFFFF';
-            document.getElementById('iconml3-img').style.color = '#5B5B5B';
-            document.getElementById('imgtext3').style.color = '#FFFFFF';
-            document.getElementById('imgtext2').style.color = '#5B5B5B';
-            document.getElementById('imgtext1').style.color = '#5B5B5B';
-            document.getElementById('imgtext4').style.color = '#5B5B5B';
-            (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.2;
-            this.polarChart.series[0].dataSource = <Object[]>this.polardata;
-            this.polarChart.series[0].animation.enable = false;
-            this.polarChart.animateSeries = false;
-            this.polarChart.enableAnimation = false;
-            this.polarChart.refresh();
-        };
-        document.getElementById('water300ml-column').onclick = () => {
-            document.getElementById('water300ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
-            document.getElementById('water100ml-column').style.backgroundImage = null;
-            document.getElementById('water200ml-column').style.backgroundImage = null;
-            document.getElementById('water50ml-column').style.backgroundImage = null;
-            document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column';
-            document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column';
-            document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column';
-            document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-columnactive';
-            document.getElementById('iconml-img').style.color = '#5B5B5B';
-            document.getElementById('iconml1-img').style.color = '#5B5B5B';
-            document.getElementById('iconml2-img').style.color = '#5B5B5B';
-            document.getElementById('iconml3-img').style.color = '#FFFFFF';
-            document.getElementById('imgtext4').style.color = '#FFFFFF';
-            document.getElementById('imgtext2').style.color = '#5B5B5B';
-            document.getElementById('imgtext3').style.color = '#5B5B5B';
-            document.getElementById('imgtext1').style.color = '#5B5B5B';
-            (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.3;
-            this.polarChart.series[0].dataSource = <Object[]>this.polardata;
-            this.polarChart.series[0].animation.enable = false;
-            this.polarChart.animateSeries = false;
-            this.polarChart.enableAnimation = false;
-            this.polarChart.refresh();
-        };
-    }
-
-    public loaded(args: ILoadedEventArgs): void {
-        document.getElementById('Break-icon').onclick = () => {
-            document.getElementById('Breakfast').style.color = '#FFFFFF';
-            document.getElementById('Lunch').style.color = '#7D7D7D';
-            document.getElementById('Dinner').style.color = '#7D7D7D';
-            document.getElementById('Snack').style.color = '#7D7D7D';
-            document.getElementById('Breakfast').className = 'icon-Breakfast breakimgactive';
-            document.getElementById('Lunch').className = 'icon-Lunch lunchimg';
-            document.getElementById('Dinner').className = 'icon-Dinner dinnerimg';
-            document.getElementById('Snack').className = 'icon-Snack snackimg';
-            document.getElementById('Break-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
-            document.getElementById('Lunch-icon').style.backgroundImage = null;
-            document.getElementById('Dinner-icon').style.backgroundImage = null;
-            document.getElementById('Snack-icon').style.backgroundImage = null;
-            document.getElementById('Break-text').className = 'breaktextactive';
-            document.getElementById('Lunch-text').className = 'lunchtext';
-            document.getElementById('Dinner-text').className = 'dinnertext';
-            document.getElementById('Snack-text').className = 'snacktext';
-            document.getElementById('Break-text').style.color = '#FFFFFF';
-            document.getElementById('Lunch-text').style.color = '#7D7D7D';
-            document.getElementById('Dinner-text').style.color = '#7D7D7D';
-            document.getElementById('Snack-text').style.color = '#7D7D7D';
-            document.getElementById('fat_value').innerHTML = '30g';
-            document.getElementById('fibre_value').innerHTML = '30g';
-            document.getElementById('carbs_value').innerHTML = '130g';
-            document.getElementById('calcium_value').innerHTML = '260g';
-            document.getElementById('protein_value').innerHTML = '40g';
-            document.getElementById('vitamins_value').innerHTML = '60g';
-            this.pie.series[0].dataSource = (<{ Breakfast: Object[] }>sunday[0]).Breakfast;
-        };
-        document.getElementById('Lunch-icon').onclick = () => {
-            document.getElementById('Breakfast').style.color = '#7D7D7D';
-            document.getElementById('Lunch').style.color = '#FFFFFF';
-            document.getElementById('Dinner').style.color = '#7D7D7D';
-            document.getElementById('Snack').style.color = '#7D7D7D';
-            document.getElementById('Breakfast').className = 'icon-Breakfast breakimg';
-            document.getElementById('Lunch').className = 'icon-Lunch lunchimgactive';
-            document.getElementById('Dinner').className = 'icon-Dinner dinnerimg';
-            document.getElementById('Snack').className = 'icon-Snack snackimg';
-            document.getElementById('Break-text').className = 'breaktext';
-            document.getElementById('Lunch-text').className = 'lunchtextactive';
-            document.getElementById('Dinner-text').className = 'dinnertext';
-            document.getElementById('Snack-text').className = 'snacktext';
-            document.getElementById('Break-text').style.color = '#7D7D7D';
-            document.getElementById('Lunch-text').style.color = '#FFFFFF';
-            document.getElementById('Dinner-text').style.color = '#7D7D7D';
-            document.getElementById('Snack-text').style.color = '#7D7D7D';
-            document.getElementById('Break-icon').style.backgroundImage = null;
-            document.getElementById('Dinner-icon').style.backgroundImage = null;
-            document.getElementById('Snack-icon').style.backgroundImage = null;
-            document.getElementById('Lunch-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
-            document.getElementById('fat_value').innerHTML = '20g';
-            document.getElementById('fibre_value').innerHTML = '10g';
-            document.getElementById('carbs_value').innerHTML = '90g';
-            document.getElementById('calcium_value').innerHTML = '120g';
-            document.getElementById('protein_value').innerHTML = '30g';
-            document.getElementById('vitamins_value').innerHTML = '40g';
-            this.pie.series[0].dataSource = (<{ Lunch: Object[] }>sunday[0]).Lunch;
-        };
-        document.getElementById('Dinner-icon').onclick = () => {
-            document.getElementById('Breakfast').style.color = '#7D7D7D';
-            document.getElementById('Lunch').style.color = '#7D7D7D';
-            document.getElementById('Dinner').style.color = '#FFFFFF';
-            document.getElementById('Snack').style.color = '#7D7D7D';
-            document.getElementById('Breakfast').className = 'icon-Breakfast breakimg';
-            document.getElementById('Lunch').className = 'icon-Lunch lunchimg';
-            document.getElementById('Dinner').className = 'icon-Dinner dinnerimgactive';
-            document.getElementById('Snack').className = 'icon-Snack snackimg';
-            document.getElementById('Break-text').className = 'breaktext';
-            document.getElementById('Lunch-text').className = 'lunchtext';
-            document.getElementById('Dinner-text').className = 'dinnertextactive';
-            document.getElementById('Snack-text').className = 'snacktext';
-            document.getElementById('Break-text').style.color = '#7D7D7D';
-            document.getElementById('Lunch-text').style.color = '#7D7D7D';
-            document.getElementById('Dinner-text').style.color = '#FFFFFF';
-            document.getElementById('Snack-text').style.color = '#7D7D7D';
-            document.getElementById('Break-icon').style.backgroundImage = null;
-            document.getElementById('Lunch-icon').style.backgroundImage = null;
-            document.getElementById('Snack-icon').style.backgroundImage = null;
-            document.getElementById('Dinner-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
-            document.getElementById('fat_value').innerHTML = '50g';
-            document.getElementById('fibre_value').innerHTML = '40g';
-            document.getElementById('carbs_value').innerHTML = '80g';
-            document.getElementById('calcium_value').innerHTML = '110g';
-            document.getElementById('protein_value').innerHTML = '30g';
-            document.getElementById('vitamins_value').innerHTML = '20g';
-            this.pie.series[0].dataSource = (<{ Dinner: Object[] }>sunday[0]).Dinner;
-        };
-        document.getElementById('Snack-icon').onclick = () => {
-            document.getElementById('Breakfast').style.color = '#7D7D7D';
-            document.getElementById('Lunch').style.color = '#7D7D7D';
-            document.getElementById('Dinner').style.color = '#7D7D7D';
-            document.getElementById('Snack').style.color = '#FFFFFF';
-            document.getElementById('Break-text').className = 'breaktext';
-            document.getElementById('Lunch-text').className = 'lunchtext';
-            document.getElementById('Dinner-text').className = 'dinnertext';
-            document.getElementById('Snack-text').className = 'snacktextactive';
-            document.getElementById('Breakfast').className = 'icon-Breakfast breakimg';
-            document.getElementById('Lunch').className = 'icon-Lunch lunchimg';
-            document.getElementById('Dinner').className = 'icon-Dinner dinnerimg';
-            document.getElementById('Snack').className = 'icon-Snack snackimgactive';
-            document.getElementById('Break-text').style.color = '#7D7D7D';
-            document.getElementById('Lunch-text').style.color = '#7D7D7D';
-            document.getElementById('Dinner-text').style.color = '#7D7D7D';
-            document.getElementById('Snack-text').style.color = '#FFFFFF';
-            document.getElementById('Break-icon').style.backgroundImage = null;
-            document.getElementById('Dinner-icon').style.backgroundImage = null;
-            document.getElementById('Lunch-icon').style.backgroundImage = null;
-            document.getElementById('Snack-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
-            document.getElementById('fat_value').innerHTML = '30g';
-            document.getElementById('fibre_value').innerHTML = '40g';
-            document.getElementById('carbs_value').innerHTML = '150g';
-            document.getElementById('calcium_value').innerHTML = '220g';
-            document.getElementById('protein_value').innerHTML = '50g';
-            document.getElementById('vitamins_value').innerHTML = '60g';
-            this.pie.series[0].dataSource = (<{ Snack: Object[] }>sunday[0]).Snack;
-        };
-        document.getElementById('water').onclick = () => {
-            document.getElementById('chart-title').innerHTML = 'Water Consumption';
-            document.getElementById('pie-title').innerHTML = 'Sunday Report';
-            document.getElementById('calories-subtitle').style.color = '#828282';
-            document.getElementById('calories-text').style.color = '#828282';
-            document.getElementById('water-text').style.color = '#FFFFFF';
-            document.getElementById('water-subtitle').style.color = '#FFFFFF';
-            document.getElementById('steps-text').style.color = '#828282';
-            document.getElementById('steps-subtitle').style.color = '#828282';
-            document.getElementById('sleep-text').style.color = '#828282';
-            document.getElementById('sleep-subtitle').style.color = '#828282';
-            this.waterclick();
-        };
-        document.getElementById('step').onclick = () => {
-            document.getElementById('chart-title').innerHTML = 'Steps Count';
-            document.getElementById('pie-title').innerHTML = 'Sunday Activity';
-            document.getElementById('calories-subtitle').style.color = '#828282';
-            document.getElementById('calories-text').style.color = '#828282';
-            document.getElementById('water-text').style.color = '#828282';
-            document.getElementById('water-subtitle').style.color = '#828282';
-            document.getElementById('sleep-text').style.color = '#828282';
-            document.getElementById('sleep-subtitle').style.color = '#828282';
-            document.getElementById('steps-text').style.color = '#FFFFFF';
-            document.getElementById('steps-subtitle').style.color = '#FFFFFF';
-            document.getElementById('steps-img').style.color = '#FFFFFF';
-            this.stepclick();
-        };
-        document.getElementById('sleep').onclick = () => {
-            document.getElementById('chart-title').innerHTML = 'Sleep Tracker';
-            document.getElementById('pie-title').innerHTML = 'Sleep Quality';
-            document.getElementById('calories-subtitle').style.color = '#828282';
-            document.getElementById('calories-text').style.color = '#828282';
-            document.getElementById('water-text').style.color = '#828282';
-            document.getElementById('water-subtitle').style.color = '#828282';
-            document.getElementById('steps-text').style.color = '#828282';
-            document.getElementById('steps-subtitle').style.color = '#828282';
-            document.getElementById('sleep-text').style.color = '#FFFFFF';
-            document.getElementById('sleep-subtitle').style.color = '#FFFFFF';
-            this.sleepclick();
-        };
-        document.getElementById('calories').onclick = () => {
-            document.getElementById('chart-title').innerHTML = 'Calories Consumed';
-            document.getElementById('pie-title').innerHTML = 'Macro Nutrients';
-            document.getElementById('calories-subtitle').style.color = '#FFFFFF';
-            document.getElementById('calories-text').style.color = '#FFFFFF';
-            document.getElementById('water-text').style.color = '#828282';
-            document.getElementById('water-subtitle').style.color = '#828282';
-            document.getElementById('steps-text').style.color = '#828282';
-            document.getElementById('steps-subtitle').style.color = '#828282';
-            document.getElementById('sleep-text').style.color = '#828282';
-            document.getElementById('sleep-subtitle').style.color = '#828282';
-            this.caloriesclick();
-        };
-    };
     public steploaded(args: ILoadedEventArgs): void {
         this.annotationpie1 = new AccumulationChart({
             // Initialize the chart series
@@ -1061,28 +782,19 @@ export class DashBoardComponent implements OnInit {
             }
         });
         this.annotationpie2.appendTo('#inside-container');
-        this.pie.refresh();
+        // this.pie.refresh();
     }
-    public onStepClick(e: MouseEvent): void {
-        this.stepclick();
+    public CalorieLoaded(args: ILoadedEventArgs): void {
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Calories Consumed </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Total </span><span id="value-annotation" style="color:#780508">1437 Kcal</span>'
+        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color:#DB4247"> 902 Kcal </span>'
     }
-    public onWaterClick(e: MouseEvent): void {
-        this.waterclick();
+    public StepLoaded(args: ILoadedEventArgs): void {
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Steps Taken </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Distance Travelled </span><span id="value-annotation" style="color:#05AD13"> 3.2 miles </span>'
+        document.getElementById("average-value").innerHTML = ''
     }
-    public onSleepClick(e: MouseEvent): void {
-        this.sleepclick();
-    }
-    public onCalClick(e: MouseEvent): void {
-        this.caloriesclick();
-    }
-    public waterclick(): void {
-        this.annotation = false;
-        this.ToggleVisibility(true, 'none');
-        document.getElementById('water-bg').style.borderRadius = '4px';
-        document.getElementById('watercard').style.boxShadow = '0 3px 6px 3px rgba(49,131,185,0.25)';
-        document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('sleepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('caloriescard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
+    public WaterLoaded(args: ILoadedEventArgs): void {
         document.getElementById('water50ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
         document.getElementById('water100ml-column').style.backgroundImage = null;
         document.getElementById('water200ml-column').style.backgroundImage = null;
@@ -1099,188 +811,291 @@ export class DashBoardComponent implements OnInit {
         document.getElementById('iconml1-img').style.color = '#5B5B5B';
         document.getElementById('iconml2-img').style.color = '#5B5B5B';
         document.getElementById('iconml3-img').style.color = '#5B5B5B';
-        document.getElementById('water-column').classList.replace('water-value', 'water-valueactive');
-        document.getElementById('pie-title').innerHTML = 'Sunday Report';
-        document.getElementById('multiple-donut').style.display = 'none';
-        document.getElementById('donut').style.display = 'none';
-        document.getElementById('semi-pie').style.display = 'none';
-        document.getElementById('polar').style.display = 'block';
-        document.getElementById('line').style.display = 'none';
-        document.getElementById('spline').style.display = 'block';
-        document.getElementById('column').style.display = 'none';
-        document.getElementById('bubble').style.display = 'none';
-        document.getElementById('calories-bg').style.backgroundImage = null;
-        document.getElementById('calories').style.backgroundImage = null;
-        document.getElementById('step-bg').style.backgroundImage = null;
-        document.getElementById('step').style.backgroundImage = null;
-        document.getElementById('calories-value').style.backgroundImage = null;
-        document.getElementById('sleep-value').style.backgroundImage = null;
-        document.getElementById('sleep-bg').style.backgroundImage = null;
-        document.getElementById('sleep').style.backgroundImage = null;
-        document.getElementById('steps-value').style.backgroundImage = null;
-        document.getElementById('water-bg').style.backgroundImage = 'linear-gradient(44deg, #2140DC 0%, #00BFD5 100%)';
-        document.getElementById('water').style.backgroundImage = 'linear-gradient(44deg, #2140DC 0%, #00BFD5 100%)';
-        document.getElementById('steps-img').style.color = '#999393';
-        document.getElementById('sleep-img').style.color = '#999393';
-        document.getElementById('water-img').style.color = '#FFFFFF';
-        document.getElementById('food-img').style.color = '#999393';
         document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Water Consumption </span>';
         document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Target </span><span id="value-annotation" style="color: #3B61E9;"> 7 litres </span>';
         document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color: #3B61E9;"> 4.32 litres </span>';
-        document.getElementById('calories-subtitle').style.color = '#828282';
-        document.getElementById('calories-text').style.color = '#828282';
-        document.getElementById('water-text').style.color = '#FFFFFF';
-        document.getElementById('water-subtitle').style.color = '#FFFFFF';
-        document.getElementById('steps-text').style.color = '#828282';
-        document.getElementById('steps-subtitle').style.color = '#828282';
-        document.getElementById('sleep-text').style.color = '#828282';
-        document.getElementById('sleep-subtitle').style.color = '#828282';
-        this.LoadChartData("water");
-        this.polarChart.series[0].animation.enable = true;
+    }
+    public SleepLoaded(args: ILoadedEventArgs): void {
+        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Sleep Tracker </span>'
+        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Goal </span><span id="value-annotation" style="color:#4526A6"> 7.2 hrs </span>'
+        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color:#4526A6"> 6.32 hrs </span>'
+    }
+    public on50mlClick(e: MouseEvent): void {
+        document.getElementById('water50ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
+        document.getElementById('water100ml-column').style.backgroundImage = null;
+        document.getElementById('water200ml-column').style.backgroundImage = null;
+        document.getElementById('water300ml-column').style.backgroundImage = null;
+        document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-columnactive';
+        document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column';
+        document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column';
+        document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column';
+        document.getElementById('iconml-img').style.color = '#FFFFFF';
+        document.getElementById('iconml1-img').style.color = '#5B5B5B';
+        document.getElementById('iconml2-img').style.color = '#5B5B5B';
+        document.getElementById('iconml3-img').style.color = '#5B5B5B';
+        document.getElementById('imgtext1').style.color = '#FFFFFF';
+        document.getElementById('imgtext2').style.color = '#5B5B5B';
+        document.getElementById('imgtext3').style.color = '#5B5B5B';
+        document.getElementById('imgtext4').style.color = '#5B5B5B';
+        (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.05;
+        this.polarChart.series[0].dataSource = <Object[]>this.polardata;
+        this.polarChart.series[0].animation.enable = false;
+        this.polarChart.animateSeries = false;
+        this.polarChart.enableAnimation = false;
+        this.polarChart.refresh();
+    }
+    public on100mlClick(e: MouseEvent): void {
+        document.getElementById('water100ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
+        document.getElementById('water50ml-column').style.backgroundImage = null;
+        document.getElementById('water200ml-column').style.backgroundImage = null;
+        document.getElementById('water300ml-column').style.backgroundImage = null;
+        document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column';
+        document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-columnactive';
+        document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column';
+        document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column';
+        document.getElementById('iconml-img').style.color = '#5B5B5B';
+        document.getElementById('iconml1-img').style.color = '#FFFFFF';
+        document.getElementById('iconml2-img').style.color = '#5B5B5B';
+        document.getElementById('iconml3-img').style.color = '#5B5B5B';
+        document.getElementById('imgtext2').style.color = '#FFFFFF';
+        document.getElementById('imgtext1').style.color = '#5B5B5B';
+        document.getElementById('imgtext3').style.color = '#5B5B5B';
+        document.getElementById('imgtext4').style.color = '#5B5B5B';
+        (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.1;
+        this.polarChart.series[0].dataSource = <Object[]>this.polardata;
+        this.polarChart.series[0].animation.enable = false;
+        this.polarChart.animateSeries = false;
+        this.polarChart.enableAnimation = false;
+        this.polarChart.refresh();
+    }
+    public on200mlClick(e: MouseEvent): void {
+        document.getElementById('water200ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
+            document.getElementById('water100ml-column').style.backgroundImage = null;
+            document.getElementById('water50ml-column').style.backgroundImage = null;
+            document.getElementById('water300ml-column').style.backgroundImage = null;
+            document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column';
+            document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column';
+            document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-columnactive';
+            document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column';
+            document.getElementById('iconml-img').style.color = '#5B5B5B';
+            document.getElementById('iconml1-img').style.color = '#5B5B5B';
+            document.getElementById('iconml2-img').style.color = '#FFFFFF';
+            document.getElementById('iconml3-img').style.color = '#5B5B5B';
+            document.getElementById('imgtext3').style.color = '#FFFFFF';
+            document.getElementById('imgtext2').style.color = '#5B5B5B';
+            document.getElementById('imgtext1').style.color = '#5B5B5B';
+            document.getElementById('imgtext4').style.color = '#5B5B5B';
+            (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.2;
+            this.polarChart.series[0].dataSource = <Object[]>this.polardata;
+            this.polarChart.series[0].animation.enable = false;
+            this.polarChart.animateSeries = false;
+            this.polarChart.enableAnimation = false;
+            this.polarChart.refresh();
+    }
+    public on300mlClick(e: MouseEvent): void {
+        document.getElementById('water300ml-column').style.backgroundImage = 'linear-gradient(to right, #2140DC, #00BFD5)';
+            document.getElementById('water100ml-column').style.backgroundImage = null;
+            document.getElementById('water200ml-column').style.backgroundImage = null;
+            document.getElementById('water50ml-column').style.backgroundImage = null;
+            document.getElementById('water50ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column';
+            document.getElementById('water100ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column';
+            document.getElementById('water200ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column';
+            document.getElementById('water300ml-column').className = 'col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-columnactive';
+            document.getElementById('iconml-img').style.color = '#5B5B5B';
+            document.getElementById('iconml1-img').style.color = '#5B5B5B';
+            document.getElementById('iconml2-img').style.color = '#5B5B5B';
+            document.getElementById('iconml3-img').style.color = '#FFFFFF';
+            document.getElementById('imgtext4').style.color = '#FFFFFF';
+            document.getElementById('imgtext2').style.color = '#5B5B5B';
+            document.getElementById('imgtext3').style.color = '#5B5B5B';
+            document.getElementById('imgtext1').style.color = '#5B5B5B';
+            (this.polardata[this.pointindex])['y'] = ((this.polardata[this.pointindex])['y']) + 0.3;
+            this.polarChart.series[0].dataSource = <Object[]>this.polardata;
+            this.polarChart.series[0].animation.enable = false;
+            this.polarChart.animateSeries = false;
+            this.polarChart.enableAnimation = false;
+            this.polarChart.refresh();
+    }
+    public onBreakClick(e: MouseEvent): void {
+        document.getElementById('Breakfast').style.color = '#FFFFFF';
+            document.getElementById('Lunch').style.color = '#7D7D7D';
+            document.getElementById('Dinner').style.color = '#7D7D7D';
+            document.getElementById('Snack').style.color = '#7D7D7D';
+            document.getElementById('Breakfast').className = 'icon-Breakfast breakimgactive';
+            document.getElementById('Lunch').className = 'icon-Lunch lunchimg';
+            document.getElementById('Dinner').className = 'icon-Dinner dinnerimg';
+            document.getElementById('Snack').className = 'icon-Snack snackimg';
+            document.getElementById('Break-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
+            document.getElementById('Lunch-icon').style.backgroundImage = null;
+            document.getElementById('Dinner-icon').style.backgroundImage = null;
+            document.getElementById('Snack-icon').style.backgroundImage = null;
+            document.getElementById('Break-text').className = 'breaktextactive';
+            document.getElementById('Lunch-text').className = 'lunchtext';
+            document.getElementById('Dinner-text').className = 'dinnertext';
+            document.getElementById('Snack-text').className = 'snacktext';
+            document.getElementById('Break-text').style.color = '#FFFFFF';
+            document.getElementById('Lunch-text').style.color = '#7D7D7D';
+            document.getElementById('Dinner-text').style.color = '#7D7D7D';
+            document.getElementById('Snack-text').style.color = '#7D7D7D';
+            document.getElementById('fat_value').innerHTML = '30g';
+            document.getElementById('fibre_value').innerHTML = '30g';
+            document.getElementById('carbs_value').innerHTML = '130g';
+            document.getElementById('calcium_value').innerHTML = '260g';
+            document.getElementById('protein_value').innerHTML = '40g';
+            document.getElementById('vitamins_value').innerHTML = '60g';
+            this.pie.series[0].dataSource = (<{ Breakfast: Object[] }>sunday[0]).Breakfast;
+    }
+    public onLunchClick(e: MouseEvent): void {
+        document.getElementById('Breakfast').style.color = '#7D7D7D';
+            document.getElementById('Lunch').style.color = '#FFFFFF';
+            document.getElementById('Dinner').style.color = '#7D7D7D';
+            document.getElementById('Snack').style.color = '#7D7D7D';
+            document.getElementById('Breakfast').className = 'icon-Breakfast breakimg';
+            document.getElementById('Lunch').className = 'icon-Lunch lunchimgactive';
+            document.getElementById('Dinner').className = 'icon-Dinner dinnerimg';
+            document.getElementById('Snack').className = 'icon-Snack snackimg';
+            document.getElementById('Break-text').className = 'breaktext';
+            document.getElementById('Lunch-text').className = 'lunchtextactive';
+            document.getElementById('Dinner-text').className = 'dinnertext';
+            document.getElementById('Snack-text').className = 'snacktext';
+            document.getElementById('Break-text').style.color = '#7D7D7D';
+            document.getElementById('Lunch-text').style.color = '#FFFFFF';
+            document.getElementById('Dinner-text').style.color = '#7D7D7D';
+            document.getElementById('Snack-text').style.color = '#7D7D7D';
+            document.getElementById('Break-icon').style.backgroundImage = null;
+            document.getElementById('Dinner-icon').style.backgroundImage = null;
+            document.getElementById('Snack-icon').style.backgroundImage = null;
+            document.getElementById('Lunch-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
+            document.getElementById('fat_value').innerHTML = '20g';
+            document.getElementById('fibre_value').innerHTML = '10g';
+            document.getElementById('carbs_value').innerHTML = '90g';
+            document.getElementById('calcium_value').innerHTML = '120g';
+            document.getElementById('protein_value').innerHTML = '30g';
+            document.getElementById('vitamins_value').innerHTML = '40g';
+            this.pie.series[0].dataSource = (<{ Lunch: Object[] }>sunday[0]).Lunch;
+    }
+    public onDinnerClick(e: MouseEvent): void {
+        document.getElementById('Breakfast').style.color = '#7D7D7D';
+        document.getElementById('Lunch').style.color = '#7D7D7D';
+        document.getElementById('Dinner').style.color = '#FFFFFF';
+        document.getElementById('Snack').style.color = '#7D7D7D';
+        document.getElementById('Breakfast').className = 'icon-Breakfast breakimg';
+        document.getElementById('Lunch').className = 'icon-Lunch lunchimg';
+        document.getElementById('Dinner').className = 'icon-Dinner dinnerimgactive';
+        document.getElementById('Snack').className = 'icon-Snack snackimg';
+        document.getElementById('Break-text').className = 'breaktext';
+        document.getElementById('Lunch-text').className = 'lunchtext';
+        document.getElementById('Dinner-text').className = 'dinnertextactive';
+        document.getElementById('Snack-text').className = 'snacktext';
+        document.getElementById('Break-text').style.color = '#7D7D7D';
+        document.getElementById('Lunch-text').style.color = '#7D7D7D';
+        document.getElementById('Dinner-text').style.color = '#FFFFFF';
+        document.getElementById('Snack-text').style.color = '#7D7D7D';
+        document.getElementById('Break-icon').style.backgroundImage = null;
+        document.getElementById('Lunch-icon').style.backgroundImage = null;
+        document.getElementById('Snack-icon').style.backgroundImage = null;
+        document.getElementById('Dinner-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
+        document.getElementById('fat_value').innerHTML = '50g';
+        document.getElementById('fibre_value').innerHTML = '40g';
+        document.getElementById('carbs_value').innerHTML = '80g';
+        document.getElementById('calcium_value').innerHTML = '110g';
+        document.getElementById('protein_value').innerHTML = '30g';
+        document.getElementById('vitamins_value').innerHTML = '20g';
+        this.pie.series[0].dataSource = (<{ Dinner: Object[] }>sunday[0]).Dinner;
+    }
+    public onSnackClick(e: MouseEvent): void {
+        document.getElementById('Breakfast').style.color = '#7D7D7D';
+            document.getElementById('Lunch').style.color = '#7D7D7D';
+            document.getElementById('Dinner').style.color = '#7D7D7D';
+            document.getElementById('Snack').style.color = '#FFFFFF';
+            document.getElementById('Break-text').className = 'breaktext';
+            document.getElementById('Lunch-text').className = 'lunchtext';
+            document.getElementById('Dinner-text').className = 'dinnertext';
+            document.getElementById('Snack-text').className = 'snacktextactive';
+            document.getElementById('Breakfast').className = 'icon-Breakfast breakimg';
+            document.getElementById('Lunch').className = 'icon-Lunch lunchimg';
+            document.getElementById('Dinner').className = 'icon-Dinner dinnerimg';
+            document.getElementById('Snack').className = 'icon-Snack snackimgactive';
+            document.getElementById('Break-text').style.color = '#7D7D7D';
+            document.getElementById('Lunch-text').style.color = '#7D7D7D';
+            document.getElementById('Dinner-text').style.color = '#7D7D7D';
+            document.getElementById('Snack-text').style.color = '#FFFFFF';
+            document.getElementById('Break-icon').style.backgroundImage = null;
+            document.getElementById('Dinner-icon').style.backgroundImage = null;
+            document.getElementById('Lunch-icon').style.backgroundImage = null;
+            document.getElementById('Snack-icon').style.backgroundImage = 'linear-gradient(45deg, #EF9027 0%, #F23B3B 100%)';
+            document.getElementById('fat_value').innerHTML = '30g';
+            document.getElementById('fibre_value').innerHTML = '40g';
+            document.getElementById('carbs_value').innerHTML = '150g';
+            document.getElementById('calcium_value').innerHTML = '220g';
+            document.getElementById('protein_value').innerHTML = '50g';
+            document.getElementById('vitamins_value').innerHTML = '60g';
+            this.pie.series[0].dataSource = (<{ Snack: Object[] }>sunday[0]).Snack;
+    }
+    public onStepClick(e: MouseEvent): void {
+        this.stepclick();
+    }
+    public onWaterClick(e: MouseEvent): void {
+        this.waterclick();
+    }
+    public onSleepClick(e: MouseEvent): void {
+        this.sleepclick();
+    }
+    public onCalClick(e: MouseEvent): void {
+        this.caloriesclick();
+    }
+    public waterclick(): void {
+        this.annotation = false;
+        document.querySelector("#card-row .selected").classList.remove("selected");
+        document.querySelector("#card-row #water").classList.add("selected");
+        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value card-container';
+        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value card-container';
+        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-value card-container';
+        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-valueactive card-container';
+        this.lineType = "spline";
+        this.pieType = "polar";
+        this.ToggleChartSkeleton(true);
+        this.LoadChartData('water');
     }
     public stepclick(): void {
         this.annotation = true;
-        this.ToggleVisibility(true, 'none');
-        document.getElementById('step-bg').style.borderRadius = '4px';
-        document.getElementById('steps-value').style.borderRadius = '4px';
-        document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('stepcard').style.boxShadow = '0 3px 6px 3px rgba(66,254,19,0.20)';
-        document.getElementById('sleepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('caloriescard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('step-column').classList.replace('steps-value', 'steps-valueactive');
-        document.getElementById('multiple-donut').style.display = 'block';
-        document.getElementById('donut').style.display = 'none';
-        document.getElementById('semi-pie').style.display = 'none';
-        document.getElementById('polar').style.display = 'none';
-        document.getElementById('line').style.display = 'none';
-        document.getElementById('spline').style.display = 'none';
-        document.getElementById('column').style.display = 'block';
-        document.getElementById('bubble').style.display = 'none';
-        document.getElementById('sleep-value').style.backgroundImage = null;
-        document.getElementById('calories-bg').style.backgroundImage = null;
-        document.getElementById('calories-value').style.backgroundImage = null;
-        document.getElementById('calories').style.backgroundImage = null;
-        document.getElementById('sleep-bg').style.backgroundImage = null;
-        document.getElementById('sleep').style.backgroundImage = null;
-        document.getElementById('water-bg').style.backgroundImage = null;
-        document.getElementById('water').style.backgroundImage = null;
-        document.getElementById('water').style.backgroundImage = null;
-        document.getElementById('step-bg').style.backgroundImage = 'linear-gradient(45deg, #04AB11 0%, #7DD61D 100%)';
-        document.getElementById('step').style.backgroundImage = 'linear-gradient(45deg, #04AB11 0%, #7DD61D 100%)';
-        document.getElementById('steps-value').style.backgroundImage = 'linear-gradient(45deg, #04AB11 0%, #7DD61D 100%)';
-        document.getElementById('steps-img').style.color = '#FFFFFF';
-        document.getElementById('sleep-img').style.color = '#999393';
-        document.getElementById('water-img').style.color = '#999393';
-        document.getElementById('food-img').style.color = '#999393';
-        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Steps Taken </span>'
-        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Distance Travelled </span><span id="value-annotation" style="color:#05AD13"> 3.2 miles </span>'
-        document.getElementById("average-value").innerHTML = ''
-        document.getElementById('pie-title').innerHTML = 'sunday Activity';
-        document.getElementById('calories-subtitle').style.color = '#828282';
-        document.getElementById('calories-text').style.color = '#828282';
-        document.getElementById('water-text').style.color = '#828282';
-        document.getElementById('water-subtitle').style.color = '#828282';
-        document.getElementById('sleep-text').style.color = '#828282';
-        document.getElementById('sleep-subtitle').style.color = '#828282';
-        document.getElementById('steps-text').style.color = '#FFFFFF';
-        document.getElementById('steps-subtitle').style.color = '#FFFFFF';
-        document.getElementById('steps-img').style.color = '#FFFFFF';
-        this.LoadChartData("steps");
+        document.querySelector("#card-row .selected").classList.remove("selected");
+        document.querySelector("#card-row #step").classList.add("selected");
+        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value card-container';
+        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-valueactive card-container';
+        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-value card-container';
+        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value card-container';
+        this.ToggleChartSkeleton(true);
+        this.LoadChartData('steps');
+        this.lineType = "column";
+        this.pieType = "multiple-donut";
     }
 
     public sleepclick(): void {
         this.annotation = false;
-        this.ToggleVisibility(true, 'none');
-        document.getElementById('sleep-bg').style.borderRadius = '4px';
-        document.getElementById('sleep-value').style.borderRadius = '4px';
-        document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('sleepcard').style.boxShadow = '0 3px 6px 3px rgba(71,63,204,0.20)';
-        document.getElementById('caloriescard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('sleep-column').classList.replace('sleep-value', 'sleep-valueactive');
-        document.getElementById('multiple-donut').style.display = 'none';
-        document.getElementById('donut').style.display = 'none';
-        document.getElementById('semi-pie').style.display = 'block';
-        document.getElementById('polar').style.display = 'none';
-        document.getElementById('line').style.display = 'none';
-        document.getElementById('spline').style.display = 'none';
-        document.getElementById('column').style.display = 'none';
-        document.getElementById('bubble').style.display = 'block';
-        document.getElementById('calories-bg').style.backgroundImage = null;
-        document.getElementById('calories').style.backgroundImage = null;
-        document.getElementById('calories-value').style.backgroundImage = null;
-        document.getElementById('water-bg').style.backgroundImage = null;
-        document.getElementById('water').style.backgroundImage = null;
-        document.getElementById('step-bg').style.backgroundImage = null;
-        document.getElementById('step').style.backgroundImage = null;
-        document.getElementById('steps-value').style.backgroundImage = null;
-        document.getElementById('sleep-bg').style.backgroundImage = 'linear-gradient(-135deg, #2925A6 0%, #B250D1 100%)';
-        document.getElementById('sleep-value').style.backgroundImage = 'linear-gradient(-135deg, #2925A6 0%, #B250D1 100%)';
-        document.getElementById('sleep').style.backgroundImage = 'linear-gradient(-135deg, #2925A6 0%, #B250D1 100%)';
-        document.getElementById('steps-img').style.color = '#999393';
-        document.getElementById('sleep-img').style.color = '#FFFFFF';
-        document.getElementById('water-img').style.color = '#999393';
-        document.getElementById('food-img').style.color = '#999393';
-        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Sleep Tracker </span>'
-        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Goal </span><span id="value-annotation" style="color:#4526A6"> 7.2 hrs </span>'
-        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color:#4526A6"> 6.32 hrs </span>'
-        document.getElementById('pie-title').innerHTML = 'Sleep Quality';
-        document.getElementById('calories-subtitle').style.color = '#828282';
-        document.getElementById('calories-text').style.color = '#828282';
-        document.getElementById('water-text').style.color = '#828282';
-        document.getElementById('water-subtitle').style.color = '#828282';
-        document.getElementById('steps-text').style.color = '#828282';
-        document.getElementById('steps-subtitle').style.color = '#828282';
-        document.getElementById('sleep-text').style.color = '#FFFFFF';
-        document.getElementById('sleep-subtitle').style.color = '#FFFFFF';
-        this.LoadChartData("sleep");
+        document.querySelector("#card-row .selected").classList.remove("selected");
+        document.querySelector("#card-row #sleep").classList.add("selected");
+        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-valueactive card-container';
+        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value card-container';
+        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-value card-container';
+        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value card-container';
+        this.ToggleChartSkeleton(true);
+        this.LoadChartData('sleep');
+        this.lineType = "bubble";
+        this.pieType = "semi-pie";
     }
 
     public caloriesclick(): void {
         this.annotation = false;
-        this.ToggleVisibility(true, 'none');
-        document.getElementById('calories-bg').style.borderRadius = '4px';
-        document.getElementById('calories-value').style.borderRadius = '4px';
-        document.getElementById('watercard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('stepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('sleepcard').style.boxShadow = '0 1px 4px 1px rgba(0,0,0,0.10)';
-        document.getElementById('caloriescard').style.boxShadow = '0 3px 6px 2px rgba(178,30,195,0.30)';
-        document.getElementById('calories-column').classList.replace('calories-value', 'calories-valueactive');
-        document.getElementById('multiple-donut').style.display = 'none';
-        document.getElementById('donut').style.display = 'block';
-        document.getElementById('semi-pie').style.display = 'none';
-        document.getElementById('polar').style.display = 'none';
-        document.getElementById('line').style.display = 'block';
-        document.getElementById('spline').style.display = 'none';
-        document.getElementById('column').style.display = 'none';
-        document.getElementById('bubble').style.display = 'none';
-        document.getElementById('steps-value').style.backgroundImage = null;
-        document.getElementById('sleep-bg').style.backgroundImage = null;
-        document.getElementById('sleep').style.backgroundImage = null;
-        document.getElementById('water-bg').style.backgroundImage = null;
-        document.getElementById('water').style.backgroundImage = null;
-        document.getElementById('step-bg').style.backgroundImage = null;
-        document.getElementById('step').style.backgroundImage = null;
-        document.getElementById('sleep-value').style.backgroundImage = null;
-        document.getElementById('calories-bg').style.backgroundImage = 'linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)';
-        document.getElementById('calories-value').style.backgroundImage = 'linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)';
-        document.getElementById('calories').style.backgroundImage = 'linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)';
-        document.getElementById('steps-img').style.color = '#999393';
-        document.getElementById('sleep-img').style.color = '#999393';
-        document.getElementById('water-img').style.color = '#999393';
-        document.getElementById('food-img').style.color = '#FFFFFF';
-        document.getElementById('chart-header-title').innerHTML = '<span id="chart-title"> Calories Consumed </span>'
-        document.getElementById('total-value').innerHTML = '<span id="title-annotation"> Total </span><span id="value-annotation" style="color:#780508">1437 Kcal</span>'
-        document.getElementById("average-value").innerHTML = '<span id="title-annotation"> Daily Average </span><span id="value-annotation" style="color:#DB4247"> 902 Kcal </span>'
-        document.getElementById('pie-title').innerHTML = 'Macro Nutrients';
-        document.getElementById('calories-subtitle').style.color = '#FFFFFF';
-        document.getElementById('calories-text').style.color = '#FFFFFF';
-        document.getElementById('water-text').style.color = '#828282';
-        document.getElementById('water-subtitle').style.color = '#828282';
-        document.getElementById('steps-text').style.color = '#828282';
-        document.getElementById('steps-subtitle').style.color = '#828282';
-        document.getElementById('sleep-text').style.color = '#828282';
-        document.getElementById('sleep-subtitle').style.color = '#828282';
-        this.LoadChartData("calorie");
+        document.querySelector("#card-row .selected").classList.remove("selected");
+        document.querySelector("#card-row #calories").classList.add("selected");
+        document.getElementById('sleep-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value card-container';
+        document.getElementById('step-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value card-container';
+        document.getElementById('calories-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive card-container';
+        document.getElementById('water-column').className = 'col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value card-container';
+        this.ToggleChartSkeleton(true);
+        this.LoadChartData('calorie');
+        this.lineType = "line";
+        this.pieType = "donut";
     }
 }
