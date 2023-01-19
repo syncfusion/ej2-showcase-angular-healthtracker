@@ -137,25 +137,41 @@
   box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
   border-radius: 4px;
 }
-#calories-column.card-container, #step-column.card-container, #water-column.card-container, #sleep-column.card-container {
+#calories-column.card-container, 
+#step-column.card-container, 
+#water-column.card-container, 
+#sleep-column.card-container {
   padding: 0px 0px 20px 20px;
 }
-.e-card.selected .card-text, .e-card.selected .card-value, .e-card.selected #food-img, .e-card.selected #steps-img, .e-card.selected #water-img, .e-card.selected #sleep-img{
+.e-card.selected .card-text, 
+.e-card.selected .card-value, 
+.e-card.selected #food-img, 
+.e-card.selected #steps-img, 
+.e-card.selected #water-img, 
+.e-card.selected #sleep-img{
   color: #FFFFFF !important;
 }
-.e-card.selected#calories, .e-card.selected #calories-bg, .e-card.selected #calories-value{
+.e-card.selected#calories, 
+.e-card.selected #calories-bg, 
+.e-card.selected #calories-value{
   background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%);
   border-radius: 4px;
 }
-.e-card.selected#step, .e-card.selected #step-bg, .e-card.selected #steps-value{
+.e-card.selected#step, 
+.e-card.selected #step-bg, 
+.e-card.selected #steps-value{
   background-image: linear-gradient(45deg, #04AB11 0%, #7DD61D 100%);
   border-radius: 4px;
 }
-.e-card.selected#water, .e-card.selected #water-bg, .e-card.selected #water-value{
+.e-card.selected#water, 
+.e-card.selected #water-bg, 
+.e-card.selected #water-value{
   background-image: linear-gradient(44deg, #2140DC 0%, #00BFD5 100%);
   border-radius: 4px;
 }
-.e-card.selected#sleep, .e-card.selected #sleep-bg, .e-card.selected #sleep-value{
+.e-card.selected#sleep, 
+.e-card.selected #sleep-bg, 
+.e-card.selected #sleep-value{
   background-image: linear-gradient(-135deg, #2925A6 0%, #B250D1 100%) ;
   border-radius: 4px;
 }
@@ -262,7 +278,10 @@
   overflow: visible !important;
   line-height: 1.42857143;
 }
-#calories.hidden-element-size, #step.hidden-element-size,#water.hidden-element-size,#sleep.hidden-element-size {
+#calories.hidden-element-size, 
+#step.hidden-element-size,
+#water.hidden-element-size,
+#sleep.hidden-element-size {
   display: block;
   visibility: hidden;
   position: absolute;
@@ -650,10 +669,16 @@ text-align: center;
 
 @media only screen and (max-width:375px)
 {
-    #Break-text, #Lunch-text, #Dinner-text, #Snack-text {
+    #Break-text, 
+    #Lunch-text, 
+    #Dinner-text, 
+    #Snack-text {
         font-size: 12px;
     }
-    #Breakfast, #Lunch, #Snack, #Dinner{
+    #Breakfast, 
+    #Lunch, 
+    #Snack, 
+    #Dinner{
         font-size: 38px;
     }
 }
@@ -667,20 +692,26 @@ text-align: center;
 
 @media (max-width: 768px)
 {
-  .pie-chart, .column-chart, .line-chart{
+  .pie-chart, 
+  .column-chart, 
+  .line-chart{
     margin-bottom: 16px;
   }
   .chart-container {
     padding: 0px 0px 15px 10px;
   }
-  .column-chart-area .chart-container {
+  .column-chart-area 
+  .chart-container {
     padding-left: 0;
   }
 }
 
 @media only screen and (min-width: 213px) and (max-width: 500px) {
   /* For portrait layouts only */
-  #calories-column.card-container, #step-column.card-container, #water-column.card-container, #sleep-column.card-container {
+  #calories-column.card-container, 
+  #step-column.card-container, 
+  #water-column.card-container, 
+  #sleep-column.card-container {
     width: 100%;
     padding: 15px;
   }

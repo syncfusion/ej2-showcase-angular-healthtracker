@@ -1,12 +1,11 @@
-import { Component, ViewEncapsulation, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit, ViewChild } from '@angular/core';
 
-import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent, AxisModel, Axis } from '@syncfusion/ej2-angular-charts';
+import { ILoadedEventArgs, IPointEventArgs, IMouseEventArgs, Index, indexFinder, getElement, ChartComponent, AxisModel } from '@syncfusion/ej2-angular-charts';
 import { monday, tuesday, wednesday, thursday, friday, saturday, sunday } from './datasource';
-import { EmitType, addClass, removeClass } from '@syncfusion/ej2-base';
+import { EmitType } from '@syncfusion/ej2-base';
 import {
     AccumulationChartComponent, IAccResizeEventArgs, AccumulationChart, IAccLoadedEventArgs
 } from '@syncfusion/ej2-angular-charts';
-import { SkeletonComponent } from '@syncfusion/ej2-angular-notifications';
 
 import { AppComponent } from '../app.component';
 import { MenuComponent } from '../menu/menu.component';
@@ -30,7 +29,7 @@ export class DashBoardComponent implements OnInit {
     @ViewChild('multiplepie') multiplepie: AccumulationChartComponent | AccumulationChart;
     @ViewChild('polarChart') polarChart: ChartComponent;
     @ViewChild('sleepChart') sleepChart: AccumulationChartComponent | AccumulationChart;
-    
+
     public selectedpoint: Boolean = false;
     public tooltipMappingName: string = 'time';
     public animation: Object;
