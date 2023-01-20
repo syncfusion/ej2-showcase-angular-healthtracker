@@ -54,7 +54,7 @@
 }
 #foodimg .icon-Food {
   float: right;
-  color: #FFFFFF
+  color: #999393
   
 }
 #stepimg .icon-Steps {
@@ -100,16 +100,127 @@
   letter-spacing: -0.08px;
   text-align: center;
 }
-#overall-title {
-  background: #FFFFFF;
-  box-shadow: 0 2px 7px 0 rgba(0,0,0,0.16);
-  height: 60px;
-  margin-bottom: 20px
-}
 #container {
   padding-bottom: 20px;
-  background: #FAFAFA !important;
+  background: #FAFAFA;
+  box-shadow: 0 2px 7px 0 rgb(0 0 0 / 16%);
+  margin: 5px 5px 0px 5px;
 }
+.e-appbar.custom-appbar{
+  height: auto;
+  width: 100%;
+  margin-bottom: 20px;
+  font-family: 'Roboto';
+}
+.e-avatar.custom-avatar{
+  background-color: transparent;
+  font-size: 14px;
+  margin: 0px 13px;
+}
+.e-appbar.custom-appbar p {
+  margin: 0;
+  letter-spacing: 0;
+}
+.e-appbar.custom-appbar .appbar-title{
+  font-weight: 300;
+  font-size: 18px;
+  color: #1A1A1A;
+}
+.e-appbar.custom-appbar .appbar-subtitle{
+  display: block;
+  font-weight: 500;
+  font-size: 15px;
+  color: #535353;
+}
+.card-block {
+  cursor:pointer;
+  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
+  border-radius: 4px;
+}
+#calories-column.card-container, 
+#step-column.card-container, 
+#water-column.card-container, 
+#sleep-column.card-container {
+  padding: 0px 0px 20px 20px;
+}
+.e-card.selected .card-text, 
+.e-card.selected .card-value, 
+.e-card.selected #food-img, 
+.e-card.selected #steps-img, 
+.e-card.selected #water-img, 
+.e-card.selected #sleep-img{
+  color: #FFFFFF !important;
+}
+.e-card.selected#calories, 
+.e-card.selected #calories-bg, 
+.e-card.selected #calories-value{
+  background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%);
+  border-radius: 4px;
+}
+.e-card.selected#step, 
+.e-card.selected #step-bg, 
+.e-card.selected #steps-value{
+  background-image: linear-gradient(45deg, #04AB11 0%, #7DD61D 100%);
+  border-radius: 4px;
+}
+.e-card.selected#water, 
+.e-card.selected #water-bg, 
+.e-card.selected #water-value{
+  background-image: linear-gradient(44deg, #2140DC 0%, #00BFD5 100%);
+  border-radius: 4px;
+}
+.e-card.selected#sleep, 
+.e-card.selected #sleep-bg, 
+.e-card.selected #sleep-value{
+  background-image: linear-gradient(-135deg, #2925A6 0%, #B250D1 100%) ;
+  border-radius: 4px;
+}
+.e-card.selected #caloriescard {
+  box-shadow: 0 3px 6px 2px rgba(178,30,195,0.30);
+}
+.e-card.selected #stepcard {
+  box-shadow: 0 3px 6px 3px rgba(66,254,19,0.20);
+}
+.e-card.selected #watercard {
+  box-shadow: 0 3px 6px 3px rgba(49,131,185,0.25);
+}
+.e-card.selected #sleepcard {
+  box-shadow: 0 3px 6px 3px rgba(71,63,204,0.20);
+}
+.chart-container {
+  height: 530px;
+  background-color: transparent;
+  padding-left: 0px;
+}
+.chart-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-family: 'Roboto';
+  letter-spacing: 0;
+}
+.chart-header-values{
+  display: flex;
+}
+.chart-header-values span {
+  display: block;
+}
+.chart-header #title-annotation {
+  font-weight: 300;
+  font-size: 12px;
+  color: #1A1A1A;
+  letter-spacing: 0;
+}
+.chart-header #value-annotation {
+  font-size: 25px;
+  font-weight: 700;
+}
+#chart-title {
+  font-weight: 500;
+  font-size: 20px;
+  color: #535353;
+}
+/*  */
 #water-text {
   padding-left: 5%;
 }
@@ -144,228 +255,12 @@
   margin-top: 20px;
   margin-left: 10px;
 }
-#title {
-  font-family: 'Roboto';
-  font-weight: 500;
-  font-size: 20px;
-  color: #535353;
-  letter-spacing: 0;
-  display:block;
-}
-#title span { 
-  display:block;
-  float:right;
-}
-#subtitle {
-  font-family: 'Roboto';
-  font-weight: 500;
-  font-size: 20px;
-  color: #535353;
-  letter-spacing: 0;
-  display: block;
-}
-#subtitle span { 
-  display:block;
-  float:right;
-}
-#title-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-left: -1.2%;
-  margin-right: 9% !important;
-}
-#sleeptitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-left: -1.2%;
-  margin-right: 11% !important;
-}
-#caloriestitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-right: 11% !important;
-}
-#steptitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-left: -1.2%;
-  margin-right: 9% !important;
-}
-#watertitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-left: -1.2%;
-  margin-right: 13% !important;
-}
-#title-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-}
-#watertitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  padding-left: 1.5% !important;
-  margin-right: 11% !important;
-}
-#steptitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  padding-left: 1.5% !important;
-}
-#sleeptitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  padding-left: 1.5% !important;
-  margin-right: 13% !important;
-}
-#caloriestitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 300;
-  font-size: 12px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-right: 15% !important;
-}
-#subtitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 26px;
-  color: #780508;
-  letter-spacing: 0;
-  margin-top: -20px;
-}
-#subtitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 26px;
-  color: #DB4247;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 8% !important;
-}
-#watersubtitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 26px;
-  color: #780508;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 1.7%;
-}
-#watersubtitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 26px;
-  color: #DB4247;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 7%;
-}
-#caloriessubtitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 26px;
-  color: #780508;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 3%;
-}
-#caloriessubtitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 26px;
-  color: #DB4247;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 7%
-}
-#sleepsubtitle-annotation2 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 28px;
-  color: #780508;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 2%
-}
-#sleepsubtitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 700;
-  font-size: 28px;
-  color: #DB4247;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 7%;
-}
-#stepsubtitle-annotation1 {
-  font-family: 'Roboto';
-  font-weight: 700 !important;
-  font-size: 28px;
-  color: #DB4247;
-  letter-spacing: 0;
-  margin-top: -20px;
-  margin-right: 7%
-}
 #caloriescontent {
   font-family: 'Roboto';
   font-weight: 400;
   font-size: 12px;
   color: #4A4A4A;
   letter-spacing: -0.07px;
-}
-#time {
-  font-family: 'Roboto';
-  font-weight: 500;
-  font-weight: 500;
-  font-size: 49px;
-  color: #4A4A4A;
-  letter-spacing: -0.08px;
-  text-align: center;
-  height: 59px
-}
-#middlecontent {
-  font-family: 'Roboto';
-  font-weight: 500;
-  font-size: 14px;
-  color: #4A4A4A;
-  letter-spacing: -0.08px;
-  text-align: center;
-}
-#sub-title {
-  font-family: 'Roboto';
-  font-weight: 500;
-  font-size: 14px;
-  color: #1A1A1A;
-  letter-spacing: 0;
-  margin-top: 20px;
-  padding-right: 0.7%
 }
 #chart-rightarea {
   background: #FFFFFF;
@@ -377,6 +272,20 @@
 #chart-leftarea {
   margin-left: 3%;
 }
+#calories,#step,#water,#sleep {
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: visible !important;
+  line-height: 1.42857143;
+}
+#calories.hidden-element-size, 
+#step.hidden-element-size,
+#water.hidden-element-size,
+#sleep.hidden-element-size {
+  display: block;
+  visibility: hidden;
+  position: absolute;
+} 
 #steps-text:hover {
   font-family: ''Roboto'';
   font-weight: 400;
@@ -395,16 +304,6 @@
 }
 #sleep-bg:hover {
   background-image: 'linear-gradient(to right, #FCDE72 , #F26D6D)';
-}
-.card {
-  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
-  border-radius: 4px;
-  background: #FFFFFF !important;
-}
-.card-block {
-  cursor:pointer;
-  box-shadow: 0 1px 4px 1px rgba(0,0,0,0.10);
-  border-radius: 4px;
 }
 #pie-chart {
   background: #FFFFFF;
@@ -633,12 +532,7 @@ letter-spacing: 0;
   box-shadow: 0 1px 4px 1px rgba(102,56,185,0.30) !important;
 }
 #chart {
-  margin-left: 3% !important;
-  margin-right: 0.5%;
-  padding-right: 0.75%;
-}
-.line-chart-area {
-  padding-right: 4.9%
+  margin:0% 3% !important;
 }
 #water50ml-column {
   width: 22%;
@@ -771,27 +665,77 @@ text-align: center;
   .line-column-chart{
       margin-bottom: 1.8rem;
   }
-  .card{
-      margin-bottom: 20px;
+}
+
+@media only screen and (max-width:375px)
+{
+    #Break-text, 
+    #Lunch-text, 
+    #Dinner-text, 
+    #Snack-text {
+        font-size: 12px;
+    }
+    #Breakfast, 
+    #Lunch, 
+    #Snack, 
+    #Dinner{
+        font-size: 38px;
+    }
+}
+
+@media only screen and (max-width:300px)
+{
+    .column-chart-area{
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 768px)
+{
+  .pie-chart, 
+  .column-chart, 
+  .line-chart{
+    margin-bottom: 16px;
+  }
+  .chart-container {
+    padding: 0px 0px 15px 10px;
+  }
+  .column-chart-area 
+  .chart-container {
+    padding-left: 0;
   }
 }
+
 @media only screen and (min-width: 213px) and (max-width: 500px) {
   /* For portrait layouts only */
-  .card-value{
-      font-family: 'Roboto';
-      font-weight: 400;
-      font-size: 20px !important;
-      color: #727272;
-      margin-bottom: 0vw;
-      margin-top: 10px;
-      letter-spacing: 0;
+  #calories-column.card-container, 
+  #step-column.card-container, 
+  #water-column.card-container, 
+  #sleep-column.card-container {
+    width: 100%;
+    padding: 15px;
   }
-  .card-text {
-      font-family: 'Roboto';
-      font-weight: 400;
-      font-size: 15px !important;
-      letter-spacing: 0;
-      line-height: 0px !important;
+  .chart-container {
+    padding: 15px;
+  }
+  #card-row {
+    margin: 0;
+  }
+  .e-appbar.custom-appbar .appbar-title {
+    font-size: 15px;
+  }
+  .e-appbar.custom-appbar .appbar-subtitle {
+    display: none;
+  }
+  .chart-header{
+    flex-wrap: wrap;
+  }
+  #chart-header-title {
+    margin: auto;
+  }
+  .chart-header-values{
+    width: 100%;
+    justify-content: space-evenly;
   }
   #Break-text {
       font-family: 'Roboto';
@@ -808,186 +752,6 @@ text-align: center;
       line-height: 16px !important;
       color: #CB2F1B;
       letter-spacing: 0;
-  }
-  #title-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-  }
-  #title {
-      font-family: 'Roboto';
-      font-weight: 500;
-      font-size: 17px;
-      color: #535353;
-      letter-spacing: 0;
-      display: block;
-  }
-  #subtitle {
-      font-family: 'Roboto';
-      font-weight: 500;
-      font-size: 20px;
-      color: #535353;
-      letter-spacing: 0;
-      display: block;
-  }
-  #subtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 20px !important;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 13% !important;
-  }
-  #subtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 20px !important;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-  }
-  #steptitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      margin-right: 1% !important
-  }
-  #stepsubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700 !important;
-      font-size: 20px !important;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-  }
-  #watertitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      margin-right: 0% !important;
-  }
-  #watertitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-  }
-  #watersubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 17px;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 1.7% !important;
-  }
-  #watersubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 17px;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-right: 0% !important;
-      margin-top: -20px;
-  }
-  #caloriestitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      margin-right: 0% !important;
-  }
-  #caloriestitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      margin-right: 13%
-  }
-  #caloriessubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 15px !important;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 3%;
-  }
-  #caloriessubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 15px !important;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 4%;
-  }
-  #sleeptitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-  }
-  #sleeptitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-  }
-  #sleepsubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 17px !important;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 2%
-  }
-  #sleepsubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 17px !important;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 12%
-  }
-  #stepsubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700 !important;
-      font-size: 23px;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-  }
-  #stepsubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700 !important;
-      font-size: 20px;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-  }
-  #subtitle span {
-      display: block;
-      float: right;
-      margin-top: -20px;
-  }
-  #title span {
-      display: block;
-      float: right;
   }
   .stepsimg {
       width: 15vw;
@@ -1009,113 +773,8 @@ text-align: center;
   }
 }
 
-@media (max-width: 768px)
-{
-  
-.pie-chart,
-.column-chart,
-.line-chart{
-  margin-bottom: 16px;
-}
-
-
-.line-column-chart{
- margin-bottom: 1.8rem;
-}
-
-}
-@media (max-width: 768px) {
-  .column-chart-area .chart-container {
-      padding-left: 0;
-  }
-  .card {
-      margin-bottom: 20px;
-      width: 100%;
-  }
-}
-
 @media only screen and (min-width: 1400px) and (max-width: 3400px) {
   #water50ml-column {
       margin-left: 20px !important;
-  }
-  #watersubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 26px;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 9%;
-  }
-  #watersubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 26px;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 4%;
-  }
-  #caloriessubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 26px;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 9%;
-  }
-  #caloriessubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 26px;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 6%;
-  }
-  #sleepsubtitle-annotation1 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 28px;
-      color: #DB4247;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 8.5%;
-  }
-  #sleepsubtitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 700;
-      font-size: 28px;
-      color: #780508;
-      letter-spacing: 0;
-      margin-top: -20px;
-      margin-right: 4%;
-  }
-  #caloriestitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      margin-right: 16% !important;
-  }
-  #watertitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      padding-left: 1.5% !important;
-      margin-right: 11.5%;
-  }
-  #sleeptitle-annotation2 {
-      font-family: 'Roboto';
-      font-weight: 300;
-      font-size: 12px;
-      color: #1A1A1A;
-      letter-spacing: 0;
-      padding-left: 1.5% !important;
-      margin-right: 13% !important;
   }
 }

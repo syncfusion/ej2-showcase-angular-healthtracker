@@ -7,6 +7,8 @@ import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { CheckBoxAllModule, RadioButtonAllModule } from '@syncfusion/ej2-angular-buttons';
 import { ChartAllModule, AccumulationChartAllModule } from '@syncfusion/ej2-angular-charts';
 import { MultiSelectAllModule, DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
+import { AppBarModule } from '@syncfusion/ej2-angular-navigations';
+import { SkeletonModule } from '@syncfusion/ej2-angular-notifications';
 import { DialogAllModule } from '@syncfusion/ej2-angular-popups';
 import { DateRangePickerModule, DateRangePickerAllModule, DatePickerAllModule, TimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
 import { AppRoutingModule } from './app-routing.module';
@@ -33,7 +35,9 @@ import { DashBoardService } from './dashboard/dashboard.service';
         DropDownListAllModule,
         NumericTextBoxAllModule,
         DateRangePickerAllModule,
-        AccumulationChartAllModule
+        AccumulationChartAllModule,
+        AppBarModule,
+        SkeletonModule,
     ],
     declarations: [
         AppComponent,
