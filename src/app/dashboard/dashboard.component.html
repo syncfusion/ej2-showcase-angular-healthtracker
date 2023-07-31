@@ -1,114 +1,102 @@
 <div id="container" style=" background: #FAFAFA;">
-    <ejs-appbar cssClass="custom-appbar">
-        <div>
-            <span class="e-avatar custom-avatar e-avatar-circle"><img src="./assets/images/icons/Healthstat.png"></span>
-            <p class="appbar-title"> Health <b>Stat</b> </p>
-            <div class="e-appbar-spacer"></div>
-            <p class="appbar-subtitle"> Hi, John Smith </p>
-            <span class="e-avatar custom-avatar e-avatar-circle"><img src="./assets/images/icons/Profile_.png"></span>
-        </div>
-        </ejs-appbar>
+    <div class="row" id="overall-title" style="cursor: default">
+        <p class="page-title">Health <b>Stat</b></p>
+        <img src="./assets/images/icons/Healthstat.png" style="padding-left: 1.5%; margin-top: 10px; float:left;">
+        <img src="./assets/images/icons/Profile_.png" style="padding-right: 1.5%; margin-top: 10px; float:right">
+        <p id="sub-title" style=" float: right">Hi, John Smith</p>
+    </div>
     <div id="card-row">
         <div class="row">
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive card-container" id="calories-column">
-                <ejs-skeleton *ngIf="showCalorieSkeleton; else showCalorieCard" cssClass="card-skeleton" width="100%" height="100px" shimmerEffect="Wave"></ejs-skeleton>
-                <ng-template #showCalorieCard>
-                <div class="e-card selected" id="calories" (click)="onCalClick($event)" style="max-width: 445px; ">
-                    <div id="calories-bg" >
-                        <div class="card-block" id="caloriescard">
-                                <div class="media-body" id="calories-value" style="max-width: 445px;">
-                                    <h3 class="card-value" id="calories-text"> {{calorieEaten}} </h3>
-                                    <div id="foodimg"><span class="card-text" id="calories-subtitle">Calories
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 calories-valueactive" id="calories-column"
+                style="padding-right: 0px; padding-left: 20px">
+                <div class="card" id="calories" (click)="onCalClick($event)" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%)">
+                    <div class="card-body expense-card" id="calories-bg" style=" background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
+                        <div class="card-block" id="caloriescard" style="box-shadow: 0 3px 6px 2px rgba(178,30,195,0.30);">
+                            <div class="media">
+                                <div class="media-body text-xs-left float-right" id="calories-value" style="max-width: 445px; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%); border-radius: 4px">
+                                    <h3 class="card-value" id="calories-text" style="color: #FFFFFF">13,100</h3>
+                                    <div id="foodimg"><span class="card-text" id="calories-subtitle" style="color: #FFFFFF">Calories
                                             Eaten</span><span id="food-img" class="icon-Food" style="font-size: 65px; margin-right: 3%; margin-bottom: 2% "></span>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </ng-template>
             </div>
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value card-container" id="step-column">
-                <ejs-skeleton *ngIf="showStepSkeleton; else showStepCard" cssClass="card-skeleton" width="100%" height="100px" shimmerEffect="Wave"></ejs-skeleton>
-                <ng-template #showStepCard>
-                <div class="e-card" id="step" (click)="onStepClick($event)" style="max-width: 445px; ">
-                    <div id="step-bg">
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 steps-value" id="step-column" style="padding-right: 0px; padding-left: 20px;">
+                <div class="card" id="step" (click)="onStepClick($event)" style="max-width: 445px; ">
+                    <div class="card-body income-card" id="step-bg">
                         <div class="card-block" id="stepcard">
-                                <div class="media-body" id="steps-value" style="max-width: 445px; background-image: null; border-radius: 4px">
-                                    <h3 class="card-value" id="steps-text">{{stepsTaken}}</h3>
+                            <div class="media">
+                                <div class="media-body text-xs-left float-right" id="steps-value" style="max-width: 445px; background-image: null; border-radius: 4px">
+                                    <h3 class="card-value" id="steps-text">52,100</h3>
                                     <div id="stepimg"><span class="card-text" id="steps-subtitle">Steps
                                             Taken</span>
                                         <span id="steps-img" class="icon-Steps" style="font-size: 65px; margin-right: 3%; margin-bottom: 2%"></span></div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </ng-template>
             </div>
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value card-container" id="water-column">
-                <ejs-skeleton *ngIf="showWaterSkeleton; else showWaterCard" cssClass="card-skeleton" width="100%" height="100px" shimmerEffect="Wave"></ejs-skeleton>
-                <ng-template #showWaterCard>
-                <div class="e-card" id="water" (click)="onWaterClick($event)" style="max-width: 445px;">
-                    <div id="water-bg">
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 water-value" id="water-column" style="padding-right: 0px; padding-left: 20px">
+                <div class="card" id="water" (click)="onWaterClick($event)" style="max-width: 445px;">
+                    <div class="card-body balance" id="water-bg">
                         <div class="card-block" id="watercard" style="max-width: 445px;">
-                                <div class="media-body" id="water-value" style="max-width: 445px; background-image: null; border-radius: 4px">
-                                    <h3 class="card-value" id="water-text">{{waterConsumed}}</h3>
+                            <div class="media">
+                                <div class="media-body text-xs-left float-right" id="water-value" style="max-width: 445px; background-image: null; border-radius: 4px">
+                                    <h3 class="card-value" id="water-text">38.7 ltr</h3>
                                     <div id="waterimg"><span class="card-text" id="water-subtitle">Water Consumed</span>
                                         <span id="water-img" class="icon-Water" style="font-size: 65px; margin-right: 3%; margin-bottom: 2%"></span></div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </ng-template>
             </div>
-            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value card-container" id="sleep-column">
-                <ejs-skeleton *ngIf="showSleepSkeleton; else showSleepCard" cssClass="card-skeleton" width="100%" height="100px" shimmerEffect="Wave"></ejs-skeleton>
-                <ng-template #showSleepCard>
-                <div class="e-card" id="sleep" (click)="onSleepClick($event)" style="max-width: 445px;">
-                    <div id="sleep-bg">
+            <div class="col-xs-6 col-xl-3 col-lg-3 col-md-3 col-sm-6 sleep-value" id="sleep-column" style="padding-right: 0px; padding-left: 20px">
+                <div class="card" id="sleep" (click)="onSleepClick($event)" style="max-width: 445px;">
+                    <div class="card-body transaction" id="sleep-bg">
                         <div class="card-block" id="sleepcard" style="max-width: 445px;" >
-                                <div class="media-body" id="sleep-value" style="max-width: 445px; background-image: null; border-radius: 4px">
-                                    <h3 class="card-value" id="sleep-text" style="font-family: 'Roboto'; font-weight:400; color: #727272;">{{sleepDuration}}
-                                        </h3>
+                            <div class="media">
+                                <div class="media-body text-xs-left float-right" id="sleep-value" style="max-width: 445px; background-image: null; border-radius: 4px">
+                                    <h3 class="card-value" id="sleep-text" style="font-family: 'Roboto'; font-weight:400; color: #727272;">50
+                                        hr</h3>
                                     <div id="sleepimg"><span class="card-text" id="sleep-subtitle">Sleep Duration</span>
                                         <span id="sleep-img" class="icon-Sleep" style="font-size: 65px; margin-right: 4%; margin-bottom: 2%"></span></div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                </ng-template>
             </div>
         </div>
     </div>
     <div class="row" id="chart" style="background:transparent; padding-right: 0px">
         <div class="line-chart-area">
-            <div class="col-sm-12 col-md-8 chart-container">
-                <ejs-skeleton *ngIf="showLineChartSkeleton; else showLineChart" cssClass="line-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
-                <ng-template #showLineChart [ngSwitch]="lineType">
-                    <div class="chart-header">
-                        <div id="chart-header-title"><p id="chart-title">Calories Consumed</p></div>
-                        <div class="chart-header-values">
-                            <div id="total-value" style="margin: 0px 10px;">
-                                <span id="title-annotation"> Total </span>
-                                <span id="value-annotation" style="color: #780508;"> 1437 Kcal </span>
-                            </div>
-                            <div id="average-value" style="margin: 0px 10px;">
-                                <span id="title-annotation"> Daily Average </span>
-                                <span id="value-annotation" style="color: #DB4247;"> 902 Kcal </span>
-                            </div>
+            <div class="col-sm-12 col-md-8" style="height: 530px; background:transparent">
+                    <div style="padding-top: 20px; margin-bottom: 10px;">
+                            <p id="title" style="color: #535353; cursor: default; ">Calories Consumed <span id="caloriestitle-annotation1">Daily
+                                    Average</span><span id="caloriestitle-annotation2">Today</span>
                         </div>
-                    </div>       
-                    <div id="line" *ngSwitchCase="'line'">
-                        <ejs-chart #lineChart id='balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [chartArea]='chartArea' [tooltip]='tooltip' 
-                            (chartMouseClick)='mouseclick($event)' (pointMove)='pointMove($event)' (loaded)='CalorieLoaded($event)' [background]='background'>
+                        <div>
+                            <p id="subtitle" style="cursor: default;"><span id="caloriessubtitle-annotation1">902 kcal</span><span
+                                    id="caloriessubtitle-annotation2">1437 kcal</span></p>
+                        </div>
+                <div class="chart-padding" id="line">       
+                    <div id="line" style='display:block'>
+                        <ejs-chart #lineChart id='balance' class='line-chart' style="width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [chartArea]='chartArea' [tooltip]='tooltip' 
+                            (chartMouseClick)='mouseclick($event)' (pointMove)='pointMove($event)' (loaded)='loaded($event)' [background]='background'>
                             <e-series-collection>
                                 <e-series type='Line' fill='#F38D36' xName='x' yName='y' width=2 [dataSource]='caloriesdata' [marker]='marker' [border]='cborder'> </e-series>
                             </e-series-collection>
                         </ejs-chart>
                     </div>
-                
-                <div id="spline" *ngSwitchCase="'spline'">
-                            <ejs-chart #splineChart id='spline-balance' class='line-chart' style=" width: 100%; height:400px; background: transparent;" [primaryXAxis]='splinePrimaryXAxis' [primaryYAxis]='splinePrimaryYAxis' [chartArea]='chartArea' [tooltip]='splineTooltip' 
-                                (pointClick)='splinemouseclick($event)' (pointMove)='splinepointMove($event)' (loaded)='WaterLoaded($event)' [background]='background'>
+                </div>
+                <div id="spline" style='display:none'>
+                            <ejs-chart #splineChart id='spline-balance' class='line-chart' style=" width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='splinePrimaryXAxis' [primaryYAxis]='splinePrimaryYAxis' [chartArea]='chartArea' [tooltip]='splineTooltip' 
+                                (pointClick)='splinemouseclick($event)' (pointMove)='splinepointMove($event)' (loaded)='loaded($event)' [background]='background'>
                                 <e-annotations>
                                     <e-annotation content='<div id="waterachieved"><span id="achieved-img" class="icon-achieved" style="font-size: 30px; color: #3B61E9"></span></div>'
                                         coordinateUnits='Point' verticalAlignment='Top' x='Thursday' y=7.5>
@@ -119,9 +107,9 @@
                                 </e-series-collection>
                             </ejs-chart>
                         </div>
-                        <div id="column" *ngSwitchCase="'column'">
-                            <ejs-chart #columnChart id='column-balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='columnPrimaryXAxis' [primaryYAxis]='columnPrimaryYAxis' [chartArea]='chartArea' [tooltip]='columnTooltip' 
-                            (loaded)='StepLoaded($event)' (chartMouseClick)='columnmouseclick($event)' [background]='background'>
+                        <div id="column" style='display:none'>
+                            <ejs-chart #columnChart id='column-balance' class='line-chart' style="width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='columnPrimaryXAxis' [primaryYAxis]='columnPrimaryYAxis' [chartArea]='chartArea' [tooltip]='columnTooltip' 
+                                (loaded)='loaded($event)' (chartMouseClick)='columnmouseclick($event)' [background]='background'>
                                 <e-annotations>
                                     <e-annotation content='<div id="thumbs_up"><img src="./assets/images/icons/Shape.png"  style="width: 30px; height: 30px"></div>'
                                         x='Tuesday' y=9200 coordinateUnits='Point' verticalAlignment='Top'>
@@ -132,26 +120,24 @@
                                 </e-series-collection>
                             </ejs-chart>
                         </div>
-                        <div id="bubble" *ngSwitchCase="'bubble'">
-                            <ejs-chart #bubbleChart id='bubble-balance' class='line-chart' style="width: 100%; height:400px; background: transparent;" [primaryXAxis]='bubblePrimaryXAxis' [primaryYAxis]='bubblePrimaryYAxis' [chartArea]='chartArea' [tooltip]='bubbleTooltip' 
-                                (chartMouseClick)='bubblemouseclick($event)' (pointMove)='bubblepointMove($event)' (loaded)='SleepLoaded($event)' [background]='background'>
+                        <div id="bubble" style='display:none'>
+                            <ejs-chart #bubbleChart id='bubble-balance' class='line-chart' style="width: 92%; height:400px; background: transparent; max-width: 1083px;" [primaryXAxis]='bubblePrimaryXAxis' [primaryYAxis]='bubblePrimaryYAxis' [chartArea]='chartArea' [tooltip]='bubbleTooltip' 
+                                (chartMouseClick)='bubblemouseclick($event)' (pointMove)='bubblepointMove($event)' (loaded)='loaded($event)' [background]='background'>
                                 <e-series-collection>
                                     <e-series type='Bubble' fill='#4526A6' xName='x' yName='y' width=2 [dataSource]='bubbledata' [marker]='bubblemarker' [border]='bborder' size='size' > </e-series>
                                 </e-series-collection>
                             </ejs-chart>
                         </div>
-                </ng-template> 
             </div>
         </div>
         <div class="row">
             <div class="column-chart-area">
                 <div class="col-sm-12 col-md-4" id="pie-chart" style=" padding: 0px; height: 525px; ">
-                    <ejs-skeleton *ngIf="showPieChartSkeleton; else showPieChart" cssClass="pie-chart-skeleton" width="100%" height="100%" shimmerEffect="Wave"></ejs-skeleton>
-                    <ng-template #showPieChart [ngSwitch]="pieType">
-                        <div id="donut" style="height: 530px;" *ngSwitchCase="'donut'">
+                    <div class="chart-padding" id="pie">
+                        <div id="donut" style="display: block; height: 530px;">
                             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9" id="pie" style=" padding: 0px;">
-                                <div id="pie-title" style=" padding-top: 20px; margin-bottom: 6px; cursor: default; margin-left: 20px; font-family: Roboto;  font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Macro
-                                    Nutrients</div>
+                                <div id="pie-title" style=" padding-top: 20px; margin-bottom: 6px; cursor: default; margin-left: 20px; font-family: Roboto;  font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
+                                    Activity</div>
                                 <div class="column-chart" >
                                     <ejs-accumulationchart id="account-balance" #pie style='height: 268px; margin-bottom: 0px' [legendSettings]="legendSettings" [enableAnimation]= 'enableAnimation' [background]='background'>
                                         <e-accumulation-annotations>
@@ -210,38 +196,38 @@
                             </div>
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" id="caloriesicon-column">
                                 <div class="row" style="margin-top:40px; height: 93px; width: 100% ">
-                                    <div class="col-sm-12 Break-icon" id="Break-icon" (click)="onBreakClick($event)" style="border-radius: 4px; padding-top:10px; padding-right:0px; padding-left: 0px; height: 93px; text-align: center; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%) ">
+                                    <div class="col-sm-12 Break-icon" id="Break-icon" style="border-radius: 4px; padding-top:10px; padding-right:0px; padding-left: 0px; height: 93px; text-align: center; background-image: linear-gradient(45deg, #F23B3B 0%, #EF9027 100%) ">
                                         <span id="Breakfast" class="icon-Breakfast breakimgactive" style="font-size: 48px;"></span>
                                         <div class="breaktextactive" id="Break-text" align="center" style="color: #FFFFFF; text-align: center">Breakfast</div>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:30px; height: 93px; width: 100% ">
-                                    <div class="col-sm-12 Lunch-icon" id="Lunch-icon" (click)="onLunchClick($event)" style="border-radius: 4px; padding-top:10px; text-align: center; padding-right:0px; padding-left: 0px; height: 93px;">
+                                    <div class="col-sm-12 Lunch-icon" id="Lunch-icon" style="border-radius: 4px; padding-top:10px; text-align: center; padding-right:0px; padding-left: 0px; height: 93px;">
                                         <span id="Lunch" class="icon-Lunch lunchimg" style="font-size: 48px;"></span>
                                         <div class="lunchtext" id="Lunch-text" align="center">Lunch</div>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:30px; height: 93px; width: 100% ">
-                                    <div class="col-sm-12 Dinner-icon" id="Dinner-icon" (click)="onDinnerClick($event)" style="border-radius: 4px; padding-top:10px; text-align: center; padding-right:0px; padding-left: 0px; height: 93px; ">
+                                    <div class="col-sm-12 Dinner-icon" id="Dinner-icon" style="border-radius: 4px; padding-top:10px; text-align: center; padding-right:0px; padding-left: 0px; height: 93px; ">
                                         <span id="Dinner" class="icon-Dinner dinnerimg" style="font-size: 48px;"></span>
                                         <div class="dinnertext" id="Dinner-text" align="center">Dinner</div>
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top:30px; height: 93px; width: 100%  ">
-                                    <div class="col-sm-12" id="Snack-icon" (click)="onSnackClick($event)" style="border-radius: 4px; padding-top:10px; text-align: center; padding-right:0px; padding-left: 0px; height: 93px;">
+                                    <div class="col-sm-12" id="Snack-icon" style="border-radius: 4px; padding-top:10px; text-align: center; padding-right:0px; padding-left: 0px; height: 93px;">
                                         <span id="Snack" class="icon-Snack snackimg" style="font-size: 48px;"></span>
                                         <div class="snacktext" id="Snack-text" align="center">Snack</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
-                    <div id="multiple-donut" style="height:330px" *ngSwitchCase="'multiple-donut'">
+                    </div>
+                    <div id="multiple-donut" style="display: none; height:330px">
                         <div class="col-sm-12" id="pie" style=" padding:0px ">
                             <div id="pie-title" style=" padding-top: 20px; cursor: default; margin-bottom: 6px;  margin-left: 20px; font-family: Roboto; font-weight:500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
                                 Activity</div>
                             <div class="column-chart" id="steps-donut" style="height:330px">
-                                <ejs-accumulationchart #multiplepie style='height: 330px; margin-bottom: 0px' [enableBorderOnMouseMove]=false [legendSettings]="legendSettings" [enableAnimation]= 'enableAnimation' (loaded)= 'steploaded($event)'>
+                                <ejs-accumulationchart #multiplepie style='height: 330px; margin-bottom: 0px' [legendSettings]="legendSettings" [enableBorderOnMouseMove]="false" [enableAnimation]= 'enableAnimation' (loaded)= 'steploaded($event)'>
                                     <e-accumulation-annotations>
                                         <e-accumulation-annotation content='<div id="steps-innercontent"><p id="main-value" style="font-family: Roboto; font-weight:500; font-size: 28px;color: #313331;letter-spacing: 0;text-align: center; margin:0px">1800</p><p id="step-value" style="font-family: Roboto; font-weight:500; font-size: 14px; color: #535353; letter-spacing: 0; line-height: 0px;text-align: center;">Calories burnt</p></div>'
                                          region='Chart' x='50%' y='50%'>
@@ -289,12 +275,12 @@
                             </div>
                         </div>
                     </div>
-                    <div id="polar" *ngSwitchCase="'polar'">
+                    <div id="polar" style="display: none">
                         <div id="pie-title" style=" padding-top: 20px; cursor: default; margin-bottom: 6px;  margin-left: 20px; font-family: Roboto; font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Sunday
                             Activity</div>
                         <div class="column-chart" id="water-polar" style="height:320px">
                             <ejs-chart #polarChart style="height:320px" [background]='background' [primaryXAxis]='polarPrimaryXAxis' [primaryYAxis]='polarPrimaryYAxis' [tooltip]='polarTooltip' 
-                            (pointClick)='polarmouseclick($event)' (pointMove)='polarpointMove($event)' [selectedDataIndexes]= 'selectedDataIndexes' [background]='background' selectionMode='Point' [enableAnimation]='polarEnableAnimation' >
+                            (pointClick)='polarmouseclick($event)' (pointMove)='polarpointMove($event)' (loaded)= 'polarloaded($event)' [selectedDataIndexes]= 'selectedDataIndexes' [background]='background' selectionMode='Point' [enableAnimation]='polarEnableAnimation' >
                             <e-series-collection>
                                 <e-series type='Polar' drawType='Column' fill='url(#gradient-polarchart)' xName='x' yName='y' width=2 [dataSource]='polarchartdata' [marker]='polarmarker' [border]='wborder' [animation]='animation'> </e-series>
                             </e-series-collection>
@@ -303,29 +289,29 @@
                         <div align="Center" style="font-family: Roboto; font-weight: 500; font-size: 16px; color: #1A1A1A; letter-spacing: 0; margin-bottom: 10px; cursor: default"><b>Add
                                 water Intake value</b></div>
                         <div class="row" style="height: 80px">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column" id="water50ml-column" (click)="on50mlClick($event)"
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water50ml-column" id="water50ml-column"
                                 style="background: #FFFFFF; height: 80px; margin-left:15px; margin-right: 1.7%; border: 1px solid rgba(69,69,69,0.40); border-radius: 4px; text-align:center; color: #5B5B5B">
                                 <span id="iconml-img" class="icon-ml" style="font-size: 35px;"></span>
                                 <div class="imgtext1" id="imgtext1">50 ml</div>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column" id="water100ml-column" (click)="on100mlClick($event)"
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water100ml-column" id="water100ml-column"
                                 style="background: #FFFFFF; height: 80px; margin-right: 1.7%; border: 1px solid rgba(69,69,69,0.40); border-radius: 4px; text-align:center; color: #5B5B5B">
                                 <span id="iconml1-img" class="icon-ml1" style="font-size: 35px;"></span>
                                 <div class="imgtext2" id="imgtext2">100 ml</div>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column" id="water200ml-column" (click)="on200mlClick($event)"
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water200ml-column" id="water200ml-column"
                                 style="background: #FFFFFF; height: 80px;  margin-right: 1.7%; border: 1px solid rgba(69,69,69,0.40); border-radius: 4px; text-align:center; color: #5B5B5B">
                                 <span id="iconml2-img" class="icon-ml2" style="font-size: 35px;"></span>
                                 <div class="imgtext3" id="imgtext3">200 ml</div>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column" id="water300ml-column" (click)="on300mlClick($event)"
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 water300ml-column" id="water300ml-column"
                                 style="background: #FFFFFF; height: 80px; border: 1px solid rgba(69,69,69,0.40); border-radius: 4px; text-align:center; color: #5B5B5B">
                                 <span id="iconml3-img" class="icon-ml3" style="font-size: 35px;"></span>
                                 <div class="imgtext4" id="imgtext4">300 ml</div>
                             </div>
                         </div>
                     </div>
-                    <div id="semi-pie" *ngSwitchCase="'semi-pie'">
+                    <div id="semi-pie" style="display: none">
                         <div class="col-sm-12" id="pie" style=" padding:0px ">
                             <div id="pie-title" style=" padding-top: 20px; cursor: default; margin-bottom: 6px;  margin-left: 20px; font-family: Roboto;  font-weight: 500; font-size: 20px; text-align: left; color: #1A1A1A">Sleep
                                 Quality</div>
@@ -372,7 +358,6 @@
                             </div>
                         </div>
                     </div>
-                </ng-template>
                 </div>
             </div>
         </div>

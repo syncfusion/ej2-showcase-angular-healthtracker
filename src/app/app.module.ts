@@ -1,17 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { APP_BASE_HREF, HashLocationStrategy, Location, LocationStrategy} from '@angular/common';
+import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { GridModule, PagerModule } from '@syncfusion/ej2-angular-grids';
 import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
 import { CheckBoxAllModule, RadioButtonAllModule } from '@syncfusion/ej2-angular-buttons';
 import { ChartAllModule, AccumulationChartAllModule } from '@syncfusion/ej2-angular-charts';
 import { MultiSelectAllModule, DropDownListAllModule } from '@syncfusion/ej2-angular-dropdowns';
-import { AppBarModule } from '@syncfusion/ej2-angular-navigations';
-import { SkeletonModule } from '@syncfusion/ej2-angular-notifications';
-import { DialogAllModule } from '@syncfusion/ej2-angular-popups';
+import { DialogAllModule, TooltipAllModule } from '@syncfusion/ej2-angular-popups';
 import { DateRangePickerModule, DateRangePickerAllModule, DatePickerAllModule, TimePickerAllModule } from '@syncfusion/ej2-angular-calendars';
-import { AppRoutingModule } from './app-routing.module';
+import { routing } from './app.router';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { DashBoardComponent } from './dashboard/dashboard.component';
@@ -20,7 +18,7 @@ import { DashBoardService } from './dashboard/dashboard.service';
 
 @NgModule({
     imports: [
-        AppRoutingModule,
+        routing,
         GridModule,
         PagerModule,
         BrowserModule,
@@ -35,9 +33,7 @@ import { DashBoardService } from './dashboard/dashboard.service';
         DropDownListAllModule,
         NumericTextBoxAllModule,
         DateRangePickerAllModule,
-        AccumulationChartAllModule,
-        AppBarModule,
-        SkeletonModule,
+        AccumulationChartAllModule
     ],
     declarations: [
         AppComponent,
@@ -47,16 +43,10 @@ import { DashBoardService } from './dashboard/dashboard.service';
     bootstrap: [AppComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
     providers: [
-        Location,
         CommonService,
         DashBoardService,
-        {provide: APP_BASE_HREF, useValue : '/' },
-        {provide: LocationStrategy, useClass: HashLocationStrategy}
+        { provide: APP_BASE_HREF, useValue: '/' },
+        { provide: LocationStrategy, useClass: PathLocationStrategy }
     ]
 })
-export class AppModule {
-    private location: Location;
-    constructor(location: Location) {
-        this.location = location;
-    }
- }
+export class AppModule { }

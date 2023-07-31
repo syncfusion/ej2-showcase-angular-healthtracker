@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 
 import { extend, Internationalization } from '@syncfusion/ej2-base';
 import { Predicate } from '@syncfusion/ej2-data';
@@ -6,9 +6,9 @@ import { Predicate } from '@syncfusion/ej2-data';
 
 @Injectable()
 export class CommonService {
-  public predicateStart: Predicate;
-  public predicateEnd: Predicate;
-  public predicate: Predicate;
+  public predicateStart!: Predicate;
+  public predicateEnd!: Predicate;
+  public predicate!: Predicate;
   public intl: Internationalization = new Internationalization();
 
   constructor() {}
