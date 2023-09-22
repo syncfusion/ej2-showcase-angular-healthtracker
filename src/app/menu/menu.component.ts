@@ -1,7 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-
-import { rippleEffect, isNullOrUndefined as isNOU, enableRipple } from '@syncfusion/ej2-base';
-
+import { Browser, rippleEffect, isNullOrUndefined as isNOU, enableRipple } from '@syncfusion/ej2-base';
 import { userInfo } from '../common/common.data';
 enableRipple(true);
 
@@ -11,11 +9,11 @@ enableRipple(true);
 })
 
 export class MenuComponent {
-  public menu: HTMLElement;
+  public menu!: HTMLElement;
   public userName: string;
-  public filterMenu: HTMLElement;
-  public overlay: HTMLElement;
-
+  public filterMenu!: HTMLElement;
+  public overlay!: HTMLElement;
+ 
   constructor(public eleRef: ElementRef) {
     /** Loads the user data in the profile from the sidebar */
     this.userName = userInfo.FullName;
