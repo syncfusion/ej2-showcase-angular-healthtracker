@@ -43,7 +43,8 @@
     "webpack-dev-middleware": ">=6.1.2",
     "follow-redirects": ">=1.15.6",
     "@babel/traverse": "7.23.2",
-    "postcss": "8.4.31"
+    "postcss": "8.4.31",
+    "cookie": ">=0.7.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.6",
@@ -66,6 +67,7 @@
     "ws": ">=8.17.1",
     "webpack-dev-middleware": ">=6.1.2",
     "follow-redirects": ">=1.15.6",
-    "ip": ">=2.0.1"
+    "ip": ">=2.0.1",
+    "cookie": ">=0.7.0"
   }
 }
