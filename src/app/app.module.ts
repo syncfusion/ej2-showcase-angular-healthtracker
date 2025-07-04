@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { APP_BASE_HREF, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { GridModule, PagerModule } from '@syncfusion/ej2-angular-grids';
 import { NumericTextBoxAllModule } from '@syncfusion/ej2-angular-inputs';
@@ -46,7 +46,7 @@ import { DashBoardService } from './dashboard/dashboard.service';
         CommonService,
         DashBoardService,
         { provide: APP_BASE_HREF, useValue: '/' },
-        { provide: LocationStrategy, useClass: PathLocationStrategy }
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
     ]
 })
 export class AppModule { }

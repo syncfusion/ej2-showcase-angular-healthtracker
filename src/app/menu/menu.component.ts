@@ -13,7 +13,7 @@ export class MenuComponent {
   public userName: string;
   public filterMenu!: HTMLElement;
   public overlay!: HTMLElement;
- 
+
   constructor(public eleRef: ElementRef) {
     /** Loads the user data in the profile from the sidebar */
     this.userName = userInfo.FullName;

@@ -1,26 +1,35 @@
 # Essential JS 2 for Angular - Health Tracker
 
-This health tracker demo application showcases using several Essential Angular components together in a real-world application scenario. You can further explore the source code of this application and use it as a reference for integrating Essential Angular components into your applications.
-## Deployment
+Track and visualize the calories consumed and daily activities like steps taken, water consumption and sleeping time.
 
-### Install
+# Health Tracker
 
-* To install all dependent packages, use the below command.
+> Angular project to track and visualize the calories consumed and daily activities like steps taken, water consumption and sleeping time.
 
-```
+## Installation
+
+To install the application dependencies, use the following command:
+
+```sh
 npm install
 ```
 
-### Run
+## Build the application
 
-To run the sample, use the below command
+To Build the application, use the below command,
 
+```sh
+ng build
 ```
+
+## Run the application
+
+To run the sample in the browser with live reload, use the following command:
+
+```sh
 ng serve
 ```
 
-## Demo
-
-#### <a href="https://ej2.syncfusion.com/showcase/angular/healthtracker/src/#/dashboard" target="_blank">Essential JS 2 for Angular - Health Tracker</a>
-
-Check all the showcase samples from <a href="https://ej2.syncfusion.com/home/angular.html" target="_blank">here</a>.
+# build for production and view the bundle analyzer report
+> npm run build --report
+```

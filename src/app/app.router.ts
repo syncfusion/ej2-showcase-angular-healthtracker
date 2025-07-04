@@ -6,7 +6,7 @@ import { DashBoardComponent } from './dashboard/dashboard.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashBoardComponent },
-  { path: '**', redirectTo: 'home' }
+  { path: '**', redirectTo: 'dashboard' }
 ];
 
 export const routing: ModuleWithProviders<RouterModule> = RouterModule.forRoot(routes);

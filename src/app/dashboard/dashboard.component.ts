@@ -44,6 +44,7 @@ export class DashBoardComponent implements OnInit {
     public selectedpoint: Boolean = false;
     public tooltipMappingName: string = 'time';
     public animation!: Object;
+    public seriesAnimation: boolean = false;
     public pointindex: number = 5;
     public marker!: Object;
     public splinemarker!: Object;
@@ -56,6 +57,7 @@ export class DashBoardComponent implements OnInit {
     public splineTooltip!: Object;
     public bubbleTooltip!: Object;
     public columnTooltip!: Object;
+    public pieTooltip!: Object;
     public selectedDataIndexes!: Object[];
     public columnborder!: Object;
     public cborder!: Object;
@@ -117,6 +119,7 @@ export class DashBoardComponent implements OnInit {
     public yValue6 : number = 0;
     public yValue7 : number = 0;
     public yValue8 : number = 0;
+    public enableBorderOnMouseMove : boolean = false;
 
     constructor(
         public app: AppComponent,
@@ -209,7 +212,7 @@ export class DashBoardComponent implements OnInit {
             labelFormat: '{value}L',
         };
         this.tooltip = {
-            enable: true, header: '${point.x}', format: '${point.y}<br>Click to View More Details'
+            enable: true, header: 'Calories Consumed', format: '${point.x} : <b>${point.y}</b>'
         };
         this.splinemarker = {
              visible: true, shape: 'Circle', width: 8, height: 8, border: {width: 2, color: '#484848' }
@@ -221,9 +224,23 @@ export class DashBoardComponent implements OnInit {
         this.sleepTooltip = {
             enable: true, header: '${point.x}', format: '${point.tooltip}',
         };
+        this.splineTooltip = {
+            enable: true,
+            header: 'Water Consumption',
+            format: '${point.x} : <b>${point.y}</b>',
+            enableMarker: false
+        }
+        this.pieTooltip ={
+            enable: true, format: '${point.x} : <b>${point.y}g</b>'
+        }
         this.bubbleTooltip = {
-            enable: true, format: '${point.y}', enableMarker: false
+            enable: true, header: 'Sleep Duration', format: '${point.x} : <b>${point.y}</b>', enableMarker: false
         };
+        this.columnTooltip = {
+            enable: true,
+            header: 'Steps Taken', 
+            format: '${point.x} : <b>${point.y}</b>'
+        }
         this.polarTooltip = {
             enable: true,
             enableMarker: false,
@@ -441,7 +458,7 @@ export class DashBoardComponent implements OnInit {
             switch (index.point) {
                 case 0:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>sunday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Sunday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Sunday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '8200';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '15';
                     (document.getElementById('active') as HTMLElement).innerHTML = '7';
@@ -451,7 +468,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 1:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>monday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Monday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Monday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '7300';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '16';
                     (document.getElementById('active') as HTMLElement).innerHTML = '6';
@@ -461,7 +478,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 2:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>tuesday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Tuesday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Tuesday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '7800';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '20';
                     (document.getElementById('active') as HTMLElement).innerHTML = '5';
@@ -471,7 +488,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 3:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>wednesday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Wednesday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Wednesday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '6800';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '16';
                     (document.getElementById('active') as HTMLElement).innerHTML = '3';
@@ -481,7 +498,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 4:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>thursday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Thursday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Thursday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '7000';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '10';
                     (document.getElementById('active') as HTMLElement).innerHTML = '7';
@@ -491,7 +508,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 5:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>friday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Friday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Friday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '6900';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '22';
                     (document.getElementById('active') as HTMLElement).innerHTML = '4';
@@ -501,7 +518,7 @@ export class DashBoardComponent implements OnInit {
                     break;
                 case 6:
                     this.multiplepie.series[0].dataSource = (<{ Steps: Object[] }>saturday[0]).Steps;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Saturday Activity';
+                    (document.querySelector('#multiple-donut #pie-title') as HTMLElement).innerHTML = 'Saturday Activity';
                     (document.getElementById('stepstext') as HTMLElement).innerHTML = '7200';
                     (document.getElementById('exercise') as HTMLElement).innerHTML = '17';
                     (document.getElementById('active') as HTMLElement).innerHTML = '4';
@@ -510,6 +527,8 @@ export class DashBoardComponent implements OnInit {
                     this.annotationpie2data = (<{ Hours: Object[] }>saturday[0]).Hours;
                     break;
             }
+            this.multiplepie.series[0].animation!.enable = false;
+            this.seriesAnimation = false;
             this.multiplepie.refresh();
         }
     }
@@ -526,42 +545,43 @@ export class DashBoardComponent implements OnInit {
                 case 0:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>sunday[0]).water;
                     this.polardata = (<{ water: Object[] }>sunday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Sunday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Sunday Activity';
                     break;
                 case 1:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>monday[0]).water;
                     this.polardata = (<{ water: Object[] }>monday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Monday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Monday Activity';
                     break;
                 case 2:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>tuesday[0]).water;
                     this.polardata = (<{ water: Object[] }>tuesday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Tuesday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Tuesday Activity';
                     break;
                 case 3:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>wednesday[0]).water;
                     this.polardata = (<{ water: Object[] }>wednesday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Wednesday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Wednesday Activity';
                     break;
                 case 4:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>thursday[0]).water;
                     this.polardata = (<{ water: Object[] }>thursday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Thursday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Thursday Activity';
                     break;
                 case 5:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>friday[0]).water;
                     this.polardata = (<{ water: Object[] }>friday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Friday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Friday Activity';
                     break;
                 case 6:
                     this.polarChart.series[0].dataSource = (<{ water: Object[] }>saturday[0]).water;
                     this.polardata = (<{ water: Object[] }>saturday[0]).water;
-                    (document.getElementById('pie-title') as HTMLElement).innerHTML = 'Saturday Activity';
+                    (document.querySelector('#polar #pie-title') as HTMLElement).innerHTML = 'Saturday Activity';
                     break;
             }
-            this.polarChart.series[0].animation!.enable = true;
+            this.polarChart.series[0].animation!.enable = false;
             this.pointindex = 5;
             this.polarChart.refresh();
+            this.polarChart.series[0].animation!.enable = true;
         }
     }
     public pointMove: EmitType<IPointEventArgs> = (args: IPointEventArgs) => {
@@ -881,9 +901,10 @@ export class DashBoardComponent implements OnInit {
                     radius: '75%', xName: 'x',
                     yName: 'y', startAngle: 180,
                     endAngle: 180, innerRadius: '80%', name: 'Project',
-                    explode: false, explodeOffset: '10%',
+                    explode: false, explodeOffset: '10%', animation: { enable: this.seriesAnimation }
                 }
             ],
+            enableBorderOnMouseMove: false,
             enableSmartLabels: true,
             legendSettings: {
                 visible: false, position: 'Top'
@@ -906,9 +927,10 @@ export class DashBoardComponent implements OnInit {
                     radius: '65%', xName: 'x',
                     yName: 'y', startAngle: 180,
                     endAngle: 180, innerRadius: '75%',
-                    explode: false,
+                    explode: false, animation: { enable: this.seriesAnimation }
                 }
             ],
+            enableBorderOnMouseMove: false,
             enableSmartLabels: true,
             resized: (args: IAccResizeEventArgs) => {
                 if (this.annotation) {
@@ -1011,6 +1033,8 @@ export class DashBoardComponent implements OnInit {
         this.splineChart.refresh();
     }
     public stepclick(): void {
+        this.multiplepie.series[0].animation!.enable = true;
+        this.seriesAnimation = true;
         this.annotation = true;
         (document.getElementById('step-bg') as HTMLElement).style.borderRadius = '4px';
         (document.getElementById('steps-value') as HTMLElement).style.borderRadius = '4px';

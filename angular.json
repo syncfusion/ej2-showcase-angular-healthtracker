@@ -30,24 +30,12 @@
               "src/assets"
             ],
             "styles": [
-             
+              "src/assets/styles.scss"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "4.5mb",
-                  "maximumError": "4.5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
@@ -93,7 +81,7 @@
               "src/assets"
             ],
             "styles": [
-
+              "src/assets/styles.scss"
             ],
             "scripts": []
           }
