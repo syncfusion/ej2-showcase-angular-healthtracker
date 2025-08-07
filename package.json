@@ -54,11 +54,13 @@
     "micromatch": ">=4.0.8",
     "cookie": ">=0.7.0"
   },
+  "overrides": {
+    "webpack-dev-server": "^5.2.1"
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.6",
     "@angular/cli": "~15.2.6",
     "@angular/compiler-cli": "^15.2.0",
-    "@syncfusion/ej2-showcase-helper": "*",
     "@types/jasmine": "~4.3.0",
     "@babel/traverse": "7.23.2",
     "jasmine-core": "~4.5.0",
@@ -68,7 +70,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "typescript": "~4.9.4",
-    "webpack-dev-server": "^4.15.1",
+    "webpack-dev-server": "^5.2.1",
     "postcss": "8.4.31",
     "glob-parent": "5.1.2",
     "tar": ">=6.2.1",
